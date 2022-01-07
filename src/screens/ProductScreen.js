@@ -53,80 +53,64 @@ export default function ProductScreen(props) {
     }
   };
   return (
-    <div>
+    <div style={{paddingTop: '2rem'}}>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <div>
-          <Link to="/">Back to result</Link>
-          <div className="row top">
-            <div className="col-2">
+          <div className="custom-row top" style={{justifyContent:'unset'}}>
+            <div className="col" style={{width:'50%'}}>
               <img
+                style={{borderRadius:0}}
                 className="large"
                 src={product.image}
                 alt={product.name}
               ></img>
             </div>
-            <div className="col-1">
-              <ul>
-                <li>
-                  <h1>{product.name}</h1>
-                </li>
-                <li>
-                  <Rating
+            <div className="col" style={{width:'50%'}}>
+              <div style={{padding:'1.5em 3em',fontSize:'1.5em'}}>
+                <Link style={{color: '#465bad',fontWeight: 700,cursor:'pointer'}} to="/"><i style={{marginRight:'5px'}} class="fa fa-arrow-left" aria-hidden="true"></i>Back to result</Link>
+                <div style={{display:'flex', fontSize:'2em', justifyContent:'space-between',alignItems:'center', fontWeight: 700, color: '#0d1136',marginTop:'50px',marginBottom:'10px'}}>
+                  <div>{product.name}</div>
+                </div>
+                <div style={{marginBottom:'50px'}}>   
+                <Rating           
                     rating={product.rating}
                     numReviews={product.numReviews}
-                  ></Rating>
-                </li>
-                <li>Pirce : ${product.price}</li>
-                <li>
-                  Description:
-                  <p>{product.description}</p>
-                </li>
-              </ul>
-            </div>
-            <div className="col-1">
-              <div className="card card-body">
-                <ul>
-                  <li>
-                    Seller{' '}
-                    <h2>
-                      <Link to={`/seller/${product.seller._id}`}>
-                        {product.seller.seller.name}
-                      </Link>
-                    </h2>
-                    <Rating
-                      rating={product.seller.seller.rating}
-                      numReviews={product.seller.seller.numReviews}
-                    ></Rating>
-                  </li>
-                  <li>
-                    <div className="row">
-                      <div>Price</div>
-                      <div className="price">${product.price}</div>
-                    </div>
-                  </li>
-                  <li>
-                    <div className="row">
-                      <div>Status</div>
-                      <div>
-                        {product.countInStock > 0 ? (
-                          <span className="success">In Stock</span>
+                ></Rating>
+                </div>
+                
+                <div style={{fontWeight: 700, fontSize: '0.8em',color: '#0d1136',marginBottom:'20px'}}>Price: <span style={{color:'#20a020',fontWeight: 700}}>
+                ${product.price}
+                  </span>   
+                </div>
+                <div style={{fontWeight: 700, fontSize: '0.8em', color: '#0d1136',marginBottom:'20px'}}>Description: <span style={{color:'rgb(119, 121, 140)',fontWeight: 400}}>
+                {product.description}
+                  </span>   
+                </div>
+                {/* <div style={{color: 'rgb(119, 121, 140)'}}>
+                  <p style={{fontSize: '0.7em'}}>{product.description}</p>
+                </div> */}
+                <div className="custom-row">
+                    <div>
+                      {product.countInStock > 0 ? (
+                        <span className="success" style={{fontSize: '0.8em',marginBottom:'20px', fontWeight:600}}> In Stock</span>
                         ) : (
-                          <span className="danger">Unavailable</span>
-                        )}
-                      </div>
+                        <span className="danger" style={{fontSize: '0.8em',marginBottom:'20px'}}>Unavailable</span>
+                      )}
                     </div>
-                  </li>
-                  {product.countInStock > 0 && (
+                </div>
+                <div className='custom-row' style={{marginTop:'20px', justifyContent:'unset'}}>
+                {product.countInStock > 0 && (
                     <>
-                      <li>
-                        <div className="row">
-                          <div>Qty</div>
+                      <div>
+                        <div className="custom-row">
+                          <div style={{fontSize: '0.8em',color: 'rgb(13, 17, 54)',fontWeight:600,marginRight:'10px'}}>Quantity</div>
                           <div>
                             <select
+                              style={{border:0, outline:0}}
                               value={qty}
                               onChange={(e) => setQty(e.target.value)}
                             >
@@ -140,43 +124,33 @@ export default function ProductScreen(props) {
                             </select>
                           </div>
                         </div>
-                      </li>
-                      <li>
+                      </div>
+                    </>
+                  )}
+                      <div>
                         <button
+                          style={{display:'flex',justifyContent:'center',alignItems:'center',fontWeight:600, marginLeft: '30px'}}
                           onClick={addToCartHandler}
                           className="primary block"
                         >
+                          <img style={{width: '25px', marginRight:'5px'}} src='/images/logoIcon.png'/>
                           Add to Cart
                         </button>
-                      </li>
-                    </>
-                  )}
-                </ul>
+                      </div>
+                  </div>
               </div>
             </div>
           </div>
           <div>
-            <h2 id="reviews">Reviews</h2>
-            {product.reviews.length === 0 && (
-              <MessageBox>There is no review</MessageBox>
-            )}
-            <ul>
-              {product.reviews.map((review) => (
-                <li key={review._id}>
-                  <strong>{review.name}</strong>
-                  <Rating rating={review.rating} caption=" "></Rating>
-                  <p>{review.createdAt.substring(0, 10)}</p>
-                  <p>{review.comment}</p>
-                </li>
-              ))}
-              <li>
+            <div className='custom-row'>
+              <div style={{width:'50%'}}>
                 {userInfo ? (
-                  <form className="form" onSubmit={submitHandler}>
+                  <form style={{padding: '0 3rem'}} className="form" onSubmit={submitHandler}>
                     <div>
-                      <h2>Write a customer review</h2>
+                      <h2>Thank you for giving us your feedback online</h2>
                     </div>
                     <div>
-                      <label htmlFor="rating">Rating</label>
+                      <label htmlFor="rating">Your rating</label>
                       <select
                         id="rating"
                         value={rating}
@@ -191,7 +165,7 @@ export default function ProductScreen(props) {
                       </select>
                     </div>
                     <div>
-                      <label htmlFor="comment">Comment</label>
+                      <label htmlFor="comment">Your comment</label>
                       <textarea
                         id="comment"
                         value={comment}
@@ -218,8 +192,28 @@ export default function ProductScreen(props) {
                     Please <Link to="/signin">Sign In</Link> to write a review
                   </MessageBox>
                 )}
-              </li>
-            </ul>
+              </div>
+              {product.reviews.length === 0 ? (
+                <div style={{margin:'auto'}}>
+                <MessageBox>There is no review</MessageBox>
+              </div>
+              ) :(
+              <div style={{width:'50%'}}>
+                <div style={{padding:'70px'}}> 
+                <div>
+                  <h2 style={{color: 'rgba(236,72,153)',fontWeight: 400}}>Below are a few of the reviews that brought some recent issues to light for our business</h2>
+                </div>
+                  {product.reviews && product.reviews.map((review) => (
+                    <div key={review._id}>
+                      <strong>{review.name}</strong>
+                      <Rating rating={review.rating} caption=" "></Rating>
+                      <p>{review.comment}</p>
+                    </div>
+                  ))}
+              </div>
+              </div>
+              )}
+            </div>
           </div>
         </div>
       )}

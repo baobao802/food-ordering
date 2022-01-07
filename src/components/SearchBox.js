@@ -9,18 +9,28 @@ export default function SearchBox() {
     navigate(`/search/name/${name}`);
   };
   return (
-    <form className="search" onSubmit={submitHandler}>
-      <div className="row">
-        <input
+    // <form className="search" onSubmit={submitHandler}>
+    //   <div className="row">
+    //     <input
+    //       type="text"
+    //       name="q"
+    //       id="q"
+    //       onChange={(e) => setName(e.target.value)}
+    //     ></input>
+    //     <button className="primary" type="submit">
+    //       <i className="fa fa-search"></i>
+    //     </button>
+    //   </div>
+    // </form>
+    <form class="search" onSubmit={submitHandler}>
+       <i className="fa fa-search"></i>
+      <input 
           type="text"
           name="q"
           id="q"
           onChange={(e) => setName(e.target.value)}
-        ></input>
-        <button className="primary" type="submit">
-          <i className="fa fa-search"></i>
-        </button>
-      </div>
+          class="nav-search-input" 
+          placeholder="Search your products from here"/>
     </form>
   );
 }

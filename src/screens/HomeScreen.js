@@ -26,28 +26,8 @@ export default function HomeScreen() {
     dispatch(listTopSellers());
   }, [dispatch]);
   return (
-    <div>
-      <h2>Top Sellers</h2>
-      {loadingSellers ? (
-        <LoadingBox></LoadingBox>
-      ) : errorSellers ? (
-        <MessageBox variant="danger">{errorSellers}</MessageBox>
-      ) : (
-        <>
-          {sellers.length === 0 && <MessageBox>No Seller Found</MessageBox>}
-          <Carousel showArrows autoPlay showThumbs={false}>
-            {sellers.map((seller) => (
-              <div key={seller._id}>
-                <Link to={`/seller/${seller._id}`}>
-                  <img src={seller.seller.logo} alt={seller.seller.name} />
-                  <p className="legend">{seller.seller.name}</p>
-                </Link>
-              </div>
-            ))}
-          </Carousel>
-        </>
-      )}
-      <h2>Featured Products</h2>
+    <div style={{backgroundColor:'#f7f7f7',padding:'2vw 2vw 0 2vw',height: '100%'}}>
+      <h1 style={{fontSize:'2rem',color:'rgb(13, 17, 54)'}} ><i style={{color:'#f0c040',marginRight:'5px'}} class="fa fa-star" aria-hidden="true"></i> Featured Products</h1>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
@@ -55,7 +35,7 @@ export default function HomeScreen() {
       ) : (
         <>
           {products.length === 0 && <MessageBox>No Product Found</MessageBox>}
-          <div className="row center">
+          <div className="homepage-container">
             {products.map((product) => (
               <Product key={product._id} product={product}></Product>
             ))}
