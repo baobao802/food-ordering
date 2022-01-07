@@ -28,15 +28,18 @@ export default function SigninScreen(props) {
     }
   }, [navigate, redirect, userInfo]);
   return (
-    <div>
-      <form className="form" onSubmit={submitHandler}>
+    <div className="login-container">
+      <img className='login-background' src='/images/fruitsbg.jpg'/>
+      <form className="form login-form" onSubmit={submitHandler}>
         <div>
-          <h1>Sign In</h1>
+          <h1 style={{color: '#20a020', fontWeight: 600}}>Welcome to </h1>
+          <img src="/images/logo.svg"/>
         </div>
+        <div className="login-form-title__support">The best fruits you can have</div>
         {loading && <LoadingBox></LoadingBox>}
         {error && <MessageBox variant="danger">{error}</MessageBox>}
         <div>
-          <label htmlFor="email">Email address</label>
+          <label htmlFor="email"><i style={{marginRight:'5px'}} class="fa fa-envelope-o" aria-hidden="true"></i>Email</label>
           <input
             type="email"
             id="email"
@@ -46,7 +49,7 @@ export default function SigninScreen(props) {
           ></input>
         </div>
         <div>
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password"><i style={{marginRight:'5px'}} class="fa fa-key" aria-hidden="true"></i>Password</label>
           <input
             type="password"
             id="password"
@@ -57,16 +60,15 @@ export default function SigninScreen(props) {
         </div>
         <div>
           <label />
-          <button className="primary" type="submit">
+          <button style={{fontWeight: 600}} className="primary" type="submit">
             Sign In
           </button>
         </div>
         <div>
           <label />
           <div>
-            New customer?{' '}
-            <Link to={`/register?redirect=${redirect}`}>
-              Create your account
+            <Link style={{fontWeight: 500, color: '#cf6c6c'}} to={`/register?redirect=${redirect}`}>
+              Create new account?
             </Link>
           </div>
         </div>
