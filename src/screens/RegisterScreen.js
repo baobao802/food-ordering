@@ -34,15 +34,16 @@ export default function RegisterScreen(props) {
     }
   }, [navigate, redirect, userInfo]);
   return (
-    <div>
+    <div className='register-container'>
       <form className="form" onSubmit={submitHandler}>
-        <div>
-          <h1>Create Account</h1>
+        <div style={{marginBottom:'1.5em'}}>
+          <h1 style={{color:'#01876c',fontSize:'3.5rem',fontWeight:600, margin:0, marginTop: '2rem'}}>Sign up</h1>
+          <span className='login-form-title__support'>Give us some of your information to buy the best fresh fruits.</span>
         </div>
         {loading && <LoadingBox></LoadingBox>}
         {error && <MessageBox variant="danger">{error}</MessageBox>}
         <div>
-          <label htmlFor="name">Name</label>
+          <label htmlFor="name">Your name</label>
           <input
             type="text"
             id="name"
@@ -52,7 +53,7 @@ export default function RegisterScreen(props) {
           ></input>
         </div>
         <div>
-          <label htmlFor="email">Email address</label>
+          <label htmlFor="email">Your email</label>
           <input
             type="email"
             id="email"
@@ -83,15 +84,15 @@ export default function RegisterScreen(props) {
         </div>
         <div>
           <label />
-          <button className="primary" type="submit">
-            Register
+          <button style={{fontWeight:600}} className="primary" type="submit">
+            Create account
           </button>
         </div>
         <div>
           <label />
           <div>
             Already have an account?{' '}
-            <Link to={`/signin?redirect=${redirect}`}>Sign-In</Link>
+            <Link style={{color:'#f0c040',fontWeight: 700}} to={`/signin?redirect=${redirect}`}>Log in</Link>
           </div>
         </div>
       </form>
