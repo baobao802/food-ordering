@@ -55,7 +55,7 @@ export default function SearchScreen(props) {
   };
   return (
     <div>
-      <div className="row">
+      <div className="custom-row">
         {loading ? (
           <LoadingBox></LoadingBox>
         ) : error ? (
@@ -78,7 +78,7 @@ export default function SearchScreen(props) {
           </select>
         </div>
       </div>
-      <div className="row top">
+      <div className="custom-row top">
         <div className="col-1">
           <h3>Department</h3>
           <div>
@@ -152,12 +152,12 @@ export default function SearchScreen(props) {
               {products.length === 0 && (
                 <MessageBox>No Product Found</MessageBox>
               )}
-              <div className="row center">
+              <div className="custom-row center">
                 {products.map((product) => (
                   <Product key={product._id} product={product}></Product>
                 ))}
               </div>
-              <div className="row center pagination">
+              <div className="custom-row center pagination">
                 {[...Array(pages).keys()].map((x) => (
                   <Link
                     className={x + 1 === page ? 'active' : ''}

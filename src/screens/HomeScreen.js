@@ -26,7 +26,7 @@ export default function HomeScreen() {
     dispatch(listTopSellers());
   }, [dispatch]);
   return (
-    <div style={{backgroundColor:'#f7f7f7',padding: '2vw',height: '100%'}}>
+    <div style={{backgroundColor:'#f7f7f7',padding:'2vw 2vw 0 2vw',height: '100%'}}>
       <h1 style={{fontSize:'2rem',color:'rgb(13, 17, 54)'}} ><i style={{color:'#f0c040',marginRight:'5px'}} class="fa fa-star" aria-hidden="true"></i> Featured Products</h1>
       {loading ? (
         <LoadingBox></LoadingBox>

@@ -55,7 +55,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="grid-container">
-        <header className="food-header row">
+        <header className="food-header custom-row">
           <div>
             <button
               type="button"
@@ -313,7 +313,7 @@ function App() {
             <Route path="/" element={<HomeScreen />} exact></Route>
           </Routes>
         </main>
-        <footer style={{fontWeight: 500}} className="row center">
+        <footer style={{fontWeight: 500}} className="custom-row center">
           {userInfo && !userInfo.isAdmin && <ChatBox userInfo={userInfo} />}
           <div><i style={{marginRight:'5px'}} class="fa fa-gratipay" aria-hidden="true"></i>FOOD ORDERING - BK HUNTER</div>
         </footer>
