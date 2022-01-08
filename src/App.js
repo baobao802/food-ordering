@@ -54,8 +54,8 @@ function App() {
   }, [dispatch]);
   return (
     <BrowserRouter>
-      <div className='grid-container'>
-        <header className='food-header custom-row'>
+      <div className="grid-container">
+        <header className="food-header custom-row">
           <div>
             <button
               type='button'
@@ -72,38 +72,16 @@ function App() {
             <SearchBox />
           </div>
           <div className='header-menu'>
-            <Link to='/cart'>
-              Cart
+            <Link to="/cart">
+            <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart
               {cartItems.length > 0 && (
                 <span className='badge'>{cartItems.length}</span>
               )}
             </Link>
-            {userInfo ? (
-              <div className='dropdown'>
-                <Link to='#'>
-                  {userInfo.name} <i className='fa fa-caret-down'></i>{' '}
-                </Link>
-                <ul className='dropdown-content'>
-                  <li>
-                    <Link to='/profile'>User Profile</Link>
-                  </li>
-                  <li>
-                    <Link to='/orderhistory'>Order History</Link>
-                  </li>
-                  <li>
-                    <Link to='#signout' onClick={signoutHandler}>
-                      Sign Out
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            ) : (
-              <Link to='/signin'>Sign In</Link>
-            )}
             {userInfo && userInfo.isSeller && (
-              <div className='dropdown'>
-                <Link to='#admin'>
-                  Seller <i className='fa fa-caret-down'></i>
+              <div className="dropdown">
+                <Link to="#admin">
+                <i class="fa fa-tachometer" aria-hidden="true"></i> Staff <i className="fa fa-caret-down"></i>
                 </Link>
                 <ul className='dropdown-content'>
                   <li>
@@ -116,9 +94,9 @@ function App() {
               </div>
             )}
             {userInfo && userInfo.isAdmin && (
-              <div className='dropdown'>
-                <Link to='#admin'>
-                  Admin <i className='fa fa-caret-down'></i>
+              <div className="dropdown">
+                <Link to="#admin">
+                <i class="fa fa-tachometer" aria-hidden="true"></i> Admin <i className="fa fa-caret-down"></i>
                 </Link>
                 <ul className='dropdown-content'>
                   <li>
@@ -138,6 +116,28 @@ function App() {
                   </li>
                 </ul>
               </div>
+            )}
+             {userInfo ? (
+              <div className="dropdown">
+                <Link to="#">
+                <i class="fa fa-user" aria-hidden="true"></i> {userInfo.name} <i className="fa fa-caret-down"></i>{' '}
+                </Link>
+                <ul className="dropdown-content">
+                  <li>
+                    <Link to="/profile">User Profile</Link>
+                  </li>
+                  <li>
+                    <Link to="/orderhistory">Order History</Link>
+                  </li>
+                  <li>
+                    <Link to="#signout" onClick={signoutHandler}>
+                      Sign Out
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            ) : (
+              <Link to="/signin">Sign In</Link>
             )}
           </div>
         </header>
@@ -215,7 +215,6 @@ function App() {
           <div
             style={{
               backgroundColor: '#f7f7f7',
-              padding: '2vw',
               height: '100%',
             }}
           >
@@ -367,7 +366,7 @@ function App() {
             </Routes>
           </div>
         </main>
-        <footer style={{ fontWeight: 500 }} className='custom-row center'>
+        <footer style={{fontWeight: 500}} className="custom-row center">
           {userInfo && !userInfo.isAdmin && <ChatBox userInfo={userInfo} />}
           <div>
             <i
