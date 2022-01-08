@@ -8,11 +8,10 @@ import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants';
 export default function ProfileScreen() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [address, setAddress] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [sellerName, setSellerName] = useState('');
-  const [sellerLogo, setSellerLogo] = useState('');
-  const [sellerDescription, setSellerDescription] = useState('');
 
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
@@ -25,6 +24,7 @@ export default function ProfileScreen() {
     loading: loadingUpdate,
   } = userUpdateProfile;
   const dispatch = useDispatch();
+
   useEffect(() => {
     if (!user) {
       dispatch({ type: USER_UPDATE_PROFILE_RESET });
@@ -32,13 +32,11 @@ export default function ProfileScreen() {
     } else {
       setName(user.name);
       setEmail(user.email);
-      if (user.seller) {
-        setSellerName(user.seller.name);
-        setSellerLogo(user.seller.logo);
-        setSellerDescription(user.seller.description);
-      }
+      setPhone(user.phone);
+      setAddress(user.address);
     }
   }, [dispatch, userInfo._id, user]);
+
   const submitHandler = (e) => {
     e.preventDefault();
     // dispatch update profile
@@ -51,13 +49,13 @@ export default function ProfileScreen() {
           name,
           email,
           password,
-          sellerName,
-          sellerLogo,
-          sellerDescription,
+          phone,
+          address,
         }),
       );
     }
   };
+
   return (
     <div className='mt-8 flex flex-col items-center gap-4 sm:flex-row sm:gap-10 sm:items-start sm:justify-center md:gap-16'>
       <div className='w-full max-w-lg sm:max-w-xl md:max-w-4xl'>
@@ -79,7 +77,7 @@ export default function ProfileScreen() {
               )}
 
               <div class='mt-5 max-w-2xl mx-auto'>
-                <form action='#' method='POST'>
+                <form onSubmit={submitHandler}>
                   <div class='shadow overflow-hidden rounded-md'>
                     <div className='px-4 py-5 bg-white sm:p-6'>
                       <div className='relative w-28 md:w-48 mx-auto'>
@@ -97,49 +95,55 @@ export default function ProfileScreen() {
                       <div class='grid grid-cols-6 gap-6'>
                         <div class='col-span-6 sm:col-span-3'>
                           <label
-                            for='first-name'
+                            for='name'
                             class='block text-sm font-medium text-gray-700'
                           >
-                            First name
+                            Name
                           </label>
                           <input
                             type='text'
-                            name='first-name'
-                            id='first-name'
-                            autocomplete='given-name'
+                            name='name'
+                            id='name'
+                            autocomplete='name'
                             class='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
-                          />
-                        </div>
-
-                        <div class='col-span-6 sm:col-span-3'>
-                          <label
-                            for='last-name'
-                            class='block text-sm font-medium text-gray-700'
-                          >
-                            Last name
-                          </label>
-                          <input
-                            type='text'
-                            name='last-name'
-                            id='last-name'
-                            autocomplete='family-name'
-                            class='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
                           />
                         </div>
 
                         <div class='col-span-6 sm:col-span-4'>
                           <label
-                            for='email-address'
+                            for='email'
                             class='block text-sm font-medium text-gray-700'
                           >
-                            Email address
+                            Email
+                          </label>
+                          <input
+                            type='email'
+                            name='email'
+                            id='email'
+                            autocomplete='email'
+                            class='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                          />
+                        </div>
+
+                        <div class='col-span-6 sm:col-span-3'>
+                          <label
+                            for='phone'
+                            class='block text-sm font-medium text-gray-700'
+                          >
+                            Phone
                           </label>
                           <input
                             type='text'
-                            name='email-address'
-                            id='email-address'
-                            autocomplete='email'
+                            name='phone'
+                            id='phone'
+                            autocomplete='phone'
                             class='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
                           />
                         </div>
 
@@ -175,24 +179,62 @@ export default function ProfileScreen() {
                             id='address'
                             autocomplete='address'
                             class='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}
                           />
                         </div>
 
                         {/* if account is not user then show this field else hide this field */}
-                        <div class='col-span-6 sm:col-span-6 lg:col-span-2'>
+                        {(user.isAdmin || user.isSeller) && (
+                          <div class='col-span-6 sm:col-span-6 lg:col-span-2'>
+                            <label
+                              for='role'
+                              class='block text-sm font-medium text-gray-700'
+                            >
+                              Role
+                            </label>
+                            <input
+                              type='text'
+                              name='role'
+                              id='role'
+                              value={user.isAdmin ? 'Admin' : 'Seller'}
+                              class='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                              disabled
+                            />
+                          </div>
+                        )}
+
+                        <div class='col-span-6 sm:col-span-3'>
                           <label
-                            for='role'
+                            for='password'
                             class='block text-sm font-medium text-gray-700'
                           >
-                            Role
+                            Password
                           </label>
                           <input
-                            type='text'
-                            name='role'
-                            id='role'
-                            value='Seller'
+                            type='password'
+                            name='password'
+                            id='password'
                             class='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
-                            disabled
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                          />
+                        </div>
+
+                        <div class='col-span-6 sm:col-span-3'>
+                          <label
+                            for='confirm-password'
+                            class='block text-sm font-medium text-gray-700'
+                          >
+                            Confirm Password
+                          </label>
+                          <input
+                            type='password'
+                            name='confirmPassword'
+                            id='confirm-password'
+                            class='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
                           />
                         </div>
                       </div>
