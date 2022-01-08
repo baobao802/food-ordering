@@ -26,16 +26,23 @@ export default function HomeScreen() {
     dispatch(listTopSellers());
   }, [dispatch]);
   return (
-    <div style={{backgroundColor:'#f7f7f7',padding: '2vw',height: '100%'}}>
-      <h1 style={{fontSize:'2rem',color:'rgb(13, 17, 54)'}} ><i style={{color:'#f0c040',marginRight:'5px'}} class="fa fa-star" aria-hidden="true"></i> Featured Products</h1>
+    <div>
+      <h1 style={{ fontSize: '2rem', color: 'rgb(13, 17, 54)' }}>
+        <i
+          style={{ color: '#f0c040', marginRight: '5px' }}
+          class='fa fa-star'
+          aria-hidden='true'
+        ></i>{' '}
+        Featured Products
+      </h1>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
-        <MessageBox variant="danger">{error}</MessageBox>
+        <MessageBox variant='danger'>{error}</MessageBox>
       ) : (
         <>
           {products.length === 0 && <MessageBox>No Product Found</MessageBox>}
-          <div className="homepage-container">
+          <div className='homepage-container'>
             {products.map((product) => (
               <Product key={product._id} product={product}></Product>
             ))}
