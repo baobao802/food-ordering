@@ -55,7 +55,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className='grid-container'>
-        <header className='food-header row'>
+        <header className='food-header custom-row'>
           <div>
             <button
               type='button'
@@ -367,7 +367,7 @@ function App() {
             </Routes>
           </div>
         </main>
-        <footer style={{ fontWeight: 500 }} className='row center'>
+        <footer style={{ fontWeight: 500 }} className='custom-row center'>
           {userInfo && !userInfo.isAdmin && <ChatBox userInfo={userInfo} />}
           <div>
             <i

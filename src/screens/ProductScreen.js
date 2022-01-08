@@ -60,7 +60,7 @@ export default function ProductScreen(props) {
         <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <div>
-          <div className="row top" style={{justifyContent:'unset'}}>
+          <div className="custom-row top" style={{justifyContent:'unset'}}>
             <div className="col" style={{width:'50%'}}>
               <img
                 style={{borderRadius:0}}
@@ -93,7 +93,7 @@ export default function ProductScreen(props) {
                 {/* <div style={{color: 'rgb(119, 121, 140)'}}>
                   <p style={{fontSize: '0.7em'}}>{product.description}</p>
                 </div> */}
-                <div className="row">
+                <div className="custom-row">
                     <div>
                       {product.countInStock > 0 ? (
                         <span className="success" style={{fontSize: '0.8em',marginBottom:'20px', fontWeight:600}}> In Stock</span>
@@ -102,11 +102,11 @@ export default function ProductScreen(props) {
                       )}
                     </div>
                 </div>
-                <div className='row' style={{marginTop:'20px', justifyContent:'unset'}}>
+                <div className='custom-row' style={{marginTop:'20px', justifyContent:'unset'}}>
                 {product.countInStock > 0 && (
                     <>
                       <div>
-                        <div className="row">
+                        <div className="custom-row">
                           <div style={{fontSize: '0.8em',color: 'rgb(13, 17, 54)',fontWeight:600,marginRight:'10px'}}>Quantity</div>
                           <div>
                             <select
@@ -142,7 +142,7 @@ export default function ProductScreen(props) {
             </div>
           </div>
           <div>
-            <div className='row'>
+            <div className='custom-row'>
               <div style={{width:'50%'}}>
                 {userInfo ? (
                   <form style={{padding: '0 3rem'}} className="form" onSubmit={submitHandler}>
