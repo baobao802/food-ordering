@@ -31,11 +31,11 @@ export default function HomeScreen() {
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
-        <MessageBox variant="danger">{error}</MessageBox>
+        <MessageBox variant='danger'>{error}</MessageBox>
       ) : (
         <>
           {products.length === 0 && <MessageBox>No Product Found</MessageBox>}
-          <div className="homepage-container">
+          <div className='homepage-container'>
             {products.map((product) => (
               <Product key={product._id} product={product}></Product>
             ))}
