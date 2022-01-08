@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listProducts } from '../actions/productActions';
 import { listTopSellers } from '../actions/userActions';
 import { Link } from 'react-router-dom';
+import '../index.css';
 
 export default function HomeScreen() {
   const dispatch = useDispatch();
@@ -31,11 +32,11 @@ export default function HomeScreen() {
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
-        <MessageBox variant="danger">{error}</MessageBox>
+        <MessageBox variant='danger'>{error}</MessageBox>
       ) : (
         <>
           {products.length === 0 && <MessageBox>No Product Found</MessageBox>}
-          <div className="homepage-container">
+          <div className='homepage-container'>
             {products.map((product) => (
               <Product key={product._id} product={product}></Product>
             ))}

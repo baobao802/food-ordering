@@ -7,6 +7,7 @@ import MessageBox from '../components/MessageBox';
 import Product from '../components/Product';
 import Rating from '../components/Rating';
 import { prices, ratings } from '../utils';
+import '../index.css';
 
 export default function SearchScreen(props) {
   const navigate = useNavigate();
