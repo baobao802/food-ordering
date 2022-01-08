@@ -17,7 +17,7 @@ export default function Product(props) {
           rating={product.rating}
           numReviews={product.numReviews}
         ></Rating>
-        <div className="row" style={{marginTop:'20px'}}>
+        <div className="custom-row" style={{marginTop:'20px'}}>
           <div className="price">${product.price}</div>
         </div>
       </div>

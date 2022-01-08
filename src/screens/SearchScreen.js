@@ -54,46 +54,23 @@ export default function SearchScreen(props) {
     return `/search/category/${filterCategory}/name/${filterName}/min/${filterMin}/max/${filterMax}/rating/${filterRating}/order/${sortOrder}/pageNumber/${filterPage}`;
   };
   return (
-    <div>
-      <div className="custom-row">
-        {loading ? (
-          <LoadingBox></LoadingBox>
-        ) : error ? (
-          <MessageBox variant="danger">{error}</MessageBox>
-        ) : (
-          <div>{products.length} Results</div>
-        )}
-        <div>
-          Sort by{' '}
-          <select
-            value={order}
-            onChange={(e) => {
-              navigate(getFilterUrl({ order: e.target.value }));
-            }}
-          >
-            <option value="newest">Newest Arrivals</option>
-            <option value="lowest">Price: Low to High</option>
-            <option value="highest">Price: High to Low</option>
-            <option value="toprated">Avg. Customer Reviews</option>
-          </select>
-        </div>
-      </div>
-      <div className="custom-row top">
-        <div className="col-1">
-          <h3>Department</h3>
+    <div style={{backgroundColor:'#f7f7f7',height: '100%'}}>  
+      <div className="custom-row top" style={{height:'100%'}}>
+        <div style={{flex:'0 0 20%', height:'100%',background: 'white',padding:'10px'}}>
+          <h3>Categories</h3>
           <div>
             {loadingCategories ? (
               <LoadingBox></LoadingBox>
             ) : errorCategories ? (
               <MessageBox variant="danger">{errorCategories}</MessageBox>
             ) : (
-              <ul>
+              <ul className='department-container'>
                 <li>
                   <Link
                     className={'all' === category ? 'active' : ''}
                     to={getFilterUrl({ category: 'all' })}
                   >
-                    Any
+                    All
                   </Link>
                 </li>
                 {categories.map((c) => (
@@ -111,7 +88,7 @@ export default function SearchScreen(props) {
           </div>
           <div>
             <h3>Price</h3>
-            <ul>
+            <ul className='department-container'>
               {prices.map((p) => (
                 <li key={p.name}>
                   <Link
@@ -127,22 +104,46 @@ export default function SearchScreen(props) {
             </ul>
           </div>
           <div>
-            <h3>Avg. Customer Review</h3>
-            <ul>
+            <h3>Customer Reviews</h3>
+            <ul className='customer-review'>
               {ratings.map((r) => (
                 <li key={r.name}>
                   <Link
                     to={getFilterUrl({ rating: r.rating })}
                     className={`${r.rating}` === `${rating}` ? 'active' : ''}
                   >
-                    <Rating caption={' & up'} rating={r.rating}></Rating>
+                    <Rating caption={'Upper'} rating={r.rating}></Rating>
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
         </div>
-        <div className="col-3">
+        <div style={{flex:1,padding:'2rem'}}>
+        <div className="custom-row" style={{marginBottom:'20px',marginTop:'20px'}}>
+          {loading ? (
+            <LoadingBox></LoadingBox>
+          ) : error ? (
+            <MessageBox variant="danger">{error}</MessageBox>
+          ) : (
+            <div style={{color: '#073B4C',fontWeight: 600}}>{products.length} Results</div>
+          )}
+          <div style={{color: '#073B4C',fontWeight: 600}}>
+          <i class="fa fa-filter" aria-hidden="true"></i> Sort by{' '}
+            <select
+              style={{outline:0,border:0,marginLeft:'10px'}}
+              value={order}
+              onChange={(e) => {
+                navigate(getFilterUrl({ order: e.target.value }));
+              }}
+            >
+              <option value="newest">Newest Arrivals</option>
+              <option value="lowest">Price: Low to High</option>
+              <option value="highest">Price: High to Low</option>
+              <option value="toprated">Customer Reviews</option>
+            </select>
+          </div>
+        </div>
           {loading ? (
             <LoadingBox></LoadingBox>
           ) : error ? (
