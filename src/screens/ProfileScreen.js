@@ -12,6 +12,7 @@ export default function ProfileScreen() {
   const [address, setAddress] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [image, setImage] = useState(null);
 
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
@@ -34,6 +35,7 @@ export default function ProfileScreen() {
       setEmail(user.email);
       setPhone(user.phone);
       setAddress(user.address);
+      setImage(user.image);
     }
   }, [dispatch, userInfo._id, user]);
 
@@ -51,6 +53,7 @@ export default function ProfileScreen() {
           password,
           phone,
           address,
+          image,
         }),
       );
     }
@@ -87,14 +90,35 @@ export default function ProfileScreen() {
                 <form onSubmit={submitHandler}>
                   <div class='shadow overflow-hidden rounded-md'>
                     <div className='px-4 py-5 bg-white sm:p-6'>
-                      <div className='relative w-28 md:w-48 mx-auto'>
-                        <img
-                          className='rounded-full'
-                          src='https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80'
-                          alt='Username'
-                        />
-                        <button className='absolute bottom-0 right-0 py-1 px-2 rounded text-xs opacity-60 font-bold sm:text-sm md:py-1.5 md:px-3 md:text-base transition-all hover:opacity-80'>
-                          Edit
+                      <div className='relative w-28 h-28 md:w-48 md:h-48 mx-auto'>
+                        {image && (
+                          <img
+                            className='rounded-full w-full h-full'
+                            src={
+                              typeof image === 'object'
+                                ? URL.createObjectURL(image)
+                                : image
+                            }
+                            alt={name}
+                          />
+                        )}
+                        <button
+                          type='button'
+                          className='absolute bottom-0 right-0 rounded bg-gray-100 text-xs opacity-60 font-bold sm:text-sm md:text-base transition-all hover:opacity-80'
+                        >
+                          <label
+                            htmlFor='image'
+                            className='py-1 px-2 md:py-1.5 md:px-3 cursor-pointer'
+                          >
+                            <input
+                              type='file'
+                              name='image'
+                              id='image'
+                              hidden
+                              onChange={(e) => setImage(e.target.files[0])}
+                            />
+                            Edit
+                          </label>
                         </button>
                       </div>
                     </div>
@@ -115,6 +139,7 @@ export default function ProfileScreen() {
                             class='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                             value={name}
                             onChange={(e) => setName(e.target.value)}
+                            required
                           />
                         </div>
 
@@ -133,6 +158,7 @@ export default function ProfileScreen() {
                             class='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                            required
                           />
                         </div>
 
@@ -151,6 +177,7 @@ export default function ProfileScreen() {
                             class='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                             value={phone}
                             onChange={(e) => setPhone(e.target.value)}
+                            required
                           />
                         </div>
 
@@ -188,28 +215,9 @@ export default function ProfileScreen() {
                             class='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                             value={address}
                             onChange={(e) => setAddress(e.target.value)}
+                            required
                           />
                         </div>
-
-                        {/* if account is not user then show this field else hide this field */}
-                        {(user.isAdmin || user.isSeller) && (
-                          <div class='col-span-6 sm:col-span-6 lg:col-span-2'>
-                            <label
-                              for='role'
-                              class='block text-sm font-medium text-gray-700'
-                            >
-                              Role
-                            </label>
-                            <input
-                              type='text'
-                              name='role'
-                              id='role'
-                              value={user.isAdmin ? 'Admin' : 'Seller'}
-                              class='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
-                              disabled
-                            />
-                          </div>
-                        )}
 
                         <div class='col-span-6 sm:col-span-3'>
                           <label
@@ -225,6 +233,7 @@ export default function ProfileScreen() {
                             class='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
+                            required
                           />
                         </div>
 
@@ -242,8 +251,29 @@ export default function ProfileScreen() {
                             class='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
+                            required
                           />
                         </div>
+
+                        {(user.isAdmin || user.isSeller) && (
+                          <div class='col-span-6 sm:col-span-6 lg:col-span-2'>
+                            <label
+                              for='role'
+                              class='block text-sm font-medium text-gray-700'
+                            >
+                              Role
+                            </label>
+                            <input
+                              type='text'
+                              name='role'
+                              id='role'
+                              value={user.isAdmin ? 'Admin' : 'Seller'}
+                              class='mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'
+                              disabled
+                              readOnly
+                            />
+                          </div>
+                        )}
                       </div>
                     </div>
                     <div class='px-4 py-3 bg-gray-50 text-right sm:px-6'>

@@ -6,6 +6,7 @@ import CheckoutSteps from '../components/CheckoutSteps';
 import { ORDER_CREATE_RESET } from '../constants/orderConstants';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
+import '../index.css';
 
 export default function PlaceOrderScreen(props) {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ export default function PlaceOrderScreen(props) {
   );
   cart.shippingPrice = cart.itemsPrice > 100 ? toPrice(0) : toPrice(10);
   cart.taxPrice = toPrice(0.15 * cart.itemsPrice);
-  cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
+  cart.totalPrice = cart.itemsPrice + cart.shippingPrice ;
   const dispatch = useDispatch();
   const placeOrderHandler = () => {
     dispatch(createOrder({ ...cart, orderItems: cart.cartItems }));
@@ -35,35 +36,34 @@ export default function PlaceOrderScreen(props) {
   return (
     <div>
       <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
-      <div className="row top">
+      <div className="custom-row top" style={{color:'rgb(13, 17, 54)'}}>
         <div className="col-2">
-          <ul>
-            <li>
-              <div className="card card-body">
-                <h2>Shipping</h2>
+          <div>
+            <div>
+              <div className="card card-body" style={{border:0,boxShadow:'rgb(0 0 0 / 8%) 0px 2px 16px 0px'}}>
+              <div class="flex items-center text-xl checkout-title"><p class="part-number">1</p> <h2>Shipping</h2> </div>
                 <p>
                   <strong>Name:</strong> {cart.shippingAddress.fullName} <br />
                   <strong>Address: </strong> {cart.shippingAddress.address},
-                  {cart.shippingAddress.city}, {cart.shippingAddress.postalCode}
-                  ,{cart.shippingAddress.country}
+                  {cart.shippingAddress.city}, {cart.shippingAddress.country}
                 </p>
               </div>
-            </li>
-            <li>
-              <div className="card card-body">
-                <h2>Payment</h2>
+            </div>
+            <div>
+              <div className="card card-body" style={{border:0,boxShadow:'rgb(0 0 0 / 8%) 0px 2px 16px 0px'}}> 
+              <div class="flex items-center text-xl checkout-title"><p class="part-number">2</p> <h2>Payment</h2> </div>
                 <p>
-                  <strong>Method:</strong> {cart.paymentMethod}
+                  <strong>Method:</strong> By cash
                 </p>
               </div>
-            </li>
-            <li>
-              <div className="card card-body">
-                <h2>Order Items</h2>
-                <ul>
+            </div>
+            <div>
+              <div className="card card-body" style={{border:0,boxShadow:'rgb(0 0 0 / 8%) 0px 2px 16px 0px'}}>
+              <div class="flex items-center text-xl checkout-title"><p class="part-number">3</p> <h2>Order Items</h2> </div>
+                <div>
                   {cart.cartItems.map((item) => (
-                    <li key={item.product}>
-                      <div className="row">
+                    <div style={{padding: '0.5rem'}} key={item.product}>
+                      <div className="custom-row">
                         <div>
                           <img
                             src={item.image}
@@ -78,51 +78,45 @@ export default function PlaceOrderScreen(props) {
                         </div>
 
                         <div>
-                          {item.qty} x ${item.price} = ${item.qty * item.price}
+                          <span style={{fontWeight:600}}>{item.qty} </span> x ${item.price} = ${item.qty * item.price}
                         </div>
                       </div>
-                    </li>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </div>
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
         <div className="col-1">
-          <div className="card card-body">
-            <ul>
-              <li>
+          <div className="card card-body" style={{border:0}}>
+            <div>
+              <div>
                 <h2>Order Summary</h2>
-              </li>
-              <li>
-                <div className="row">
+              </div>
+              <div>
+                <div className="custom-row">
                   <div>Items</div>
                   <div>${cart.itemsPrice.toFixed(2)}</div>
                 </div>
-              </li>
-              <li>
-                <div className="row">
+              </div>
+              <div>
+                <div className="custom-row">
                   <div>Shipping</div>
                   <div>${cart.shippingPrice.toFixed(2)}</div>
                 </div>
-              </li>
-              <li>
-                <div className="row">
-                  <div>Tax</div>
-                  <div>${cart.taxPrice.toFixed(2)}</div>
-                </div>
-              </li>
-              <li>
-                <div className="row">
+              </div>
+              <div>
+                <div className="custom-row">
                   <div>
-                    <strong> Order Total</strong>
+                    <strong> Total</strong>
                   </div>
                   <div>
                     <strong>${cart.totalPrice.toFixed(2)}</strong>
                   </div>
                 </div>
-              </li>
-              <li>
+              </div>
+              <div>
                 <button
                   type="button"
                   onClick={placeOrderHandler}
@@ -131,10 +125,10 @@ export default function PlaceOrderScreen(props) {
                 >
                   Place Order
                 </button>
-              </li>
+              </div>
               {loading && <LoadingBox></LoadingBox>}
               {error && <MessageBox variant="danger">{error}</MessageBox>}
-            </ul>
+            </div>
           </div>
         </div>
       </div>

@@ -79,9 +79,16 @@ export default function ProductListScreen(props) {
     >
       <div className='row'>
         <h1 className='text-gray-900 text-lg md:text-2xl'>Products</h1>
-        <button type='button' className='primary' onClick={createHandler}>
-          Create Product
-        </button>
+        <div className='text-right'>
+          <button
+            type='button'
+            className='primary'
+            style={{ marginLeft: 'auto', marginBottom: '1rem' }}
+            onClick={createHandler}
+          >
+            Create Product
+          </button>
+        </div>
       </div>
 
       {loadingDelete && <LoadingBox></LoadingBox>}
@@ -201,18 +208,4 @@ export default function ProductListScreen(props) {
       )}
     </div>
   );
-}
-
-{
-  /* <div className='row center pagination'>
-  {[...Array(pages).keys()].map((x) => (
-    <Link
-      className={x + 1 === page ? 'active' : ''}
-      key={x + 1}
-      to={`/productlist/pageNumber/${x + 1}`}
-    >
-      {x + 1}
-    </Link>
-  ))}
-</div> */
 }

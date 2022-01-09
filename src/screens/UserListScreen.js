@@ -9,7 +9,7 @@ import { USER_DETAILS_RESET } from '../constants/userConstants';
 export default function UserListScreen(props) {
   const navigate = useNavigate();
   const userList = useSelector((state) => state.userList);
-  const { loading, error, users } = userList;
+  const { loading, error, users, pages, page } = userList;
 
   const userDelete = useSelector((state) => state.userDelete);
   const {
@@ -32,63 +32,14 @@ export default function UserListScreen(props) {
     }
   };
 
-  // return (
-  //   <div>
-  //     <h1>Users</h1>
-  //     {loadingDelete && <LoadingBox></LoadingBox>}
-  //     {errorDelete && <MessageBox variant='danger'>{errorDelete}</MessageBox>}
-  //     {successDelete && (
-  //       <MessageBox variant='success'>User Deleted Successfully</MessageBox>
-  //     )}
-  //     {loading ? (
-  //       <LoadingBox></LoadingBox>
-  //     ) : error ? (
-  //       <MessageBox variant='danger'>{error}</MessageBox>
-  //     ) : (
-  //       <table className='table'>
-  //         <thead>
-  //           <tr>
-  //             <th>ID</th>
-  //             <th>NAME</th>
-  //             <th>EMAIL</th>
-  //             <th>IS SELLER</th>
-  //             <th>IS ADMIN</th>
-  //             <th>ACTIONS</th>
-  //           </tr>
-  //         </thead>
-  //         <tbody>
-  //           {users.map((user) => (
-  //             <tr key={user._id}>
-  //               <td>{user._id}</td>
-  //               <td>{user.name}</td>
-  //               <td>{user.email}</td>
-  //               <td>{user.isSeller ? 'YES' : ' NO'}</td>
-  //               <td>{user.isAdmin ? 'YES' : 'NO'}</td>
-  //               <td>
-  //                 <button
-  //                   type='button'
-  //                   className='medium'
-  //                   onClick={() => navigate(`/user/${user._id}/edit`)}
-  //                 >
-  //                   <i class='fa fa-pencil' aria-hidden='true'></i>
-  //                 </button>
-  //                 <button
-  //                   type='button'
-  //                   className='medium'
-  //                   onClick={() => deleteHandler(user)}
-  //                 >
-  //                   <i class='fa fa-trash' aria-hidden='true'></i>
-  //                 </button>
-  //               </td>
-  //             </tr>
-  //           ))}
-  //         </tbody>
-  //       </table>
-  //     )}
-  //   </div>
-  // );
   return (
-    <div>
+    <div
+      style={{
+        backgroundColor: '#f7f7f7',
+        padding: '2vw 2vw 0 2vw',
+        height: '100%',
+      }}
+    >
       <h1 className='text-gray-900 text-lg md:text-2xl'>Users</h1>
       {loadingDelete && <LoadingBox></LoadingBox>}
       {errorDelete && <MessageBox variant='danger'>{errorDelete}</MessageBox>}
@@ -144,7 +95,7 @@ export default function UserListScreen(props) {
                             <div class='flex-shrink-0 h-10 w-10'>
                               <img
                                 class='h-10 w-10 rounded-full'
-                                src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60'
+                                src={user.image}
                                 alt=''
                               />
                             </div>
@@ -196,10 +147,18 @@ export default function UserListScreen(props) {
             </div>
           </div>
           <div className='flex gap-1 mt-4 justify-end'>
-            <button class='bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'>
+            <button
+              class='bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'
+              disabled={0 === page}
+              onClick={() => navigate(`/userlist/pageNumber/${page - 1}`)}
+            >
               Prev
             </button>
-            <button class='bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'>
+            <button
+              class='bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'
+              disabled={pages === page}
+              onClick={() => navigate(`/userlist/pageNumber/${page + 1}`)}
+            >
               Next
             </button>
           </div>
