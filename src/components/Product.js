@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Rating from './Rating';
-
+import '../index.css';
 export default function Product(props) {
   const { product } = props;
   return (

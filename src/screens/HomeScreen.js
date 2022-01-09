@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listProducts } from '../actions/productActions';
 import { listTopSellers } from '../actions/userActions';
 import { Link } from 'react-router-dom';
+import '../index.css';
 
 export default function HomeScreen() {
   const dispatch = useDispatch();

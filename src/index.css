@@ -41,16 +41,24 @@ footer {
   background-color: #01876c;
   color: #ffffff;
 }
+
 /* Common */
 h1 {
   font-size: 1.8rem;
   padding: 1rem 0;
+  margin: revert;
+  font-weight: revert;
 }
 h2 {
   font-size: 1.6rem;
   padding: 1rem 0;
+  margin: revert;
+  font-weight: revert;
 }
-
+h3,h4,h5,h6{
+  font-weight: bold;
+  margin: revert;
+}
 a {
   text-decoration: none;
 }
@@ -197,6 +205,7 @@ button.close-sidebar {
 
 /* Image */
 img {
+  display: unset;
   border-radius: 0.5rem;
 }
 img.small {
@@ -367,6 +376,7 @@ img.large {
   border-radius: 0.5rem 0 0 0.5rem;
   border-right: none;
   margin-left: 0.5rem;
+  height: 100%;
 }
 .active {
   font-weight: bold;

@@ -6,6 +6,7 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import Rating from '../components/Rating';
 import { PRODUCT_REVIEW_CREATE_RESET } from '../constants/productConstants';
+import '../index.css';
 
 export default function ProductScreen(props) {
   const navigate = useNavigate();
