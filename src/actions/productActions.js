@@ -144,7 +144,7 @@ export const createReview =
     } = getState();
     try {
       const { data } = await Axios.post(
-        `/api/products/${productId}/reviews`,
+        `/api/fruits/${productId}/reviews`,
         review,
         {
           headers: { Authorization: `Bearer ${userInfo.token}` },

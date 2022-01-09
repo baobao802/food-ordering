@@ -28,11 +28,36 @@ import {
 
 export const createOrder = (order) => async (dispatch, getState) => {
   dispatch({ type: ORDER_CREATE_REQUEST, payload: order });
+  let {itemsPrice,orderItems,shippingAddress,shippingPrice,totalPrice}= order
+  console.log(order);
+  let orderItemsDetail = []
+  orderItems.map(item=>{
+    orderItemsDetail.push({
+      image: item.image,
+      name: item.name,
+      price: item.price,
+      fruit: item.product,
+      qty: item.qty
+    })
+  })
+  let orderDetail = {
+    orderItems: [...orderItemsDetail],
+    shippingAddress: {
+      address: shippingAddress?.address,
+      city: shippingAddress?.city,
+      country: shippingAddress?.country,
+      fullName: shippingAddress?.fullName,
+    },
+    paymentMethod: "By cash",
+    itemsPrice,
+    shippingPrice,
+    totalPrice
+  }
   try {
     const {
       userSignin: { userInfo },
     } = getState();
-    const { data } = await Axios.post('/api/orders', order, {
+    const { data } = await Axios.post('/api/orders', orderDetail, {
       headers: {
         Authorization: `Bearer ${userInfo.token}`,
       },
@@ -120,7 +145,6 @@ export const listOrders = ({ seller = '' }) => async (dispatch, getState) => {
     const { data } = await Axios.get(`/api/orders?seller=${seller}`, {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     });
-    console.log(data);
     dispatch({ type: ORDER_LIST_SUCCESS, payload: data });
   } catch (error) {
     const message =
