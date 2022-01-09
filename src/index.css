@@ -79,11 +79,26 @@ textarea:focus {
   outline: #06d6a0;
 }
 
+button.primary {
+  background-color: #f0c040;
+}
+button.block {
+  width: 100%;
+}
+button.small {
+  font-size: 1.2rem;
+}
+
 /* Header */
 header a {
   color: #ffffff;
   padding: 0.625rem;
 }
+
+.header-menu i:first-child {
+  color: orange;
+}
+
 a.brand {
   color: #ffffff;
   font-size: 1.875rem;
@@ -267,7 +282,7 @@ img.large {
   position: absolute;
   display: none;
   right: 0;
-  min-width: 7.5rem;
+  min-width: 10rem;
   padding: 0.625rem;
   z-index: 1;
   background-color: #203040;
