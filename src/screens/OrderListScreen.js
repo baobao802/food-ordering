@@ -32,7 +32,13 @@ export default function OrderListScreen(props) {
     }
   };
   return (
-    <div>
+    <div
+      style={{
+        backgroundColor: '#f7f7f7',
+        padding: '2vw 2vw 0 2vw',
+        height: '100%',
+      }}
+    >
       <h1 className='text-gray-900 text-lg md:text-2xl'>Orders</h1>
       {loadingDelete && <LoadingBox></LoadingBox>}
       {errorDelete && <MessageBox variant='danger'>{errorDelete}</MessageBox>}

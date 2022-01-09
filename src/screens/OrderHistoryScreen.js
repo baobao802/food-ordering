@@ -14,7 +14,13 @@ export default function OrderHistoryScreen(props) {
     dispatch(listOrderMine());
   }, [dispatch]);
   return (
-    <div>
+    <div
+      style={{
+        backgroundColor: '#f7f7f7',
+        padding: '2vw 2vw 0 2vw',
+        height: '100%',
+      }}
+    >
       <h1 className='text-gray-900 text-lg md:text-2xl'>Order History</h1>
       {loading ? (
         <LoadingBox></LoadingBox>

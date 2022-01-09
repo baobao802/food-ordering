@@ -57,7 +57,14 @@ export default function ProfileScreen() {
   };
 
   return (
-    <div className='mt-8 flex flex-col items-center gap-4 sm:flex-row sm:gap-10 sm:items-start sm:justify-center md:gap-16'>
+    <div
+      className='mt-8 flex flex-col items-center gap-4 sm:flex-row sm:gap-10 sm:items-start sm:justify-center md:gap-16'
+      style={{
+        backgroundColor: '#f7f7f7',
+        padding: '2vw 2vw 0 2vw',
+        height: '100%',
+      }}
+    >
       <div className='w-full max-w-lg sm:max-w-xl md:max-w-4xl'>
         <div class='my-10 sm:my-12'>
           {loading ? (

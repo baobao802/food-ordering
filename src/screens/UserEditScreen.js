@@ -50,61 +50,67 @@ export default function UserEditScreen(props) {
     dispatch(updateUser({ _id: userId, name, email, isSeller, isAdmin }));
   };
   return (
-    <div>
-      <form className="form" onSubmit={submitHandler}>
+    <div
+      style={{
+        backgroundColor: '#f7f7f7',
+        padding: '2vw 2vw 0 2vw',
+        height: '100%',
+      }}
+    >
+      <form className='form' onSubmit={submitHandler}>
         <div>
           <h1>Edit User {name}</h1>
           {loadingUpdate && <LoadingBox></LoadingBox>}
           {errorUpdate && (
-            <MessageBox variant="danger">{errorUpdate}</MessageBox>
+            <MessageBox variant='danger'>{errorUpdate}</MessageBox>
           )}
         </div>
         {loading ? (
           <LoadingBox />
         ) : error ? (
-          <MessageBox variant="danger">{error}</MessageBox>
+          <MessageBox variant='danger'>{error}</MessageBox>
         ) : (
           <>
             <div>
-              <label htmlFor="name">Name</label>
+              <label htmlFor='name'>Name</label>
               <input
-                id="name"
-                type="text"
-                placeholder="Enter name"
+                id='name'
+                type='text'
+                placeholder='Enter name'
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               ></input>
             </div>
             <div>
-              <label htmlFor="email">Email</label>
+              <label htmlFor='email'>Email</label>
               <input
-                id="email"
-                type="email"
-                placeholder="Enter email"
+                id='email'
+                type='email'
+                placeholder='Enter email'
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               ></input>
             </div>
             <div>
-              <label htmlFor="isSeller">Is Seller</label>
+              <label htmlFor='isSeller'>Is Seller</label>
               <input
-                id="isSeller"
-                type="checkbox"
+                id='isSeller'
+                type='checkbox'
                 checked={isSeller}
                 onChange={(e) => setIsSeller(e.target.checked)}
               ></input>
             </div>
             <div>
-              <label htmlFor="isAdmin">Is Admin</label>
+              <label htmlFor='isAdmin'>Is Admin</label>
               <input
-                id="isAdmin"
-                type="checkbox"
+                id='isAdmin'
+                type='checkbox'
                 checked={isAdmin}
                 onChange={(e) => setIsAdmin(e.target.checked)}
               ></input>
             </div>
             <div>
-              <button type="submit" className="primary">
+              <button type='submit' className='primary'>
                 Update
               </button>
             </div>
