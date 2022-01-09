@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveShippingAddress } from '../actions/cartActions';
 import CheckoutSteps from '../components/CheckoutSteps';
+import '../index.css';
 
 export default function ShippingAddressScreen(props) {
   const navigate = useNavigate();
@@ -36,11 +37,6 @@ export default function ShippingAddressScreen(props) {
       setLng(addressMap.lng);
     }
     let moveOn = true;
-    if (!newLat || !newLng) {
-      moveOn = window.confirm(
-        'You did not set your location on map. Continue?'
-      );
-    }
     if (moveOn) {
       dispatch(
         saveShippingAddress({
@@ -53,7 +49,7 @@ export default function ShippingAddressScreen(props) {
           lng: newLng,
         })
       );
-      navigate('/payment');
+      navigate('/placeorder');
     }
   };
   const chooseOnMap = () => {
@@ -71,7 +67,7 @@ export default function ShippingAddressScreen(props) {
     navigate('/map');
   };
   return (
-    <div>
+    <div style={{paddingTop:'2rem'}}>
       <CheckoutSteps step1 step2></CheckoutSteps>
       <form className="form" onSubmit={submitHandler}>
         <div>
@@ -111,17 +107,6 @@ export default function ShippingAddressScreen(props) {
           ></input>
         </div>
         <div>
-          <label htmlFor="postalCode">Postal Code</label>
-          <input
-            type="text"
-            id="postalCode"
-            placeholder="Enter postal code"
-            value={postalCode}
-            onChange={(e) => setPostalCode(e.target.value)}
-            required
-          ></input>
-        </div>
-        <div>
           <label htmlFor="country">Country</label>
           <input
             type="text"
@@ -131,12 +116,6 @@ export default function ShippingAddressScreen(props) {
             onChange={(e) => setCountry(e.target.value)}
             required
           ></input>
-        </div>
-        <div>
-          <label htmlFor="chooseOnMap">Location</label>
-          <button type="button" onClick={chooseOnMap}>
-            Choose On Map
-          </button>
         </div>
         <div>
           <label />

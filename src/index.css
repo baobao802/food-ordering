@@ -1,4 +1,3 @@
-
 /* AAAAAAAAAA */
 html {
   font-size: 62.5%; /* 16px x 62.5 = 10px = 1rem */
@@ -639,4 +638,18 @@ img.large {
 .customer-review .active .rating span:last-child{
   color: #b32451 !important;
   font-size:1.5rem !important
+}
+
+.part-number{
+  background-color: #009e7f;
+  width: 2.5vw;
+  height: 2.5vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.3rem;
+  margin-right: 1vw;  
 }

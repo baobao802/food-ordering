@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams, useLocation } from 'react-router-dom';
 import { addToCart, removeFromCart } from '../actions/cartActions';
 import MessageBox from '../components/MessageBox';
+import '../index.css';
 
 export default function CartScreen(props) {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ export default function CartScreen(props) {
     navigate('/signin?redirect=/shipping');
   };
   return (
-    <div className="row top">
+    <div className="custom-row top">
       <div className="col-2">
         <h1>Shopping Cart</h1>
         {error && <MessageBox variant="danger">{error}</MessageBox>}
@@ -43,7 +44,7 @@ export default function CartScreen(props) {
           <ul>
             {cartItems.map((item) => (
               <li key={item.product}>
-                <div className="row">
+                <div className="custom-row">
                   <div>
                     <img
                       src={item.image}
