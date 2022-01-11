@@ -40,7 +40,9 @@ export default function UserListScreen(props) {
         height: '100%',
       }}
     >
-      <h1 className='text-gray-900 text-lg md:text-2xl'>Users</h1>
+      <h1 className='text-gray-900 text-lg md:text-3xl mb-3 font-medium'>
+        Users
+      </h1>
       {loadingDelete && <LoadingBox></LoadingBox>}
       {errorDelete && <MessageBox variant='danger'>{errorDelete}</MessageBox>}
       {successDelete && (
@@ -68,7 +70,7 @@ export default function UserListScreen(props) {
                         scope='col'
                         class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
                       >
-                        Title
+                        Contact
                       </th>
                       <th
                         scope='col'
@@ -111,9 +113,9 @@ export default function UserListScreen(props) {
                         </td>
                         <td class='px-6 py-4 whitespace-nowrap'>
                           <div class='text-sm text-gray-900'>
-                            Regional Paradigm Technician
+                            {user.address}
                           </div>
-                          <div class='text-sm text-gray-500'>Optimization</div>
+                          <div class='text-sm text-gray-500'>{user.phone}</div>
                         </td>
                         <td class='px-6 py-4 whitespace-nowrap'>
                           <span class='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>
@@ -121,7 +123,11 @@ export default function UserListScreen(props) {
                           </span>
                         </td>
                         <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-                          Admin
+                          {user.isAdmin
+                            ? 'Admin'
+                            : user.isSeller
+                            ? 'Seller'
+                            : 'Customer'}
                         </td>
                         <td class='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
                           <Link

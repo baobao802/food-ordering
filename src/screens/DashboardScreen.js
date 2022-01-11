@@ -13,42 +13,48 @@ export default function DashboardScreen() {
     dispatch(summaryOrder());
   }, [dispatch]);
   return (
-    <div>
-      <div className="row">
-        <h1>Dashboard</h1>
+    <div
+      style={{
+        backgroundColor: '#f7f7f7',
+        padding: '2vw 2vw 0 2vw',
+        height: '100%',
+      }}
+    >
+      <div className='row'>
+        <h1 className='font-bold text-3xl py-2 font-medium'>Dashboard</h1>
       </div>
       {loading ? (
         <LoadingBox />
       ) : error ? (
-        <MessageBox variant="danger">{error}</MessageBox>
+        <MessageBox variant='danger'>{error}</MessageBox>
       ) : (
         <>
-          <ul className="row summary">
+          <ul className='row summary flex gap-8 mb-8'>
             <li>
-              <div className="summary-title color1">
+              <div className='summary-title bg-red-300'>
                 <span>
-                  <i className="fa fa-users" /> Users
+                  <i className='fa fa-users' /> Users
                 </span>
               </div>
-              <div className="summary-body">{summary.users[0].numUsers}</div>
+              <div className='summary-body'>{summary.users[0].numUsers}</div>
             </li>
             <li>
-              <div className="summary-title color2">
+              <div className='summary-title bg-green-300'>
                 <span>
-                  <i className="fa fa-shopping-cart" /> Orders
+                  <i className='fa fa-shopping-cart' /> Orders
                 </span>
               </div>
-              <div className="summary-body">
+              <div className='summary-body'>
                 {summary.orders[0] ? summary.orders[0].numOrders : 0}
               </div>
             </li>
             <li>
-              <div className="summary-title color3">
+              <div className='summary-title bg-purple-300'>
                 <span>
-                  <i className="fa fa-money" /> Sales
+                  <i className='fa fa-money' /> Sales
                 </span>
               </div>
-              <div className="summary-body">
+              <div className='summary-body'>
                 $
                 {summary.orders[0]
                   ? summary.orders[0].totalSales.toFixed(2)
@@ -56,40 +62,44 @@ export default function DashboardScreen() {
               </div>
             </li>
           </ul>
-          <div>
+          <div className='mb-8'>
             <div>
-              <h2>Sales</h2>
+              <h2 className='font-bold text-2xl font-medium mb-3'>Sales</h2>
               {summary.dailyOrders.length === 0 ? (
                 <MessageBox>No Sale</MessageBox>
               ) : (
-                <Chart
-                  width="100%"
-                  height="400px"
-                  chartType="AreaChart"
-                  loader={<div>Loading Chart</div>}
-                  data={[
-                    ['Date', 'Sales'],
-                    ...summary.dailyOrders.map((x) => [x._id, x.sales]),
-                  ]}
-                ></Chart>
+                <div className='rounded overflow-hidden'>
+                  <Chart
+                    width='100%'
+                    height='500px'
+                    chartType='AreaChart'
+                    loader={<div>Loading Chart</div>}
+                    data={[
+                      ['Date', 'Sales'],
+                      ...summary.dailyOrders.map((x) => [x._id, x.sales]),
+                    ]}
+                  ></Chart>
+                </div>
               )}
             </div>
           </div>
-          <div>
-            <h2>Categories</h2>
-            {summary.productCategories.length === 0 ? (
+          <div className='mb-8'>
+            <h2 className='font-bold text-2xl font-medium mb-3'>Categories</h2>
+            {summary.fruitCategories.length === 0 ? (
               <MessageBox>No Category</MessageBox>
             ) : (
-              <Chart
-                width="100%"
-                height="400px"
-                chartType="PieChart"
-                loader={<div>Loading Chart</div>}
-                data={[
-                  ['Category', 'Products'],
-                  ...summary.productCategories.map((x) => [x._id, x.count]),
-                ]}
-              />
+              <div className='rounded overflow-hidden'>
+                <Chart
+                  width='100%'
+                  height='500px'
+                  chartType='PieChart'
+                  loader={<div>Loading Chart</div>}
+                  data={[
+                    ['Category', 'Products'],
+                    ...summary.fruitCategories.map((x) => [x._id, x.count]),
+                  ]}
+                />
+              </div>
             )}
           </div>
         </>
