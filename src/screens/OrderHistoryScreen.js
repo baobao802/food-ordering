@@ -8,13 +8,19 @@ import MessageBox from '../components/MessageBox';
 export default function OrderHistoryScreen(props) {
   const navigate = useNavigate();
   const orderMineList = useSelector((state) => state.orderMineList);
-  const { loading, error, orders } = orderMineList;
+  const { loading, error, orders, pages, page } = orderMineList;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(listOrderMine());
   }, [dispatch]);
   return (
-    <div>
+    <div
+      style={{
+        backgroundColor: '#f7f7f7',
+        padding: '2vw 2vw 0 2vw',
+        height: '100%',
+      }}
+    >
       <h1 className='text-gray-900 text-lg md:text-2xl'>Order History</h1>
       {loading ? (
         <LoadingBox></LoadingBox>
@@ -99,10 +105,18 @@ export default function OrderHistoryScreen(props) {
             </div>
           </div>
           <div className='flex gap-1 mt-4 justify-end'>
-            <button class='bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'>
+            <button
+              class='bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'
+              disabled={0 === page}
+              onClick={() => navigate(`/orderhistory/pageNumber/${page - 1}`)}
+            >
               Prev
             </button>
-            <button class='bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'>
+            <button
+              class='bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'
+              disabled={pages === page}
+              onClick={() => navigate(`/orderhistory/pageNumber/${page + 1}`)}
+            >
               Next
             </button>
           </div>

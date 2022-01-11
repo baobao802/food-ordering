@@ -38,6 +38,7 @@ export default function ProductListScreen(props) {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
   const dispatch = useDispatch();
+
   useEffect(() => {
     if (successCreate) {
       dispatch({ type: PRODUCT_CREATE_RESET });
@@ -69,12 +70,25 @@ export default function ProductListScreen(props) {
     dispatch(createProduct());
   };
   return (
-    <div>
+    <div
+      style={{
+        backgroundColor: '#f7f7f7',
+        padding: '2vw 2vw 0 2vw',
+        height: '100%',
+      }}
+    >
       <div className='row'>
         <h1 className='text-gray-900 text-lg md:text-2xl'>Products</h1>
-        <button type='button' className='primary' onClick={createHandler}>
-          Create Product
-        </button>
+        <div className='text-right'>
+          <button
+            type='button'
+            className='primary'
+            style={{ marginLeft: 'auto', marginBottom: '1rem' }}
+            onClick={createHandler}
+          >
+            Create Product
+          </button>
+        </div>
       </div>
 
       {loadingDelete && <LoadingBox></LoadingBox>}
@@ -175,10 +189,18 @@ export default function ProductListScreen(props) {
             </div>
           </div>
           <div className='flex gap-1 mt-4 justify-end'>
-            <button class='bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'>
+            <button
+              class='bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'
+              disabled={0 === page}
+              onClick={() => navigate(`/productlist/pageNumber/${page - 1}`)}
+            >
               Prev
             </button>
-            <button class='bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'>
+            <button
+              class='bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'
+              disabled={pages === page}
+              onClick={() => navigate(`/productlist/pageNumber/${page + 1}`)}
+            >
               Next
             </button>
           </div>
@@ -186,18 +208,4 @@ export default function ProductListScreen(props) {
       )}
     </div>
   );
-}
-
-{
-  /* <div className='row center pagination'>
-  {[...Array(pages).keys()].map((x) => (
-    <Link
-      className={x + 1 === page ? 'active' : ''}
-      key={x + 1}
-      to={`/productlist/pageNumber/${x + 1}`}
-    >
-      {x + 1}
-    </Link>
-  ))}
-</div> */
 }

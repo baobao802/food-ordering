@@ -11,7 +11,7 @@ export default function OrderListScreen(props) {
   const { pathname } = useLocation();
   const sellerMode = pathname.indexOf('/seller') >= 0;
   const orderList = useSelector((state) => state.orderList);
-  const { loading, error, orders } = orderList;
+  const { loading, error, orders, pages, page } = orderList;
   const orderDelete = useSelector((state) => state.orderDelete);
   const {
     loading: loadingDelete,
@@ -32,7 +32,13 @@ export default function OrderListScreen(props) {
     }
   };
   return (
-    <div>
+    <div
+      style={{
+        backgroundColor: '#f7f7f7',
+        padding: '2vw 2vw 0 2vw',
+        height: '100%',
+      }}
+    >
       <h1 className='text-gray-900 text-lg md:text-2xl'>Orders</h1>
       {loadingDelete && <LoadingBox></LoadingBox>}
       {errorDelete && <MessageBox variant='danger'>{errorDelete}</MessageBox>}
@@ -127,10 +133,18 @@ export default function OrderListScreen(props) {
             </div>
           </div>
           <div className='flex gap-1 mt-4 justify-end'>
-            <button class='bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'>
+            <button
+              class='bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'
+              disabled={0 === page}
+              onClick={() => navigate(`/orderlist/pageNumber/${page - 1}`)}
+            >
               Prev
             </button>
-            <button class='bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'>
+            <button
+              class='bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'
+              disabled={pages === page}
+              onClick={() => navigate(`/orderlist/pageNumber/${page + 1}`)}
+            >
               Next
             </button>
           </div>

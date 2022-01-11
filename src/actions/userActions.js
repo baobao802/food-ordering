@@ -96,8 +96,13 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
     userSignin: { userInfo },
   } = getState();
   try {
-    const { data } = await Axios.put(`/api/users/profile`, user, {
-      headers: { Authorization: `Bearer ${userInfo.token}` },
+    const bodyFormData = new FormData();
+    Object.keys(user).map((key) => bodyFormData.append(key, user[key]));
+    const { data } = await Axios.put(`/api/users/profile`, bodyFormData, {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+        'Content-Type': 'multipart/form-data',
+      },
     });
     dispatch({ type: USER_UPDATE_PROFILE_SUCCESS, payload: data });
     dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
