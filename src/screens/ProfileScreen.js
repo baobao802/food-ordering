@@ -104,7 +104,7 @@ export default function ProfileScreen() {
                         )}
                         <button
                           type='button'
-                          className='absolute bottom-0 right-0 rounded bg-gray-100 text-xs opacity-60 font-bold sm:text-sm md:text-base transition-all hover:opacity-80'
+                          className='absolute bottom-0 right-0 rounded bg-gray-100 text-xs opacity-50 font-bold sm:text-sm md:text-base transition-all hover:opacity-80'
                         >
                           <label
                             htmlFor='image'
@@ -290,111 +290,6 @@ export default function ProfileScreen() {
             </>
           )}
         </div>
-        {/* <form className='form' onSubmit={submitHandler}>
-          {loading ? (
-            <LoadingBox></LoadingBox>
-          ) : error ? (
-            <MessageBox variant='danger'>{error}</MessageBox>
-          ) : (
-            <>
-              {loadingUpdate && <LoadingBox></LoadingBox>}
-              {errorUpdate && (
-                <MessageBox variant='danger'>{errorUpdate}</MessageBox>
-              )}
-              {successUpdate && (
-                <MessageBox variant='success'>
-                  Profile Updated Successfully
-                </MessageBox>
-              )}
-              <h2 className='font-bold text-xl sm:text-2xl md:text-3xl'>
-                Profile
-              </h2>
-              <div>
-                <label htmlFor='name'>Name</label>
-                <input
-                  id='name'
-                  type='text'
-                  placeholder='Enter name'
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                ></input>
-              </div>
-              <div>
-                <label htmlFor='email'>Email</label>
-                <input
-                  id='email'
-                  type='email'
-                  placeholder='Enter email'
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                ></input>
-              </div>
-              <div>
-                <label htmlFor='password'>Password</label>
-                <input
-                  id='password'
-                  type='password'
-                  placeholder='Enter password'
-                  onChange={(e) => setPassword(e.target.value)}
-                ></input>
-              </div>
-              <div>
-                <label htmlFor='confirmPassword'>Confirm Password</label>
-                <input
-                  id='confirmPassword'
-                  type='password'
-                  placeholder='Enter confirm password'
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                ></input>
-              </div>
-              {user.isSeller && (
-                <>
-                  <h2>Seller</h2>
-                  <div>
-                    <label htmlFor='sellerName'>Seller Name</label>
-                    <input
-                      id='sellerName'
-                      type='text'
-                      placeholder='Enter Seller Name'
-                      value={sellerName}
-                      onChange={(e) => setSellerName(e.target.value)}
-                    ></input>
-                  </div>
-                  <div>
-                    <label htmlFor='sellerLogo'>Seller Logo</label>
-                    <input
-                      id='sellerLogo'
-                      type='text'
-                      placeholder='Enter Seller Logo'
-                      value={sellerLogo}
-                      onChange={(e) => setSellerLogo(e.target.value)}
-                    ></input>
-                  </div>
-                  <div>
-                    <label htmlFor='sellerDescription'>
-                      Seller Description
-                    </label>
-                    <input
-                      id='sellerDescription'
-                      type='text'
-                      placeholder='Enter Seller Description'
-                      value={sellerDescription}
-                      onChange={(e) => setSellerDescription(e.target.value)}
-                    ></input>
-                  </div>
-                </>
-              )}
-              <div>
-                <button
-                  class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-fit text-sm md:text-base ml-auto'
-                  type='submit'
-                >
-                  Update
-                </button>
-              </div>
-            </>
-          )}
-        </form> */}
       </div>
     </div>
   );

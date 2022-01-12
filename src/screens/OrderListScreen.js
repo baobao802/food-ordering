@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useLocation, Link } from 'react-router-dom';
+import { useNavigate, useLocation, Link, useParams } from 'react-router-dom';
 import { deleteOrder, listOrders } from '../actions/orderActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
@@ -8,6 +8,7 @@ import { ORDER_DELETE_RESET } from '../constants/orderConstants';
 
 export default function OrderListScreen(props) {
   const navigate = useNavigate();
+  const { pageNumber = 1 } = useParams();
   const { pathname } = useLocation();
   const sellerMode = pathname.indexOf('/seller') >= 0;
   const orderList = useSelector((state) => state.orderList);
@@ -24,8 +25,10 @@ export default function OrderListScreen(props) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch({ type: ORDER_DELETE_RESET });
-    dispatch(listOrders({ seller: sellerMode ? userInfo._id : '' }));
-  }, [dispatch, sellerMode, successDelete, userInfo._id]);
+    dispatch(
+      listOrders({ seller: sellerMode ? userInfo._id : '', pageNumber }),
+    );
+  }, [dispatch, pageNumber, sellerMode, successDelete, userInfo._id]);
   const deleteHandler = (order) => {
     if (window.confirm('Are you sure to delete?')) {
       dispatch(deleteOrder(order._id));
@@ -92,8 +95,8 @@ export default function OrderListScreen(props) {
                   <tbody class='bg-white divide-y divide-gray-200'>
                     {orders.map((order) => (
                       <tr key={order._id}>
-                        <td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>
-                          {order.user.name}
+                        <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+                          {order.shippingAddress.fullName}
                         </td>
                         <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
                           {order.createdAt.substring(0, 10)}
@@ -135,7 +138,7 @@ export default function OrderListScreen(props) {
           <div className='flex gap-1 mt-4 justify-end'>
             <button
               class='bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'
-              disabled={0 === page}
+              disabled={1 === page}
               onClick={() => navigate(`/orderlist/pageNumber/${page - 1}`)}
             >
               Prev

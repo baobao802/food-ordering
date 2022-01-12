@@ -76,7 +76,12 @@ export const orderMineListReducer = (state = { orders: [] }, action) => {
     case ORDER_MINE_LIST_REQUEST:
       return { loading: true };
     case ORDER_MINE_LIST_SUCCESS:
-      return { loading: false, orders: action.payload };
+      return {
+        loading: false,
+        orders: action.payload.orders,
+        page: action.payload.page,
+        pages: action.payload.pages,
+      };
     case ORDER_MINE_LIST_FAIL:
       return { loading: false, error: action.payload };
     default:
@@ -88,7 +93,12 @@ export const orderListReducer = (state = { orders: [] }, action) => {
     case ORDER_LIST_REQUEST:
       return { loading: true };
     case ORDER_LIST_SUCCESS:
-      return { loading: false, orders: action.payload };
+      return {
+        loading: false,
+        orders: action.payload.orders,
+        page: action.payload.page,
+        pages: action.payload.pages,
+      };
     case ORDER_LIST_FAIL:
       return { loading: false, error: action.payload };
     default:
@@ -127,7 +137,7 @@ export const orderDeliverReducer = (state = {}, action) => {
 
 export const orderSummaryReducer = (
   state = { loading: true, summary: {} },
-  action
+  action,
 ) => {
   switch (action.type) {
     case ORDER_SUMMARY_REQUEST:

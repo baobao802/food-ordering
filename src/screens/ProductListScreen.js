@@ -145,7 +145,7 @@ export default function ProductListScreen(props) {
                             <div class='flex-shrink-0 h-10 w-10'>
                               <img
                                 class='h-10 w-10 rounded-sm'
-                                src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60'
+                                src={product.image}
                                 alt=''
                               />
                             </div>
@@ -191,7 +191,7 @@ export default function ProductListScreen(props) {
           <div className='flex gap-1 mt-4 justify-end'>
             <button
               class='bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'
-              disabled={0 === page}
+              disabled={1 === page}
               onClick={() => navigate(`/productlist/pageNumber/${page - 1}`)}
             >
               Prev
