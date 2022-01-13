@@ -27,7 +27,23 @@ import {
   ORDER_SUMMARY_REQUEST,
   ORDER_SUMMARY_SUCCESS,
   ORDER_SUMMARY_FAIL,
-} from '../constants/orderConstants';
+  CONFIRM_PAIDED_SUCCESS,
+  CONFIRM_PAIDED_REQUEST,
+  CONFIRM_PAIDED_FAIL,
+} from "../constants/orderConstants";
+
+export const confirmPaidReducer = (state = {}, action) => {
+  switch (action.type) {
+    case CONFIRM_PAIDED_SUCCESS:
+      return { loading: true };
+    case CONFIRM_PAIDED_REQUEST:
+      return { loading: false, success: true, order: action.payload };
+    case CONFIRM_PAIDED_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
 
 export const orderCreateReducer = (state = {}, action) => {
   switch (action.type) {
