@@ -4,7 +4,7 @@ import '../index.css';
 export default function Rating(props) {
   const { rating, numReviews, caption } = props;
   return (
-    <div className="rating">
+    <div className='rating'>
       <span>
         <i
           className={
@@ -61,9 +61,25 @@ export default function Rating(props) {
         ></i>
       </span>
       {caption ? (
-        <span style={{color: 'rgb(119, 121, 140)',marginLeft:'10px',fontSize: '0.7em'}}>{caption}</span>
+        <span
+          style={{
+            color: 'rgb(119, 121, 140)',
+            marginLeft: '10px',
+            fontSize: '0.7em',
+          }}
+        >
+          {caption}
+        </span>
       ) : (
-        <span style={{color: 'rgb(119, 121, 140)',marginLeft:'10px',fontSize: '0.7em'}}>{numReviews + ' reviews'}</span>
+        <span
+          style={{
+            color: 'rgb(119, 121, 140)',
+            marginLeft: '10px',
+            fontSize: '0.7em',
+          }}
+        >
+          {numReviews || 0 + ' reviews'}
+        </span>
       )}
     </div>
   );

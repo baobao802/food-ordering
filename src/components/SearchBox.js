@@ -23,15 +23,16 @@ export default function SearchBox() {
     //     </button>
     //   </div>
     // </form>
-    <form class="search" onSubmit={submitHandler}>
-       <i className="fa fa-search"></i>
-      <input 
-          type="text"
-          name="q"
-          id="q"
-          onChange={(e) => setName(e.target.value)}
-          class="nav-search-input" 
-          placeholder="Search your products from here"/>
+    <form className='search' onSubmit={submitHandler}>
+      <i className='fa fa-search'></i>
+      <input
+        type='text'
+        name='q'
+        id='q'
+        onChange={(e) => setName(e.target.value)}
+        className='nav-search-input'
+        placeholder='Search your products from here'
+      />
     </form>
   );
 }

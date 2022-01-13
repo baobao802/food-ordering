@@ -86,7 +86,9 @@ export default function OrderScreen(props) {
         height: '100%',
       }}
     >
-      <h1>Order {order._id}</h1>
+      <h1 className='text-gray-900 text-lg md:text-3xl mb-3 font-medium'>
+        Order {order._id}
+      </h1>
       <div className='row top'>
         <div className='col-2'>
           <ul>
@@ -189,7 +191,7 @@ export default function OrderScreen(props) {
                   </div>
                 </div>
               </li>
-              {!order.isPaid && (
+              {/* {!order.isPaid && (
                 <li>
                   {!sdkReady ? (
                     <LoadingBox></LoadingBox>
@@ -222,7 +224,7 @@ export default function OrderScreen(props) {
                     Deliver Order
                   </button>
                 </li>
-              )}
+              )} */}
             </ul>
           </div>
         </div>

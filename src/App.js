@@ -17,6 +17,7 @@ import RegisterScreen from './screens/RegisterScreen';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SigninScreen from './screens/SigninScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
+import ProductCreateScreen from './screens/ProductCreateScreen';
 import OrderListScreen from './screens/OrderListScreen';
 import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
@@ -66,7 +67,11 @@ function App() {
               <i className='fa fa-bars' style={{ color: 'black' }}></i>
             </button>
             <Link className='brand' to='/'>
-              <img style={{ borderRadius: 0 }} src='/images/logo.svg' />
+              <img
+                style={{ borderRadius: 0 }}
+                src='/images/logo.svg'
+                alt='home'
+              />
             </Link>
           </div>
           <div style={{ width: '40%', height: '60%' }}>
@@ -74,7 +79,7 @@ function App() {
           </div>
           <div className='header-menu'>
             <Link to='/cart'>
-              <i class='fa fa-shopping-cart' aria-hidden='true'></i> Cart
+              <i className='fa fa-shopping-cart' aria-hidden='true'></i> Cart
               {cartItems.length > 0 && (
                 <span className='badge'>{cartItems.length}</span>
               )}
@@ -82,7 +87,7 @@ function App() {
             {userInfo && userInfo.isSeller && (
               <div className='dropdown'>
                 <Link to='#admin'>
-                  <i class='fa fa-tachometer' aria-hidden='true'></i> Staff{' '}
+                  <i className='fa fa-tachometer' aria-hidden='true'></i> Staff{' '}
                   <i className='fa fa-caret-down'></i>
                 </Link>
                 <ul className='dropdown-content'>
@@ -98,7 +103,7 @@ function App() {
             {userInfo && userInfo.isAdmin && (
               <div className='dropdown'>
                 <Link to='#admin'>
-                  <i class='fa fa-tachometer' aria-hidden='true'></i> Admin{' '}
+                  <i className='fa fa-tachometer' aria-hidden='true'></i> Admin{' '}
                   <i className='fa fa-caret-down'></i>
                 </Link>
                 <ul className='dropdown-content'>
@@ -123,8 +128,8 @@ function App() {
             {userInfo ? (
               <div className='dropdown'>
                 <Link to='#'>
-                  <i class='fa fa-user' aria-hidden='true'></i> {userInfo.name}{' '}
-                  <i className='fa fa-caret-down'></i>{' '}
+                  <i className='fa fa-user' aria-hidden='true'></i>{' '}
+                  {userInfo.name} <i className='fa fa-caret-down'></i>{' '}
                 </Link>
                 <ul className='dropdown-content'>
                   <li>
@@ -173,7 +178,7 @@ function App() {
                       transform='translate(-294.289 -380.346)'
                       fill='currentColor'
                       stroke='currentColor'
-                      stroke-width='0.1'
+                      strokeWidth='0.1'
                     ></path>
                     <path
                       id='Path_17387'
@@ -182,7 +187,7 @@ function App() {
                       transform='translate(-0.5)'
                       fill='currentColor'
                       stroke='currentColor'
-                      stroke-width='0.1'
+                      strokeWidth='0.1'
                     ></path>
                   </g>
                 </svg>
@@ -233,7 +238,7 @@ function App() {
               ></Route>
               <Route
                 path='/product/:id/edit'
-                element={ProductEditScreen}
+                element={<ProductEditScreen />}
                 exact
               ></Route>
               <Route path='/signin' element={<SigninScreen />}></Route>
@@ -302,6 +307,15 @@ function App() {
               />
 
               <Route
+                path='/productlist/create'
+                element={
+                  <AdminRoute>
+                    <ProductCreateScreen />
+                  </AdminRoute>
+                }
+              />
+
+              <Route
                 path='/productlist/pageNumber/:pageNumber'
                 element={
                   <AdminRoute>
@@ -318,7 +332,23 @@ function App() {
                 }
               />
               <Route
+                path='/orderlist/pageNumber/:pageNumber'
+                element={
+                  <AdminRoute>
+                    <OrderListScreen />
+                  </AdminRoute>
+                }
+              />
+              <Route
                 path='/userlist'
+                element={
+                  <AdminRoute>
+                    <UserListScreen />
+                  </AdminRoute>
+                }
+              />
+              <Route
+                path='/userlist/pageNumber/:pageNumber'
                 element={
                   <AdminRoute>
                     <UserListScreen />
@@ -375,7 +405,7 @@ function App() {
           <div>
             <i
               style={{ marginRight: '5px' }}
-              class='fa fa-gratipay'
+              className='fa fa-gratipay'
               aria-hidden='true'
             ></i>
             FOOD ORDERING - BK HUNTER
