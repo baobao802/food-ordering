@@ -9,6 +9,7 @@ import Axios from "axios";
 
 export default function OrderListScreen(props) {
   const navigate = useNavigate();
+  const { pageNumber = 1 } = useParams();
   const { pathname } = useLocation();
   const sellerMode = pathname.indexOf("/seller") >= 0;
   const orderList = useSelector((state) => state.orderList);

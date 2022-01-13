@@ -1,17 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams, useNavigate, useLocation } from 'react-router-dom';
-import {
-  createProduct,
-  deleteProduct,
-  listProducts,
-} from '../actions/productActions';
+import { deleteProduct, listProducts } from '../actions/productActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
-import {
-  PRODUCT_CREATE_RESET,
-  PRODUCT_DELETE_RESET,
-} from '../constants/productConstants';
+import { PRODUCT_DELETE_RESET } from '../constants/productConstants';
 
 export default function ProductListScreen(props) {
   const navigate = useNavigate();
@@ -20,14 +13,6 @@ export default function ProductListScreen(props) {
   const sellerMode = pathname.indexOf('/seller') >= 0;
   const productList = useSelector((state) => state.productList);
   const { loading, error, products, page, pages } = productList;
-
-  const productCreate = useSelector((state) => state.productCreate);
-  const {
-    loading: loadingCreate,
-    error: errorCreate,
-    success: successCreate,
-    product: createdProduct,
-  } = productCreate;
 
   const productDelete = useSelector((state) => state.productDelete);
   const {
@@ -40,26 +25,13 @@ export default function ProductListScreen(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (successCreate) {
-      dispatch({ type: PRODUCT_CREATE_RESET });
-      navigate(`/product/${createdProduct._id}/edit`);
-    }
     if (successDelete) {
       dispatch({ type: PRODUCT_DELETE_RESET });
     }
     dispatch(
       listProducts({ seller: sellerMode ? userInfo._id : '', pageNumber }),
     );
-  }, [
-    createdProduct,
-    dispatch,
-    navigate,
-    sellerMode,
-    successCreate,
-    successDelete,
-    userInfo._id,
-    pageNumber,
-  ]);
+  }, [dispatch, navigate, sellerMode, successDelete, userInfo._id, pageNumber]);
 
   const deleteHandler = (product) => {
     if (window.confirm('Are you sure to delete?')) {
@@ -67,7 +39,7 @@ export default function ProductListScreen(props) {
     }
   };
   const createHandler = () => {
-    dispatch(createProduct());
+    navigate('/productlist/create');
   };
   return (
     <div
@@ -94,8 +66,6 @@ export default function ProductListScreen(props) {
       {loadingDelete && <LoadingBox></LoadingBox>}
       {errorDelete && <MessageBox variant='danger'>{errorDelete}</MessageBox>}
 
-      {loadingCreate && <LoadingBox></LoadingBox>}
-      {errorCreate && <MessageBox variant='danger'>{errorCreate}</MessageBox>}
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
@@ -145,7 +115,7 @@ export default function ProductListScreen(props) {
                             <div class='flex-shrink-0 h-10 w-10'>
                               <img
                                 class='h-10 w-10 rounded-sm'
-                                src='https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60'
+                                src={product.image}
                                 alt=''
                               />
                             </div>
@@ -191,7 +161,7 @@ export default function ProductListScreen(props) {
           <div className='flex gap-1 mt-4 justify-end'>
             <button
               class='bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'
-              disabled={0 === page}
+              disabled={1 === page}
               onClick={() => navigate(`/productlist/pageNumber/${page - 1}`)}
             >
               Prev

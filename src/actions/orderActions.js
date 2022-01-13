@@ -52,7 +52,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
       country: shippingAddress?.country,
       fullName: shippingAddress?.fullName,
     },
-    paymentMethod: "By cash",
+    paymentMethod: 'By cash',
     itemsPrice,
     shippingPrice,
     totalPrice,
@@ -111,7 +111,11 @@ export const payOrder =
         paymentResult,
         {
           headers: { Authorization: `Bearer ${userInfo.token}` },
+<<<<<<< HEAD
         }
+=======
+        },
+>>>>>>> 0a4e62fdca2405987c887dfc81d534b09db216a1
       );
       dispatch({ type: ORDER_PAY_SUCCESS, payload: data });
     } catch (error) {
@@ -143,16 +147,29 @@ export const listOrderMine = () => async (dispatch, getState) => {
   }
 };
 export const listOrders =
+<<<<<<< HEAD
   ({ seller = "" }) =>
+=======
+  ({ seller = '', pageNumber = 1 }) =>
+>>>>>>> 0a4e62fdca2405987c887dfc81d534b09db216a1
   async (dispatch, getState) => {
     dispatch({ type: ORDER_LIST_REQUEST });
     const {
       userSignin: { userInfo },
     } = getState();
     try {
+<<<<<<< HEAD
       const { data } = await Axios.get(`/api/orders?seller=${seller}`, {
         headers: { Authorization: `Bearer ${userInfo.token}` },
       });
+=======
+      const { data } = await Axios.get(
+        `/api/orders?seller=${seller}&pageNumber=${pageNumber}`,
+        {
+          headers: { Authorization: `Bearer ${userInfo.token}` },
+        },
+      );
+>>>>>>> 0a4e62fdca2405987c887dfc81d534b09db216a1
       dispatch({ type: ORDER_LIST_SUCCESS, payload: data });
     } catch (error) {
       const message =
@@ -192,7 +209,7 @@ export const deliverOrder = (orderId) => async (dispatch, getState) => {
       {},
       {
         headers: { Authorization: `Bearer ${userInfo.token}` },
-      }
+      },
     );
     dispatch({ type: ORDER_DELIVER_SUCCESS, payload: data });
   } catch (error) {
