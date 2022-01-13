@@ -21,7 +21,7 @@ export default function DashboardScreen() {
       }}
     >
       <div className='row'>
-        <h1 className='font-bold text-3xl py-2 font-medium'>Dashboard</h1>
+        <h1 className='font-bold text-3xl py-2 font-medium'>Thống kê</h1>
       </div>
       {loading ? (
         <LoadingBox />
@@ -33,7 +33,7 @@ export default function DashboardScreen() {
             <li>
               <div className='summary-title bg-red-300'>
                 <span>
-                  <i className='fa fa-users' /> Users
+                  <i className='fa fa-users' /> Người dùng
                 </span>
               </div>
               <div className='summary-body'>{summary.users[0].numUsers}</div>
@@ -41,7 +41,7 @@ export default function DashboardScreen() {
             <li>
               <div className='summary-title bg-green-300'>
                 <span>
-                  <i className='fa fa-shopping-cart' /> Orders
+                  <i className='fa fa-shopping-cart' /> Đơn hàng
                 </span>
               </div>
               <div className='summary-body'>
@@ -51,22 +51,22 @@ export default function DashboardScreen() {
             <li>
               <div className='summary-title bg-purple-300'>
                 <span>
-                  <i className='fa fa-money' /> Sales
+                  <i className='fa fa-money' /> Doanh thu
                 </span>
               </div>
               <div className='summary-body'>
-                $
                 {summary.orders[0]
-                  ? summary.orders[0].totalSales.toFixed(2)
+                  ? summary.orders[0].totalSales
                   : 0}
+                  VNĐ
               </div>
             </li>
           </ul>
           <div className='mb-8'>
             <div>
-              <h2 className='font-bold text-2xl font-medium mb-3'>Sales</h2>
+              <h2 className='font-bold text-2xl font-medium mb-3'>Doanh thu</h2>
               {summary.dailyOrders.length === 0 ? (
-                <MessageBox>No Sale</MessageBox>
+                <MessageBox>Không có doanh thu</MessageBox>
               ) : (
                 <div className='rounded overflow-hidden'>
                   <Chart
@@ -84,9 +84,9 @@ export default function DashboardScreen() {
             </div>
           </div>
           <div className='mb-8'>
-            <h2 className='font-bold text-2xl font-medium mb-3'>Categories</h2>
+            <h2 className='font-bold text-2xl font-medium mb-3'>Doanh số theo phân loại</h2>
             {summary.fruitCategories.length === 0 ? (
-              <MessageBox>No Category</MessageBox>
+              <MessageBox>Không có sản phẩm</MessageBox>
             ) : (
               <div className='rounded overflow-hidden'>
                 <Chart

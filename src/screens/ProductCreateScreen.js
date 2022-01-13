@@ -56,7 +56,7 @@ export default function ProductCreateScreen(props) {
     >
       <div>
         <h1 className='text-gray-900 text-lg md:text-3xl mb-3 font-medium'>
-          Create a New Product
+          Thêm sản phẩm mới
         </h1>
       </div>
       {loadingCreate && <LoadingBox></LoadingBox>}
@@ -93,7 +93,7 @@ export default function ProductCreateScreen(props) {
                             hidden
                             onChange={(e) => setImage(e.target.files[0])}
                           />
-                          Edit
+                          Chỉnh sửa
                         </label>
                       </button>
                     </div>
@@ -107,7 +107,7 @@ export default function ProductCreateScreen(props) {
                         for='image'
                         class='block text-sm font-medium text-gray-700'
                       >
-                        Image
+                        Hình ảnh sản phẩm
                       </label>
                       <input
                         type='file'
@@ -127,7 +127,7 @@ export default function ProductCreateScreen(props) {
                       for='name'
                       class='block text-sm font-medium text-gray-700'
                     >
-                      Name
+                      Tên 
                     </label>
                     <input
                       type='text'
@@ -146,7 +146,7 @@ export default function ProductCreateScreen(props) {
                       for='price'
                       class='block text-sm font-medium text-gray-700'
                     >
-                      Price
+                      Giá
                     </label>
                     <input
                       type='number'
@@ -164,7 +164,7 @@ export default function ProductCreateScreen(props) {
                       for='category'
                       class='block text-sm font-medium text-gray-700'
                     >
-                      Category
+                      Phân loại
                     </label>
                     <input
                       type='text'
@@ -182,7 +182,7 @@ export default function ProductCreateScreen(props) {
                       for='brand'
                       class='block text-sm font-medium text-gray-700'
                     >
-                      Brand
+                      Xuất xứ
                     </label>
                     <input
                       type='text'
@@ -200,7 +200,7 @@ export default function ProductCreateScreen(props) {
                       for='countInStock'
                       class='block text-sm font-medium text-gray-700'
                     >
-                      Count In Stock
+                      Số lượng trong kho
                     </label>
                     <input
                       type='number'
@@ -218,7 +218,7 @@ export default function ProductCreateScreen(props) {
                       for='description'
                       class='block text-sm font-medium text-gray-700'
                     >
-                      Description
+                      Mô tả
                     </label>
                     <textarea
                       name='description'
@@ -236,7 +236,7 @@ export default function ProductCreateScreen(props) {
                   type='submit'
                   class='inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
                 >
-                  Save
+                  Thêm
                 </button>
               </div>
             </div>

@@ -55,6 +55,7 @@ export default function SearchScreen(props) {
     return `/search/category/${filterCategory}/name/${filterName}/min/${filterMin}/max/${filterMax}/rating/${filterRating}/order/${sortOrder}/pageNumber/${filterPage}`;
   };
   return (
+<<<<<<< HEAD
     <div style={{ backgroundColor: "#f7f7f7", height: "100%" }}>
       <div className="custom-row top" style={{ height: "100%" }}>
         <div
@@ -66,6 +67,12 @@ export default function SearchScreen(props) {
           }}
         >
           <h3>Categories</h3>
+=======
+    <div style={{backgroundColor:'#f7f7f7',height: '100%'}}>  
+      <div className="custom-row top" style={{height:'100%'}}>
+        <div style={{flex:'0 0 20%', height:'100%',background: 'white',padding:'10px'}}>
+          <h2>Phân loại</h2>
+>>>>>>> 4b75004 (Do an important work)
           <div>
             {loadingCategories ? (
               <LoadingBox></LoadingBox>
@@ -78,7 +85,7 @@ export default function SearchScreen(props) {
                     className={"all" === category ? "active" : ""}
                     to={getFilterUrl({ category: "all" })}
                   >
-                    All
+                    Tất cả
                   </Link>
                 </li>
                 {categories.map((c) => (
@@ -95,8 +102,13 @@ export default function SearchScreen(props) {
             )}
           </div>
           <div>
+<<<<<<< HEAD
             <h3>Price</h3>
             <ul className="department-container">
+=======
+            <h2>Giá</h2>
+            <ul className='department-container'>
+>>>>>>> 4b75004 (Do an important work)
               {prices.map((p) => (
                 <li key={p.name}>
                   <Link
@@ -112,8 +124,13 @@ export default function SearchScreen(props) {
             </ul>
           </div>
           <div>
+<<<<<<< HEAD
             <h3>Customer Reviews</h3>
             <ul className="customer-review">
+=======
+            <h3>Đánh giá của khách hàng</h3>
+            <ul className='customer-review'>
+>>>>>>> 4b75004 (Do an important work)
               {ratings.map((r) => (
                 <li key={r.name}>
                   <Link
@@ -127,6 +144,7 @@ export default function SearchScreen(props) {
             </ul>
           </div>
         </div>
+<<<<<<< HEAD
         <div style={{ flex: 1, padding: "2rem" }}>
           <div
             className="custom-row"
@@ -156,6 +174,31 @@ export default function SearchScreen(props) {
                 <option value="toprated">Customer Reviews</option>
               </select>
             </div>
+=======
+        <div style={{flex:1,padding:'2rem'}}>
+        <div className="custom-row" style={{marginBottom:'20px',marginTop:'20px'}}>
+          {loading ? (
+            <LoadingBox></LoadingBox>
+          ) : error ? (
+            <MessageBox variant="danger">{error}</MessageBox>
+          ) : (
+            <div style={{color: '#073B4C',fontWeight: 600}}>{products.length} Kết quả</div>
+          )}
+          <div style={{color: '#073B4C',fontWeight: 600}}>
+          <i class="fa fa-filter" aria-hidden="true"></i> Sắp xếp theo{' '}
+            <select
+              style={{outline:0,border:0,marginLeft:'10px'}}
+              value={order}
+              onChange={(e) => {
+                navigate(getFilterUrl({ order: e.target.value }));
+              }}
+            >
+              <option value="newest">Mới nhất</option>
+              <option value="lowest">Giá: Thấp tới cao</option>
+              <option value="highest">Giá: Cao tới thấp</option>
+              <option value="toprated">Đánh giá của khách hàng</option>
+            </select>
+>>>>>>> 4b75004 (Do an important work)
           </div>
           {loading ? (
             <LoadingBox></LoadingBox>
@@ -164,7 +207,7 @@ export default function SearchScreen(props) {
           ) : (
             <>
               {products.length === 0 && (
-                <MessageBox>No Product Found</MessageBox>
+                <MessageBox>Không tìm thấy sản phẩm nào!</MessageBox>
               )}
               <div
                 className="custom-row center"

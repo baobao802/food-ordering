@@ -41,25 +41,25 @@ export default function PlaceOrderScreen(props) {
           <div>
             <div>
               <div className="card card-body" style={{border:0,boxShadow:'rgb(0 0 0 / 8%) 0px 2px 16px 0px'}}>
-              <div class="flex items-center text-xl checkout-title"><p class="part-number">1</p> <h2>Shipping</h2> </div>
+              <div class="flex items-center text-xl checkout-title"><p class="part-number">1</p> <h2>Vận chuyển</h2> </div>
                 <p>
-                  <strong>Name:</strong> {cart.shippingAddress.fullName} <br />
-                  <strong>Address: </strong> {cart.shippingAddress.address},
+                  <strong>Tên :</strong> {cart.shippingAddress.fullName} <br />
+                  <strong>Địa chỉ: </strong> {cart.shippingAddress.address},
                   {cart.shippingAddress.city}, {cart.shippingAddress.country}
                 </p>
               </div>
             </div>
             <div>
               <div className="card card-body" style={{border:0,boxShadow:'rgb(0 0 0 / 8%) 0px 2px 16px 0px'}}> 
-              <div class="flex items-center text-xl checkout-title"><p class="part-number">2</p> <h2>Payment</h2> </div>
+              <div class="flex items-center text-xl checkout-title"><p class="part-number">2</p> <h2>Thanh toán</h2> </div>
                 <p>
-                  <strong>Method:</strong> By cash
+                  <strong>Phương thức thanh toán :</strong> Thanh toán khi nhận hàng
                 </p>
               </div>
             </div>
             <div>
               <div className="card card-body" style={{border:0,boxShadow:'rgb(0 0 0 / 8%) 0px 2px 16px 0px'}}>
-              <div class="flex items-center text-xl checkout-title"><p class="part-number">3</p> <h2>Order Items</h2> </div>
+              <div class="flex items-center text-xl checkout-title"><p class="part-number">3</p> <h2>Danh sách sản phẩm</h2> </div>
                 <div>
                   {cart.cartItems.map((item) => (
                     <div style={{padding: '0.5rem'}} key={item.product}>
@@ -78,7 +78,7 @@ export default function PlaceOrderScreen(props) {
                         </div>
 
                         <div>
-                          <span style={{fontWeight:600}}>{item.qty} </span> x ${item.price} = ${item.qty * item.price}
+                          <span style={{fontWeight:600}}>{item.qty} </span> x {item.price} = {item.qty * item.price} VNĐ
                         </div>
                       </div>
                     </div>
@@ -92,27 +92,27 @@ export default function PlaceOrderScreen(props) {
           <div className="card card-body" style={{border:0}}>
             <div>
               <div>
-                <h2>Order Summary</h2>
+                <h2>Tổng kết</h2>
               </div>
               <div>
                 <div className="custom-row">
-                  <div>Items</div>
-                  <div>${cart.itemsPrice.toFixed(2)}</div>
+                  <div>Sản phẩm</div>
+                  <div>{cart.itemsPrice} VNĐ</div>
                 </div>
               </div>
               <div>
                 <div className="custom-row">
-                  <div>Shipping</div>
-                  <div>${cart.shippingPrice.toFixed(2)}</div>
+                  <div>Phí vận chuyển</div>
+                  <div>{cart.shippingPrice} VNĐ</div>
                 </div>
               </div>
               <div>
                 <div className="custom-row">
                   <div>
-                    <strong> Total</strong>
+                    <strong> Tổng tiền</strong>
                   </div>
                   <div>
-                    <strong>${cart.totalPrice.toFixed(2)}</strong>
+                    <strong>{cart.totalPrice} VNĐ</strong>
                   </div>
                 </div>
               </div>
@@ -123,7 +123,7 @@ export default function PlaceOrderScreen(props) {
                   className="primary block"
                   disabled={cart.cartItems.length === 0}
                 >
-                  Place Order
+                  Đặt hàng
                 </button>
               </div>
               {loading && <LoadingBox></LoadingBox>}

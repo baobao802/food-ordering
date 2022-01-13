@@ -82,7 +82,7 @@ export default function ProfileScreen() {
               )}
               {successUpdate && (
                 <MessageBox variant='success'>
-                  Profile Updated Successfully
+                  Cập nhật hồ sơ thành công!
                 </MessageBox>
               )}
 
@@ -116,7 +116,7 @@ export default function ProfileScreen() {
                                 hidden
                                 onChange={(e) => setImage(e.target.files[0])}
                               />
-                              Edit
+                              Sửa
                             </label>
                           </button>
                         </div>
@@ -129,7 +129,7 @@ export default function ProfileScreen() {
                             for='name'
                             class='block text-sm font-medium text-gray-700'
                           >
-                            Name
+                            Tên
                           </label>
                           <input
                             type='text'
@@ -167,7 +167,7 @@ export default function ProfileScreen() {
                             for='phone'
                             class='block text-sm font-medium text-gray-700'
                           >
-                            Phone
+                            Số điện thoại
                           </label>
                           <input
                             type='text'
@@ -205,7 +205,7 @@ export default function ProfileScreen() {
                             for='address'
                             class='block text-sm font-medium text-gray-700'
                           >
-                            Address
+                            Địa chỉ
                           </label>
                           <input
                             type='text'
@@ -224,7 +224,7 @@ export default function ProfileScreen() {
                             for='password'
                             class='block text-sm font-medium text-gray-700'
                           >
-                            Password
+                            Mật khẩu
                           </label>
                           <input
                             type='password'
@@ -242,7 +242,7 @@ export default function ProfileScreen() {
                             for='confirm-password'
                             class='block text-sm font-medium text-gray-700'
                           >
-                            Confirm Password
+                            Nhập lại mật khẩu
                           </label>
                           <input
                             type='password'
@@ -261,7 +261,7 @@ export default function ProfileScreen() {
                               for='role'
                               class='block text-sm font-medium text-gray-700'
                             >
-                              Role
+                              Quyền
                             </label>
                             <input
                               type='text'
@@ -281,7 +281,7 @@ export default function ProfileScreen() {
                         type='submit'
                         class='inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
                       >
-                        Save
+                        Lưu
                       </button>
                     </div>
                   </div>

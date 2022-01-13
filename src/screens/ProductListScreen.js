@@ -50,7 +50,7 @@ export default function ProductListScreen(props) {
       }}
     >
       <div className='row'>
-        <h1 className='text-gray-900 text-lg md:text-2xl'>Products</h1>
+        <h1 className='text-gray-900 text-lg md:text-2xl'>Danh sách sản phẩm</h1>
         <div className='text-right'>
           <button
             type='button'
@@ -58,7 +58,7 @@ export default function ProductListScreen(props) {
             style={{ marginLeft: 'auto', marginBottom: '1rem' }}
             onClick={createHandler}
           >
-            Create Product
+            Thêm sản phẩm mới
           </button>
         </div>
       </div>
@@ -82,25 +82,25 @@ export default function ProductListScreen(props) {
                         scope='col'
                         class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
                       >
-                        Name
+                        Tên
                       </th>
                       <th
                         scope='col'
                         class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
                       >
-                        Price
+                        Giá
                       </th>
                       <th
                         scope='col'
                         class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
                       >
-                        Category
+                        Phân loại
                       </th>
                       <th
                         scope='col'
                         class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
                       >
-                        Brand
+                        Xuất xứ
                       </th>
                       <th scope='col' class='relative px-6 py-3'>
                         <span class='sr-only'>Actions</span>
@@ -140,7 +140,7 @@ export default function ProductListScreen(props) {
                             to={`/product/${product._id}/edit`}
                             class='text-indigo-600 hover:text-indigo-900'
                           >
-                            Edit
+                            Chỉnh sửa
                           </Link>
                           <span> / </span>
                           <Link
@@ -148,7 +148,7 @@ export default function ProductListScreen(props) {
                             class='text-indigo-600 hover:text-indigo-900'
                             onClick={() => deleteHandler(product)}
                           >
-                            Delete
+                            Xoá
                           </Link>
                         </td>
                       </tr>
@@ -164,14 +164,14 @@ export default function ProductListScreen(props) {
               disabled={1 === page}
               onClick={() => navigate(`/productlist/pageNumber/${page - 1}`)}
             >
-              Prev
+              Trước
             </button>
             <button
               class='bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'
               disabled={pages === page}
               onClick={() => navigate(`/productlist/pageNumber/${page + 1}`)}
             >
-              Next
+              Sau
             </button>
           </div>
         </div>

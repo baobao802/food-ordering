@@ -84,7 +84,11 @@ export default function OrderListScreen(props) {
         height: "100%",
       }}
     >
+<<<<<<< HEAD
       <h1 className="text-gray-900 text-lg md:text-2xl">Orders</h1>
+=======
+      <h1 className='text-gray-900 text-lg md:text-2xl'>Đơn hàng</h1>
+>>>>>>> 4b75004 (Do an important work)
       {loadingDelete && <LoadingBox></LoadingBox>}
       {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
       {loading ? (
@@ -103,31 +107,39 @@ export default function OrderListScreen(props) {
                         scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
-                        User
+                        Khách hàng
                       </th>
                       <th
                         scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
-                        Date
+                        Ngày
                       </th>
                       <th
                         scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
-                        Total
+                        Tổng tiền
                       </th>
                       <th
                         scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
+<<<<<<< HEAD
                         Delivered
+=======
+                        Đã thanh toán
+>>>>>>> 4b75004 (Do an important work)
                       </th>
                       <th
                         scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
+<<<<<<< HEAD
                         Paid
+=======
+                        Đã vận chuyển
+>>>>>>> 4b75004 (Do an important work)
                       </th>
                       <th
                         scope="col"
@@ -140,6 +152,7 @@ export default function OrderListScreen(props) {
                       </th> */}
                     </tr>
                   </thead>
+<<<<<<< HEAD
                   <tbody class="bg-white divide-y divide-gray-200">
                     {orders &&
                       orders.map((order) => {
@@ -223,6 +236,46 @@ export default function OrderListScreen(props) {
                           </tr>
                         );
                       })}
+=======
+                  <tbody class='bg-white divide-y divide-gray-200'>
+                    {orders.map((order) => (
+                      <tr key={order._id}>
+                        <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+                          {order.shippingAddress.fullName}
+                        </td>
+                        <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+                          {order.createdAt.substring(0, 10)}
+                        </td>
+                        <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+                          {order.totalPrice}
+                        </td>
+                        <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                          {order.isPaid ? order.paidAt.substring(0, 10) : 'No'}
+                        </td>
+                        <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+                          {order.isDelivered
+                            ? order.deliveredAt.substring(0, 10)
+                            : 'No'}
+                        </td>
+                        <td class='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
+                          <Link
+                            to={`/order/${order._id}`}
+                            class='text-indigo-600 hover:text-indigo-900'
+                          >
+                            Chỉnh sửa
+                          </Link>
+                          <span> / </span>
+                          <Link
+                            to='#'
+                            class='text-indigo-600 hover:text-indigo-900'
+                            onClick={() => deleteHandler(order)}
+                          >
+                            Xoá
+                          </Link>
+                        </td>
+                      </tr>
+                    ))}
+>>>>>>> 4b75004 (Do an important work)
                   </tbody>
                 </table>
               </div>
@@ -234,14 +287,14 @@ export default function OrderListScreen(props) {
               disabled={0 === page}
               onClick={() => navigate(`/orderlist/pageNumber/${page - 1}`)}
             >
-              Prev
+              Trước
             </button>
             <button
               class="bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow"
               disabled={pages === page}
               onClick={() => navigate(`/orderlist/pageNumber/${page + 1}`)}
             >
-              Next
+              Sau
             </button>
           </div>
         </div>

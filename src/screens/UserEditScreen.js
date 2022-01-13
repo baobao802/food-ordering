@@ -81,7 +81,7 @@ export default function UserEditScreen(props) {
     >
       <div>
         <h1 className='text-gray-900 text-lg md:text-3xl mb-3 font-medium'>
-          Edit User {name}
+          Chỉnh sửa nhân viên {name}
         </h1>
         {loadingUpdate && <LoadingBox></LoadingBox>}
         {errorUpdate && <MessageBox variant='danger'>{errorUpdate}</MessageBox>}
@@ -101,7 +101,7 @@ export default function UserEditScreen(props) {
                       for='name'
                       class='block text-sm font-medium text-gray-700'
                     >
-                      Name
+                      Tên
                     </label>
                     <input
                       type='text'
@@ -138,7 +138,7 @@ export default function UserEditScreen(props) {
                       for='Role'
                       class='block text-sm font-medium text-gray-700'
                     >
-                      Role
+                      Chức vụ
                     </label>
                     <select
                       id='role'
@@ -148,8 +148,8 @@ export default function UserEditScreen(props) {
                       onChange={(e) => setRole(e.target.value)}
                     >
                       <option value='admin'>Admin</option>
-                      <option value='seller'>Seller</option>
-                      <option value='customer'>Customer</option>
+                      <option value='seller'>Nhân viên</option>
+                      <option value='customer'>Khách hàng</option>
                     </select>
                   </div>
                 </div>
@@ -159,7 +159,7 @@ export default function UserEditScreen(props) {
                   type='submit'
                   class='inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
                 >
-                  Save
+                  Lưu
                 </button>
               </div>
             </div>

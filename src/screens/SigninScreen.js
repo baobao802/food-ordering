@@ -33,10 +33,10 @@ export default function SigninScreen(props) {
       <img className='login-background' src='/images/fruitsbg.jpg'/>
       <form className="form login-form" onSubmit={submitHandler}>
         <div>
-          <h1 style={{color: '#20a020', fontWeight: 600}}>Welcome to </h1>
+          <h1 style={{color: '#20a020', fontWeight: 600}}>Chào mừng đến với </h1>
           <img src="/images/logo.svg"/>
         </div>
-        <div className="login-form-title__support">The best fruits you can have</div>
+        <div className="login-form-title__support">Luôn mang đến cho bạn những sản phẩm tốt nhất.</div>
         {loading && <LoadingBox></LoadingBox>}
         {error && <MessageBox variant="danger">{error}</MessageBox>}
         <div>
@@ -44,17 +44,17 @@ export default function SigninScreen(props) {
           <input
             type="email"
             id="email"
-            placeholder="Enter email"
+            placeholder="Nhập email"
             required
             onChange={(e) => setEmail(e.target.value)}
           ></input>
         </div>
         <div>
-          <label htmlFor="password"><i style={{marginRight:'5px'}} class="fa fa-key" aria-hidden="true"></i>Password</label>
+          <label htmlFor="password"><i style={{marginRight:'5px'}} class="fa fa-key" aria-hidden="true"></i>Mật khẩu</label>
           <input
             type="password"
             id="password"
-            placeholder="Enter password"
+            placeholder="Nhập mật khẩu"
             required
             onChange={(e) => setPassword(e.target.value)}
           ></input>
@@ -62,14 +62,14 @@ export default function SigninScreen(props) {
         <div>
           <label />
           <button style={{fontWeight: 600}} className="primary" type="submit">
-            Sign In
+            Đăng nhập
           </button>
         </div>
         <div>
           <label />
           <div>
             <Link style={{fontWeight: 500, color: '#cf6c6c'}} to={`/register?redirect=${redirect}`}>
-              Create new account?
+              Tạo tài khoản mới?
             </Link>
           </div>
         </div>

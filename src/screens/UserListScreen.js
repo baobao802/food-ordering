@@ -42,12 +42,12 @@ export default function UserListScreen(props) {
       }}
     >
       <h1 className='text-gray-900 text-lg md:text-3xl mb-3 font-medium'>
-        Users
+        Nhân viên
       </h1>
       {loadingDelete && <LoadingBox></LoadingBox>}
       {errorDelete && <MessageBox variant='danger'>{errorDelete}</MessageBox>}
       {successDelete && (
-        <MessageBox variant='success'>User Deleted Successfully</MessageBox>
+        <MessageBox variant='success'>Xoá tài khoản nhân viên thành công!</MessageBox>
       )}
       {loading ? (
         <LoadingBox></LoadingBox>
@@ -65,25 +65,25 @@ export default function UserListScreen(props) {
                         scope='col'
                         className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
                       >
-                        Name
+                        Tên
                       </th>
                       <th
                         scope='col'
                         className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
                       >
-                        Contact
+                        Liên hệ
                       </th>
                       <th
                         scope='col'
                         className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
                       >
-                        Status
+                        Trạng thái
                       </th>
                       <th
                         scope='col'
                         className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
                       >
-                        Role
+                        Chức vụ
                       </th>
                       <th scope='col' className='relative px-6 py-3'>
                         <span className='sr-only'>Actions</span>
@@ -122,22 +122,22 @@ export default function UserListScreen(props) {
                         </td>
                         <td className='px-6 py-4 whitespace-nowrap'>
                           <span className='px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800'>
-                            Active
+                            Đang hoạt động
                           </span>
                         </td>
                         <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
                           {user.isAdmin
                             ? 'Admin'
                             : user.isSeller
-                            ? 'Seller'
-                            : 'Customer'}
+                            ? 'Nhân viên'
+                            : 'Khách hàng'}
                         </td>
                         <td className='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
                           <Link
                             to={`/user/${user._id}/edit`}
                             className='text-indigo-600 hover:text-indigo-900'
                           >
-                            Edit
+                            Chỉnh sửa
                           </Link>
                           <span> / </span>
                           <Link
@@ -145,7 +145,7 @@ export default function UserListScreen(props) {
                             className='text-indigo-600 hover:text-indigo-900'
                             onClick={() => deleteHandler(user)}
                           >
-                            Delete
+                            Xoá
                           </Link>
                         </td>
                       </tr>
@@ -161,14 +161,14 @@ export default function UserListScreen(props) {
               disabled={1 === page}
               onClick={() => navigate(`/userlist/pageNumber/${page - 1}`)}
             >
-              Prev
+              Trước
             </button>
             <button
               className='bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'
               disabled={pages === page}
               onClick={() => navigate(`/userlist/pageNumber/${page + 1}`)}
             >
-              Next
+              Sau
             </button>
           </div>
         </div>

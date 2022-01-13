@@ -38,47 +38,47 @@ export default function RegisterScreen(props) {
     <div className='register-container'>
       <form className="form" onSubmit={submitHandler}>
         <div style={{marginBottom:'1.5em'}}>
-          <h1 style={{color:'#01876c',fontSize:'3.5rem',fontWeight:600, margin:0, marginTop: '2rem'}}>Sign up</h1>
-          <span className='login-form-title__support'>Give us some of your information to buy the best fresh fruits.</span>
+          <h1 style={{color:'#01876c',fontSize:'3.5rem',fontWeight:600, margin:0, marginTop: '2rem'}}>Đăng ký</h1>
+          <span className='login-form-title__support'>Đăng ký để có thể mua những trái cây tươi ngon nhất từ chúng tôi.</span>
         </div>
         {loading && <LoadingBox></LoadingBox>}
         {error && <MessageBox variant="danger">{error}</MessageBox>}
         <div>
-          <label htmlFor="name">Your name</label>
+          <label htmlFor="name">Tên</label>
           <input
             type="text"
             id="name"
-            placeholder="Enter name"
+            placeholder="Nhập tên"
             required
             onChange={(e) => setName(e.target.value)}
           ></input>
         </div>
         <div>
-          <label htmlFor="email">Your email</label>
+          <label htmlFor="email">Email</label>
           <input
             type="email"
             id="email"
-            placeholder="Enter email"
+            placeholder="Nhập email"
             required
             onChange={(e) => setEmail(e.target.value)}
           ></input>
         </div>
         <div>
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Mật khẩu</label>
           <input
             type="password"
             id="password"
-            placeholder="Enter password"
+            placeholder="Nhập mật khẩu"
             required
             onChange={(e) => setPassword(e.target.value)}
           ></input>
         </div>
         <div>
-          <label htmlFor="confirmPassword">Confirm Password</label>
+          <label htmlFor="confirmPassword">Nhập lại mật khẩu</label>
           <input
             type="password"
             id="confirmPassword"
-            placeholder="Enter confirm password"
+            placeholder="Nhập lại mật khẩu"
             required
             onChange={(e) => setConfirmPassword(e.target.value)}
           ></input>
@@ -86,14 +86,14 @@ export default function RegisterScreen(props) {
         <div>
           <label />
           <button style={{fontWeight:600}} className="primary" type="submit">
-            Create account
+            Tạo tài khoản
           </button>
         </div>
         <div>
           <label />
           <div>
-            Already have an account?{' '}
-            <Link style={{color:'#f0c040',fontWeight: 700}} to={`/signin?redirect=${redirect}`}>Log in</Link>
+            Đã có tài khoản?{' '}
+            <Link style={{color:'#f0c040',fontWeight: 700}} to={`/signin?redirect=${redirect}`}>Đăng nhập</Link>
           </div>
         </div>
       </form>

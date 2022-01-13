@@ -50,7 +50,7 @@ export default function ProductScreen(props) {
         createReview(productId, { rating, comment, name: userInfo.name }),
       );
     } else {
-      alert('Please enter comment and rating');
+      alert('Vui lòng đánh giá và nhập bình luận!');
     }
   };
   return (
@@ -85,7 +85,7 @@ export default function ProductScreen(props) {
                     class='fa fa-arrow-left'
                     aria-hidden='true'
                   ></i>
-                  Back to result
+                  Quay về trang tìm kiếm
                 </Link>
                 <div
                   style={{
@@ -116,7 +116,7 @@ export default function ProductScreen(props) {
                     marginBottom: '20px',
                   }}
                 >
-                  Price:{' '}
+                  Giá:{' '}
                   <span style={{ color: '#20a020', fontWeight: 700 }}>
                     {product.price} VND
                   </span>
@@ -129,7 +129,7 @@ export default function ProductScreen(props) {
                     marginBottom: '20px',
                   }}
                 >
-                  Description:{' '}
+                  Mô tả:{' '}
                   <span
                     style={{ color: 'rgb(119, 121, 140)', fontWeight: 400 }}
                   >
@@ -151,14 +151,14 @@ export default function ProductScreen(props) {
                         }}
                       >
                         {' '}
-                        In Stock
+                        Số lượng còn lại :
                       </span>
                     ) : (
                       <span
                         className='danger'
                         style={{ fontSize: '0.8em', marginBottom: '20px' }}
                       >
-                        Unavailable
+                        Không có sẵn
                       </span>
                     )}
                   </div>
@@ -179,7 +179,7 @@ export default function ProductScreen(props) {
                               marginRight: '10px',
                             }}
                           >
-                            Quantity
+                            Số lượng
                           </div>
                           <div>
                             <select
@@ -217,7 +217,7 @@ export default function ProductScreen(props) {
                         src='/images/logoIcon.png'
                         alt={product.name}
                       />
-                      Add to Cart
+                      Thêm vào giỏ hàng
                     </button>
                   </div>
                 </div>
@@ -234,25 +234,25 @@ export default function ProductScreen(props) {
                     onSubmit={submitHandler}
                   >
                     <div>
-                      <h2>Thank you for giving us your feedback online</h2>
+                      <h2>Cảm ơn phản hồi của quý khách!</h2>
                     </div>
                     <div>
-                      <label htmlFor='rating'>Your rating</label>
+                      <label htmlFor='rating'>Đánh giá</label>
                       <select
                         id='rating'
                         value={rating}
                         onChange={(e) => setRating(e.target.value)}
                       >
                         <option value=''>Select...</option>
-                        <option value='1'>1- Poor</option>
-                        <option value='2'>2- Fair</option>
-                        <option value='3'>3- Good</option>
-                        <option value='4'>4- Very good</option>
-                        <option value='5'>5- Excelent</option>
+                        <option value='1'>1- Tệ</option>
+                        <option value='2'>2- Bình thường</option>
+                        <option value='3'>3- Tốt</option>
+                        <option value='4'>4- Rất tốt</option>
+                        <option value='5'>5- Xuất sắc</option>
                       </select>
                     </div>
                     <div>
-                      <label htmlFor='comment'>Your comment</label>
+                      <label htmlFor='comment'>Bình luận</label>
                       <textarea
                         id='comment'
                         value={comment}
@@ -262,7 +262,7 @@ export default function ProductScreen(props) {
                     <div>
                       <label />
                       <button className='primary' type='submit'>
-                        Submit
+                        Đánh giá
                       </button>
                     </div>
                     <div>
@@ -276,13 +276,13 @@ export default function ProductScreen(props) {
                   </form>
                 ) : (
                   <MessageBox>
-                    Please <Link to='/signin'>Sign In</Link> to write a review
+                    Vui lòng <Link to='/signin'>Đăng nhập</Link> để đánh giá.
                   </MessageBox>
                 )}
               </div>
               {product.reviews.length === 0 ? (
                 <div style={{ margin: 'auto' }}>
-                  <MessageBox>There is no review</MessageBox>
+                  <MessageBox>Chưa có đánh giá</MessageBox>
                 </div>
               ) : (
                 <div style={{ width: '50%' }}>
@@ -291,8 +291,7 @@ export default function ProductScreen(props) {
                       <h2
                         style={{ color: 'rgba(236,72,153)', fontWeight: 400 }}
                       >
-                        Below are a few of the reviews that brought some recent
-                        issues to light for our business
+                        Một số nhật xét :
                       </h2>
                     </div>
                     {product.reviews &&
