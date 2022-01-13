@@ -143,16 +143,19 @@ export const listOrderMine = () => async (dispatch, getState) => {
   }
 };
 export const listOrders =
-  ({ seller = "" }) =>
+  ({ seller = "", pageNumber = 1 }) =>
   async (dispatch, getState) => {
     dispatch({ type: ORDER_LIST_REQUEST });
     const {
       userSignin: { userInfo },
     } = getState();
     try {
-      const { data } = await Axios.get(`/api/orders?seller=${seller}`, {
-        headers: { Authorization: `Bearer ${userInfo.token}` },
-      });
+      const { data } = await Axios.get(
+        `/api/orders?seller=${seller}&pageNumber=${pageNumber}`,
+        {
+          headers: { Authorization: `Bearer ${userInfo.token}` },
+        }
+      );
       dispatch({ type: ORDER_LIST_SUCCESS, payload: data });
     } catch (error) {
       const message =

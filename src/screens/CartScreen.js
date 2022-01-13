@@ -32,27 +32,34 @@ export default function CartScreen(props) {
     navigate('/signin?redirect=/shipping');
   };
   return (
-    <div className="custom-row top">
-      <div className="col-2">
+    <div
+      className='custom-row top'
+      style={{
+        backgroundColor: '#f7f7f7',
+        padding: '2vw 2vw 0 2vw',
+        height: '100%',
+      }}
+    >
+      <div className='col-2'>
         <h1>Shopping Cart</h1>
-        {error && <MessageBox variant="danger">{error}</MessageBox>}
+        {error && <MessageBox variant='danger'>{error}</MessageBox>}
         {cartItems.length === 0 ? (
           <MessageBox>
-            Cart is empty. <Link to="/">Go Shopping</Link>
+            Cart is empty. <Link to='/'>Go Shopping</Link>
           </MessageBox>
         ) : (
           <ul>
             {cartItems.map((item) => (
               <li key={item.product}>
-                <div className="custom-row">
+                <div className='custom-row'>
                   <div>
                     <img
                       src={item.image}
                       alt={item.name}
-                      className="small"
+                      className='small'
                     ></img>
                   </div>
-                  <div className="min-30">
+                  <div className='min-30'>
                     <Link to={`/product/${item.product}`}>{item.name}</Link>
                   </div>
                   <div>
@@ -60,7 +67,7 @@ export default function CartScreen(props) {
                       value={item.qty}
                       onChange={(e) =>
                         dispatch(
-                          addToCart(item.product, Number(e.target.value))
+                          addToCart(item.product, Number(e.target.value)),
                         )
                       }
                     >
@@ -74,7 +81,7 @@ export default function CartScreen(props) {
                   <div>${item.price}</div>
                   <div>
                     <button
-                      type="button"
+                      type='button'
                       onClick={() => removeFromCartHandler(item.product)}
                     >
                       Delete
@@ -86,8 +93,8 @@ export default function CartScreen(props) {
           </ul>
         )}
       </div>
-      <div className="col-1">
-        <div className="card card-body">
+      <div className='col-1'>
+        <div className='card card-body'>
           <ul>
             <li>
               <h2>
@@ -97,9 +104,9 @@ export default function CartScreen(props) {
             </li>
             <li>
               <button
-                type="button"
+                type='button'
                 onClick={checkoutHandler}
-                className="primary block"
+                className='primary block'
                 disabled={cartItems.length === 0}
               >
                 Proceed to Checkout

@@ -6,9 +6,11 @@ import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import { ORDER_DELETE_RESET } from "../constants/orderConstants";
 import Axios from "axios";
+import { useParams } from "../../node_modules/react-router/index";
 
 export default function OrderListScreen(props) {
   const navigate = useNavigate();
+  const { pageNumber } = useParams();
   const { pathname } = useLocation();
   const sellerMode = pathname.indexOf("/seller") >= 0;
   const orderList = useSelector((state) => state.orderList);
@@ -27,6 +29,7 @@ export default function OrderListScreen(props) {
     dispatch({ type: ORDER_DELETE_RESET });
     dispatch(listOrders({ seller: sellerMode ? userInfo._id : "" }));
   }, [dispatch, sellerMode, successDelete, userInfo._id]);
+
   const deleteHandler = (order) => {
     if (window.confirm("Are you sure to delete?")) {
       dispatch(deleteOrder(order._id));
@@ -139,8 +142,8 @@ export default function OrderListScreen(props) {
                     </tr>
                   </thead>
                   <tbody class="bg-white divide-y divide-gray-200">
-                    {orders.orders &&
-                      orders.orders.map((order) => {
+                    {orders &&
+                      orders.map((order) => {
                         return (
                           <tr key={order._id}>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
