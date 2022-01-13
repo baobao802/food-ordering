@@ -17,6 +17,7 @@ import RegisterScreen from './screens/RegisterScreen';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
 import SigninScreen from './screens/SigninScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
+import ProductCreateScreen from './screens/ProductCreateScreen';
 import OrderListScreen from './screens/OrderListScreen';
 import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
@@ -301,6 +302,15 @@ function App() {
                 element={
                   <AdminRoute>
                     <ProductListScreen />
+                  </AdminRoute>
+                }
+              />
+
+              <Route
+                path='/productlist/create'
+                element={
+                  <AdminRoute>
+                    <ProductCreateScreen />
                   </AdminRoute>
                 }
               />

@@ -40,7 +40,7 @@ export const listProducts =
     });
     try {
       const { data } = await Axios.get(
-        `/api/fruits?pageNumber=${pageNumber}&name=${name}&category=${category}&min=${min}&max=${max}&rating=${rating}&order=${order}`
+        `/api/fruits?pageNumber=${pageNumber}&name=${name}&category=${category}&min=${min}&max=${max}&rating=${rating}&order=${order}`,
       );
       dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
     } catch (error) {
@@ -75,22 +75,20 @@ export const detailsProduct = (productId) => async (dispatch) => {
     });
   }
 };
-export const createProduct = () => async (dispatch, getState) => {
+export const createProduct = (product) => async (dispatch, getState) => {
   dispatch({ type: PRODUCT_CREATE_REQUEST });
   const {
     userSignin: { userInfo },
   } = getState();
   try {
-    const { data } = await Axios.post(
-      '/api/products',
-      {},
-      {
-        headers: { Authorization: `Bearer ${userInfo.token}` },
-      }
-    );
+    const bodyFormData = new FormData();
+    Object.keys(product).map((key) => bodyFormData.append(key, product[key]));
+    const { data } = await Axios.post('/api/fruits', bodyFormData, {
+      headers: { Authorization: `Bearer ${userInfo.token}` },
+    });
     dispatch({
       type: PRODUCT_CREATE_SUCCESS,
-      payload: data.product,
+      payload: data.fruit,
     });
   } catch (error) {
     const message =
@@ -106,9 +104,15 @@ export const updateProduct = (product) => async (dispatch, getState) => {
     userSignin: { userInfo },
   } = getState();
   try {
-    const { data } = await Axios.put(`/api/products/${product._id}`, product, {
-      headers: { Authorization: `Bearer ${userInfo.token}` },
-    });
+    const bodyFormData = new FormData();
+    Object.keys(product).map((key) => bodyFormData.append(key, product[key]));
+    const { data } = await Axios.put(
+      `/api/fruits/${product._id}`,
+      bodyFormData,
+      {
+        headers: { Authorization: `Bearer ${userInfo.token}` },
+      },
+    );
     dispatch({ type: PRODUCT_UPDATE_SUCCESS, payload: data });
   } catch (error) {
     const message =
@@ -124,7 +128,7 @@ export const deleteProduct = (productId) => async (dispatch, getState) => {
     userSignin: { userInfo },
   } = getState();
   try {
-    await Axios.delete(`/api/products/${productId}`, {
+    await Axios.delete(`/api/fruits/${productId}`, {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     });
     dispatch({ type: PRODUCT_DELETE_SUCCESS });
@@ -148,7 +152,7 @@ export const createReview =
         review,
         {
           headers: { Authorization: `Bearer ${userInfo.token}` },
-        }
+        },
       );
       dispatch({
         type: PRODUCT_REVIEW_CREATE_SUCCESS,

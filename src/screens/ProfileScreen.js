@@ -90,8 +90,8 @@ export default function ProfileScreen() {
                 <form onSubmit={submitHandler}>
                   <div class='shadow overflow-hidden rounded-md'>
                     <div className='px-4 py-5 bg-white sm:p-6'>
-                      <div className='relative w-28 h-28 md:w-48 md:h-48 mx-auto'>
-                        {image && (
+                      {image && (
+                        <div className='relative w-28 h-28 md:w-48 md:h-48 mx-auto'>
                           <img
                             className='rounded-full w-full h-full'
                             src={
@@ -101,26 +101,26 @@ export default function ProfileScreen() {
                             }
                             alt={name}
                           />
-                        )}
-                        <button
-                          type='button'
-                          className='absolute bottom-0 right-0 rounded bg-gray-100 text-xs opacity-50 font-bold sm:text-sm md:text-base transition-all hover:opacity-80'
-                        >
-                          <label
-                            htmlFor='image'
-                            className='py-1 px-2 md:py-1.5 md:px-3 cursor-pointer'
+                          <button
+                            type='button'
+                            className='absolute bottom-0 right-0 rounded bg-gray-100 text-xs opacity-50 font-bold sm:text-sm md:text-base transition-all hover:opacity-80'
                           >
-                            <input
-                              type='file'
-                              name='image'
-                              id='image'
-                              hidden
-                              onChange={(e) => setImage(e.target.files[0])}
-                            />
-                            Edit
-                          </label>
-                        </button>
-                      </div>
+                            <label
+                              htmlFor='image'
+                              className='py-1 px-2 md:py-1.5 md:px-3 cursor-pointer'
+                            >
+                              <input
+                                type='file'
+                                name='image'
+                                id='image'
+                                hidden
+                                onChange={(e) => setImage(e.target.files[0])}
+                              />
+                              Edit
+                            </label>
+                          </button>
+                        </div>
+                      )}
                     </div>
                     <div class='px-4 py-5 bg-white sm:p-6'>
                       <div class='grid grid-cols-6 gap-6'>
