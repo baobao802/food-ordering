@@ -30,18 +30,22 @@ export default function OrderListScreen(props) {
     dispatch(listOrders({ seller: sellerMode ? userInfo._id : "" }));
   }, [dispatch, sellerMode, successDelete, userInfo._id]);
   const deleteHandler = (order) => {
-    if (window.confirm("Bạn có chắc muốn xoá đơn hàng này?")) {
+    if (window.confirm("Are you sure to delete?")) {
       dispatch(deleteOrder(order._id));
     }
   };
   const handlePaid = async (order) => {
     // console.log(userInfo);
-    if (window.confirm("Xác nhận rằng đơn hàng đã thanh toán?")) {
+    if (window.confirm("Are you sure to set this order into PAIDED?")) {
       try {
         console.log(userInfo);
-        const response = await Axios.put(`/api/orders/${order._id}/pay`, {}, {
-          headers: { Authorization: `Bearer ${userInfo.token}` },
-        });
+        const response = await Axios.put(
+          `/api/orders/${order._id}/pay`,
+          {},
+          {
+            headers: { Authorization: `Bearer ${userInfo.token}` },
+          }
+        );
         dispatch(listOrders({ seller: sellerMode ? userInfo._id : "" }));
         console.log(response);
       } catch (err) {
@@ -52,11 +56,15 @@ export default function OrderListScreen(props) {
 
   const handleCancel = async (order) => {
     // console.log(userInfo);
-    if (window.confirm("Bạn có muốn huỷ đơn hàng này?")) {
+    if (window.confirm("Are you sure to cancel this order?")) {
       try {
-        const response = await Axios.put(`/api/orders/${order._id}/cancel`, {}, {
-          headers: { Authorization: `Bearer ${userInfo.token}` },
-        });
+        const response = await Axios.put(
+          `/api/orders/${order._id}/cancel`,
+          {},
+          {
+            headers: { Authorization: `Bearer ${userInfo.token}` },
+          }
+        );
         dispatch(listOrders({ seller: sellerMode ? userInfo._id : "" }));
         console.log(response);
       } catch (err) {
@@ -66,11 +74,15 @@ export default function OrderListScreen(props) {
   };
 
   const handleDelivery = async (order) => {
-    if (window.confirm("Xác nhận rằng đơn hàng đã vận chuyển?")) {
+    if (window.confirm("Are you sure to set this order into DELIVERED?")) {
       try {
-        const response = await Axios.put(`/api/orders/${order._id}/deliver`, {}, {
-          headers: { Authorization: `Bearer ${userInfo.token}` },
-        });
+        const response = await Axios.put(
+          `/api/orders/${order._id}/deliver`,
+          {},
+          {
+            headers: { Authorization: `Bearer ${userInfo.token}` },
+          }
+        );
         dispatch(listOrders({ seller: sellerMode ? userInfo._id : "" }));
         console.log(response);
       } catch (err) {
@@ -87,7 +99,7 @@ export default function OrderListScreen(props) {
         height: "100%",
       }}
     >
-      <h1 className='text-gray-900 text-lg md:text-2xl'>Đơn hàng</h1>
+      <h1 className="text-gray-900 text-lg md:text-2xl">Đơn hàng</h1>
       {loadingDelete && <LoadingBox></LoadingBox>}
       {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
       {loading ? (
@@ -124,41 +136,45 @@ export default function OrderListScreen(props) {
                         scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
-                        Đã vận chuyển
-                      </th>
-                      <th
-                        scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                      >
                         Đã thanh toán
                       </th>
                       <th
                         scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
-                        Huỷ
+                        Đã vận chuyển
+                      </th>
+                      <th
+                        scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        Huỷ đơn hàng
                       </th>
                       {/* <th scope="col" class="relative px-6 py-3">
                         <span class="sr-only">Actions</span>
                       </th> */}
                     </tr>
                   </thead>
-                  <tbody class='bg-white divide-y divide-gray-200'>
-                    {orders.map((order) => (
-                      <tr key={order._id}>
-                        <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
-                          {order.shippingAddress.fullName}
-                        </td>
-                        <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
-                          {order.createdAt.substring(0, 10)}
-                        </td>
-                        <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
-                          {order.totalPrice}
-                        </td>
-                        <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-                        <button
+                  <tbody class="bg-white divide-y divide-gray-200">
+                    {orders &&
+                      orders.map((order) => {
+                        return (
+                          <tr key={order._id}>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                              {order.shippingAddress.fullName}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                              {order.createdAt.substring(0, 10)}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                              {order.totalPrice.toFixed(2)}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                              <button
                                 style={{
-                                  backgroundColor: "#01876c",
+                                  backgroundColor: `${
+                                    order.isDelivered ? "#01876c" : "grey"
+                                  }`,
                                   cursor: "pointer",
                                   padding: "7px",
                                   borderRadius: "20px",
@@ -166,39 +182,53 @@ export default function OrderListScreen(props) {
                                   fontWeight: 600,
                                 }}
                                 onClick={() => handleDelivery(order)}
-                        ></button>       
-                        </td>
-                        <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
-                           <button
-                           style={{
-                             backgroundColor: "#01876c",
-                             cursor: "pointer",
-                             padding: "7px",
-                             borderRadius: "20px",
-                             color: "white",
-                             fontWeight: 600,
-                           }}
-                           onClick={() => handlePaid(order)}
-                           ></button>
-                        </td>
-                        <td class='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
-                          <Link
-                            to={`/order/${order._id}`}
-                            class='text-indigo-600 hover:text-indigo-900'
-                          >
-                            Chỉnh sửa
-                          </Link>
-                          <span> / </span>
-                          <Link
-                            to='#'
-                            class='text-indigo-600 hover:text-indigo-900'
-                            onClick={() => deleteHandler(order)}
-                          >
-                            Xoá
-                          </Link>
-                        </td>
-                      </tr>
-                    ))}
+                              >
+                                {order.isDelivered
+                                  ? "Đã vận chuyển"
+                                  : "Xác nhận vận chuyển"}
+                              </button>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                              <button
+                                style={{
+                                  backgroundColor: `${
+                                    order.isPaid ? "#01876c" : "grey"
+                                  }`,
+                                  cursor: "pointer",
+                                  padding: "7px",
+                                  borderRadius: "20px",
+                                  color: "white",
+                                  fontWeight: 600,
+                                }}
+                                onClick={() => handlePaid(order)}
+                              >
+                                {order.isPaid
+                                  ? "Đã thanh toán"
+                                  : "Xác nhận thanh toán"}
+                              </button>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                              <button
+                                style={{
+                                  backgroundColor: `${
+                                    order.isCanceled ? "red" : "grey"
+                                  }`,
+                                  cursor: "pointer",
+                                  padding: "7px",
+                                  borderRadius: "20px",
+                                  color: "white",
+                                  fontWeight: 600,
+                                }}
+                                onClick={() => handleCancel(order)}
+                              >
+                                {order.isCanceled
+                                  ? "Đã huỷ đơn hàng"
+                                  : "Huỷ đơn hàng"}
+                              </button>
+                            </td>
+                          </tr>
+                        );
+                      })}
                   </tbody>
                 </table>
               </div>

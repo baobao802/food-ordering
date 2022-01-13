@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import { createReview, detailsProduct } from '../actions/productActions';
-import LoadingBox from '../components/LoadingBox';
-import MessageBox from '../components/MessageBox';
-import Rating from '../components/Rating';
-import { PRODUCT_REVIEW_CREATE_RESET } from '../constants/productConstants';
-import '../index.css';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { createReview, detailsProduct } from "../actions/productActions";
+import LoadingBox from "../components/LoadingBox";
+import MessageBox from "../components/MessageBox";
+import Rating from "../components/Rating";
+import { PRODUCT_REVIEW_CREATE_RESET } from "../constants/productConstants";
+import "../index.css";
 
 export default function ProductScreen(props) {
   const navigate = useNavigate();
@@ -29,13 +29,13 @@ export default function ProductScreen(props) {
   } = productReviewCreate;
 
   const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
 
   useEffect(() => {
     if (successReviewCreate) {
-      window.alert('Review Submitted Successfully');
-      setRating('');
-      setComment('');
+      window.alert("Review Submitted Successfully");
+      setRating("");
+      setComment("");
       dispatch({ type: PRODUCT_REVIEW_CREATE_RESET });
     }
     dispatch(detailsProduct(productId));
@@ -47,61 +47,61 @@ export default function ProductScreen(props) {
     e.preventDefault();
     if (comment && rating) {
       dispatch(
-        createReview(productId, { rating, comment, name: userInfo.name }),
+        createReview(productId, { rating, comment, name: userInfo.name })
       );
     } else {
-      alert('Vui lòng đánh giá và nhập bình luận!');
+      alert("Vui lòng đánh giá và nhập bình luận!");
     }
   };
   return (
-    <div style={{ paddingTop: '2rem' }}>
+    <div>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
-        <MessageBox variant='danger'>{error}</MessageBox>
+        <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <div>
-          <div className='custom-row top' style={{ justifyContent: 'unset' }}>
-            <div className='col' style={{ width: '50%' }}>
+          <div className="custom-row top" style={{ justifyContent: "unset" }}>
+            <div className="col" style={{ width: "50%" }}>
               <img
                 style={{ borderRadius: 0 }}
-                className='large'
+                className="large"
                 src={product.image}
                 alt={product.name}
               ></img>
             </div>
-            <div className='col' style={{ width: '50%' }}>
-              <div style={{ padding: '1.5em 3em', fontSize: '1.5em' }}>
+            <div className="col" style={{ width: "50%" }}>
+              <div style={{ padding: "1.5em 3em", fontSize: "1.5em" }}>
                 <Link
                   style={{
-                    color: '#465bad',
+                    color: "#465bad",
                     fontWeight: 700,
-                    cursor: 'pointer',
+                    cursor: "pointer",
                   }}
-                  to='/'
+                  to="/"
                 >
                   <i
-                    style={{ marginRight: '5px' }}
-                    class='fa fa-arrow-left'
-                    aria-hidden='true'
+                    style={{ marginRight: "5px" }}
+                    class="fa fa-arrow-left"
+                    aria-hidden="true"
                   ></i>
                   Quay về trang tìm kiếm
                 </Link>
                 <div
                   style={{
-                    display: 'flex',
-                    fontSize: '2em',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
+                    display: "flex",
+                    fontSize: "2em",
+                    justifyContent: "space-between",
+                    alignItems: "center",
                     fontWeight: 700,
-                    color: '#0d1136',
-                    marginTop: '50px',
-                    marginBottom: '10px',
+                    color: "#0d1136",
+                    marginTop: "50px",
+                    marginBottom: "10px",
                   }}
                 >
                   <div>{product.name}</div>
                 </div>
-                <div style={{ marginBottom: '50px' }}>
+                <div style={{ marginBottom: "50px" }}>
                   <Rating
                     rating={product.rating}
                     numReviews={product.numReviews}
@@ -111,27 +111,27 @@ export default function ProductScreen(props) {
                 <div
                   style={{
                     fontWeight: 700,
-                    fontSize: '0.8em',
-                    color: '#0d1136',
-                    marginBottom: '20px',
+                    fontSize: "0.8em",
+                    color: "#0d1136",
+                    marginBottom: "20px",
                   }}
                 >
-                  Giá:{' '}
-                  <span style={{ color: '#20a020', fontWeight: 700 }}>
+                  Giá:{" "}
+                  <span style={{ color: "#20a020", fontWeight: 700 }}>
                     {product.price} VND
                   </span>
                 </div>
                 <div
                   style={{
                     fontWeight: 700,
-                    fontSize: '0.8em',
-                    color: '#0d1136',
-                    marginBottom: '20px',
+                    fontSize: "0.8em",
+                    color: "#0d1136",
+                    marginBottom: "20px",
                   }}
                 >
-                  Mô tả:{' '}
+                  Mô tả:{" "}
                   <span
-                    style={{ color: 'rgb(119, 121, 140)', fontWeight: 400 }}
+                    style={{ color: "rgb(119, 121, 140)", fontWeight: 400 }}
                   >
                     {product.description}
                   </span>
@@ -139,24 +139,24 @@ export default function ProductScreen(props) {
                 {/* <div style={{color: 'rgb(119, 121, 140)'}}>
                   <p style={{fontSize: '0.7em'}}>{product.description}</p>
                 </div> */}
-                <div className='custom-row'>
+                <div className="custom-row">
                   <div>
                     {product.countInStock > 0 ? (
                       <span
-                        className='success'
+                        className="success"
                         style={{
-                          fontSize: '0.8em',
-                          marginBottom: '20px',
+                          fontSize: "0.8em",
+                          marginBottom: "20px",
                           fontWeight: 600,
                         }}
                       >
-                        {' '}
+                        {" "}
                         Số lượng còn lại :
                       </span>
                     ) : (
                       <span
-                        className='danger'
-                        style={{ fontSize: '0.8em', marginBottom: '20px' }}
+                        className="danger"
+                        style={{ fontSize: "0.8em", marginBottom: "20px" }}
                       >
                         Không có sẵn
                       </span>
@@ -164,19 +164,19 @@ export default function ProductScreen(props) {
                   </div>
                 </div>
                 <div
-                  className='custom-row'
-                  style={{ marginTop: '20px', justifyContent: 'unset' }}
+                  className="custom-row"
+                  style={{ marginTop: "20px", justifyContent: "unset" }}
                 >
                   {product.countInStock > 0 && (
                     <>
                       <div>
-                        <div className='custom-row'>
+                        <div className="custom-row">
                           <div
                             style={{
-                              fontSize: '0.8em',
-                              color: 'rgb(13, 17, 54)',
+                              fontSize: "0.8em",
+                              color: "rgb(13, 17, 54)",
                               fontWeight: 600,
-                              marginRight: '10px',
+                              marginRight: "10px",
                             }}
                           >
                             Số lượng
@@ -192,7 +192,7 @@ export default function ProductScreen(props) {
                                   <option key={x + 1} value={x + 1}>
                                     {x + 1}
                                   </option>
-                                ),
+                                )
                               )}
                             </select>
                           </div>
@@ -203,18 +203,18 @@ export default function ProductScreen(props) {
                   <div>
                     <button
                       style={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
                         fontWeight: 600,
-                        marginLeft: '30px',
+                        marginLeft: "30px",
                       }}
                       onClick={addToCartHandler}
-                      className='primary block'
+                      className="primary block"
                     >
                       <img
-                        style={{ width: '25px', marginRight: '5px' }}
-                        src='/images/logoIcon.png'
+                        style={{ width: "25px", marginRight: "5px" }}
+                        src="/images/logoIcon.png"
                         alt={product.name}
                       />
                       Thêm vào giỏ hàng
@@ -225,50 +225,50 @@ export default function ProductScreen(props) {
             </div>
           </div>
           <div>
-            <div className='custom-row'>
-              <div style={{ width: '50%' }}>
+            <div className="custom-row">
+              <div style={{ width: "50%" }}>
                 {userInfo ? (
                   <form
-                    style={{ padding: '0 3rem' }}
-                    className='form'
+                    style={{ padding: "0 3rem" }}
+                    className="form"
                     onSubmit={submitHandler}
                   >
                     <div>
                       <h2>Cảm ơn phản hồi của quý khách!</h2>
                     </div>
                     <div>
-                      <label htmlFor='rating'>Đánh giá</label>
+                      <label htmlFor="rating">Đánh giá</label>
                       <select
-                        id='rating'
+                        id="rating"
                         value={rating}
                         onChange={(e) => setRating(e.target.value)}
                       >
-                        <option value=''>Select...</option>
-                        <option value='1'>1- Tệ</option>
-                        <option value='2'>2- Bình thường</option>
-                        <option value='3'>3- Tốt</option>
-                        <option value='4'>4- Rất tốt</option>
-                        <option value='5'>5- Xuất sắc</option>
+                        <option value="">Select...</option>
+                        <option value="1">1- Tệ</option>
+                        <option value="2">2- Bình thường</option>
+                        <option value="3">3- Tốt</option>
+                        <option value="4">4- Rất tốt</option>
+                        <option value="5">5- Xuất sắc</option>
                       </select>
                     </div>
                     <div>
-                      <label htmlFor='comment'>Bình luận</label>
+                      <label htmlFor="comment">Bình luận</label>
                       <textarea
-                        id='comment'
+                        id="comment"
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
                       ></textarea>
                     </div>
                     <div>
                       <label />
-                      <button className='primary' type='submit'>
+                      <button className="primary" type="submit">
                         Đánh giá
                       </button>
                     </div>
                     <div>
                       {loadingReviewCreate && <LoadingBox></LoadingBox>}
                       {errorReviewCreate && (
-                        <MessageBox variant='danger'>
+                        <MessageBox variant="danger">
                           {errorReviewCreate}
                         </MessageBox>
                       )}
@@ -276,20 +276,20 @@ export default function ProductScreen(props) {
                   </form>
                 ) : (
                   <MessageBox>
-                    Vui lòng <Link to='/signin'>Đăng nhập</Link> để đánh giá.
+                    Vui lòng <Link to="/signin">Đăng nhập</Link> để đánh giá.
                   </MessageBox>
                 )}
               </div>
               {product.reviews.length === 0 ? (
-                <div style={{ margin: 'auto' }}>
+                <div style={{ margin: "auto" }}>
                   <MessageBox>Chưa có đánh giá</MessageBox>
                 </div>
               ) : (
-                <div style={{ width: '50%' }}>
-                  <div style={{ padding: '70px' }}>
+                <div style={{ width: "50%" }}>
+                  <div style={{ padding: "70px" }}>
                     <div>
                       <h2
-                        style={{ color: 'rgba(236,72,153)', fontWeight: 400 }}
+                        style={{ color: "rgba(236,72,153)", fontWeight: 400 }}
                       >
                         Một số nhật xét :
                       </h2>
@@ -298,7 +298,7 @@ export default function ProductScreen(props) {
                       product.reviews.map((review) => (
                         <div key={review._id}>
                           <strong>{review.name}</strong>
-                          <Rating rating={review.rating} caption=' '></Rating>
+                          <Rating rating={review.rating} caption=" "></Rating>
                           <p>{review.comment}</p>
                         </div>
                       ))}

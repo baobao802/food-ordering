@@ -1,43 +1,43 @@
 export const prices = [
   {
-    name: 'Any',
+    name: "Bất kỳ",
     min: 0,
     max: 0,
   },
   {
-    name: `$1 to $10`,
-    min: 1,
-    max: 10,
+    name: `0 VND đến 200.000 VND`,
+    min: 0,
+    max: 200000,
   },
   {
-    name: `$10 to $100`,
-    min: 10,
-    max: 100,
+    name: `200.000 VND đến 500.000 VND`,
+    min: 200000,
+    max: 500000,
   },
   {
-    name: `$100 to $1000`,
-    min: 100,
-    max: 1000,
+    name: `500.000 VND đến 1.000.000 VND`,
+    min: 500000,
+    max: 1000000,
   },
 ];
 export const ratings = [
   {
-    name: '4stars & up',
+    name: "4stars & up",
     rating: 4,
   },
 
   {
-    name: '3stars & up',
+    name: "3stars & up",
     rating: 3,
   },
 
   {
-    name: '2stars & up',
+    name: "2stars & up",
     rating: 2,
   },
 
   {
-    name: '1stars & up',
+    name: "1stars & up",
     rating: 1,
   },
 ];

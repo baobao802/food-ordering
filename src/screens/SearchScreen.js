@@ -55,10 +55,17 @@ export default function SearchScreen(props) {
     return `/search/category/${filterCategory}/name/${filterName}/min/${filterMin}/max/${filterMax}/rating/${filterRating}/order/${sortOrder}/pageNumber/${filterPage}`;
   };
   return (
-    <div style={{backgroundColor:'#f7f7f7',height: '100%'}}>  
-      <div className="custom-row top" style={{height:'100%'}}>
-        <div style={{flex:'0 0 20%', height:'100%',background: 'white',padding:'10px'}}>
-          <h2>Phân loại</h2>
+    <div style={{ backgroundColor: "#f7f7f7", height: "100%" }}>
+      <div className="custom-row top" style={{ height: "100%" }}>
+        <div
+          style={{
+            flex: "0 0 20%",
+            height: "100%",
+            background: "white",
+            padding: "10px",
+          }}
+        >
+          <h2 style={{ fontWeight: 600 }}>Phân loại</h2>
           <div>
             {loadingCategories ? (
               <LoadingBox></LoadingBox>
@@ -88,8 +95,8 @@ export default function SearchScreen(props) {
             )}
           </div>
           <div>
-            <h2>Giá</h2>
-            <ul className='department-container'>
+            <h2 style={{ fontWeight: 600, marginTop: "20px" }}>Giá</h2>
+            <ul className="department-container">
               {prices.map((p) => (
                 <li key={p.name}>
                   <Link
@@ -105,82 +112,94 @@ export default function SearchScreen(props) {
             </ul>
           </div>
           <div>
-            <h3>Đánh giá của khách hàng</h3>
-            <ul className='customer-review'>
+            <h2 style={{ fontWeight: 600, marginTop: "20px" }}>
+              Đánh giá của khách hàng
+            </h2>
+            <ul className="customer-review">
               {ratings.map((r) => (
                 <li key={r.name}>
                   <Link
                     to={getFilterUrl({ rating: r.rating })}
                     className={`${r.rating}` === `${rating}` ? "active" : ""}
                   >
-                    <Rating caption={"Upper"} rating={r.rating}></Rating>
+                    <Rating caption={"Trở lên"} rating={r.rating}></Rating>
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
         </div>
-        <div style={{flex:1,padding:'2rem'}}>
-        <div className="custom-row" style={{marginBottom:'20px',marginTop:'20px'}}>
-          {loading ? (
-            <LoadingBox></LoadingBox>
-          ) : error ? (
-            <MessageBox variant="danger">{error}</MessageBox>
-          ) : (
-            <div style={{color: '#073B4C',fontWeight: 600}}>{products.length} Kết quả</div>
-          )}
-          <div style={{color: '#073B4C',fontWeight: 600}}>
-          <i class="fa fa-filter" aria-hidden="true"></i> Sắp xếp theo{' '}
-            <select
-              style={{outline:0,border:0,marginLeft:'10px'}}
-              value={order}
-              onChange={(e) => {
-                navigate(getFilterUrl({ order: e.target.value }));
-              }}
-            >
-              <option value="newest">Mới nhất</option>
-              <option value="lowest">Giá: Thấp tới cao</option>
-              <option value="highest">Giá: Cao tới thấp</option>
-              <option value="toprated">Đánh giá của khách hàng</option>
-            </select>
-          </div>
-          {loading ? (
-            <LoadingBox></LoadingBox>
-          ) : error ? (
-            <MessageBox variant="danger">{error}</MessageBox>
-          ) : (
-            <>
-              {products.length === 0 && (
-                <MessageBox>Không tìm thấy sản phẩm nào!</MessageBox>
-              )}
-              <div
-                className="custom-row center"
-                style={{ alignItems: "unset" }}
+        <div style={{ flex: 1, padding: "0 2rem", height: "100%" }}>
+          <div
+            className="custom-row"
+            style={{ marginBottom: "20px", marginTop: "20px" }}
+          >
+            {loading ? (
+              <LoadingBox></LoadingBox>
+            ) : error ? (
+              <MessageBox variant="danger">{error}</MessageBox>
+            ) : (
+              <div style={{ color: "#073B4C", fontWeight: 600 }}>
+                {products.length} Kết quả
+              </div>
+            )}
+            <div style={{ color: "#073B4C", fontWeight: 600 }}>
+              <i class="fa fa-filter" aria-hidden="true"></i> Sắp xếp theo{" "}
+              <select
+                style={{ outline: 0, border: 0, marginLeft: "10px" }}
+                value={order}
+                onChange={(e) => {
+                  navigate(getFilterUrl({ order: e.target.value }));
+                }}
               >
-                {products.map((product) => (
-                  <Product
-                    key={product._id}
-                    isCategory={true}
-                    product={product}
-                  ></Product>
-                ))}
-              </div>
-              <div className="custom-row center pagination">
-                {[...Array(pages).keys()].map((x) => (
-                  <Link
-                    className={x + 1 === page ? "active" : ""}
-                    key={x + 1}
-                    to={getFilterUrl({ page: x + 1 })}
-                  >
-                    {x + 1}
-                  </Link>
-                ))}
-              </div>
-            </>
-          )}
+                <option value="newest">Mới nhất</option>
+                <option value="lowest">Giá: Thấp tới cao</option>
+                <option value="highest">Giá: Cao tới thấp</option>
+                <option value="toprated">Đánh giá của khách hàng</option>
+              </select>
+            </div>
+            {loading ? (
+              <LoadingBox></LoadingBox>
+            ) : error ? (
+              <MessageBox variant="danger">{error}</MessageBox>
+            ) : (
+              <>
+                {products.length === 0 && (
+                  <MessageBox>Không tìm thấy sản phẩm nào!</MessageBox>
+                )}
+                <div
+                  className="custom-row center"
+                  style={{
+                    alignItems: "unset",
+                    marginTop: "30px",
+                    width: "100%",
+                    height: "100%",
+                  }}
+                >
+                  {products.map((product) => (
+                    <Product
+                      key={product._id}
+                      isCategory={true}
+                      product={product}
+                    ></Product>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+          <div className="custom-row center pagination">
+            {[...Array(pages).keys()].map((x) => (
+              <Link
+                className={x + 1 === page ? "active" : ""}
+                key={x + 1}
+                to={getFilterUrl({ page: x + 1 })}
+              >
+                {x + 1}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </div>
-  </div>
   );
 }
