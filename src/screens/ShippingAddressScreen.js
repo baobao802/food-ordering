@@ -71,47 +71,47 @@ export default function ShippingAddressScreen(props) {
       <CheckoutSteps step1 step2></CheckoutSteps>
       <form className="form" onSubmit={submitHandler}>
         <div>
-          <h1>Shipping Address</h1>
+          <h1>Địa chỉ giao hàng</h1>
         </div>
         <div>
-          <label htmlFor="fullName">Full Name</label>
+          <label htmlFor="fullName">Tên</label>
           <input
             type="text"
             id="fullName"
-            placeholder="Enter full name"
+            placeholder="Nhập tên"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             required
           ></input>
         </div>
         <div>
-          <label htmlFor="address">Address</label>
+          <label htmlFor="address">Địa chỉ</label>
           <input
             type="text"
             id="address"
-            placeholder="Enter address"
+            placeholder="Nhập địa chỉ"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             required
           ></input>
         </div>
         <div>
-          <label htmlFor="city">City</label>
+          <label htmlFor="city">Tỉnh/Thành phố</label>
           <input
             type="text"
             id="city"
-            placeholder="Enter city"
+            placeholder="Nhập tỉnh/thành phố"
             value={city}
             onChange={(e) => setCity(e.target.value)}
             required
           ></input>
         </div>
         <div>
-          <label htmlFor="country">Country</label>
+          <label htmlFor="country">Quốc gia</label>
           <input
             type="text"
             id="country"
-            placeholder="Enter country"
+            placeholder="Nhập quốc gia"
             value={country}
             onChange={(e) => setCountry(e.target.value)}
             required
@@ -120,7 +120,7 @@ export default function ShippingAddressScreen(props) {
         <div>
           <label />
           <button className="primary" type="submit">
-            Continue
+            Tiếp tục
           </button>
         </div>
       </form>

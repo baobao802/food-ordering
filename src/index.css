@@ -6,7 +6,7 @@ body {
   margin: 0;
   height: 100vh;
   font-size: 1rem;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -18,9 +18,9 @@ body {
 .grid-container {
   display: grid;
   grid-template-areas:
-    'header'
-    'main'
-    'footer';
+    "header"
+    "main"
+    "footer";
   grid-template-columns: 1fr;
   grid-template-rows: 4.125rem 1fr 4.125rem;
   height: 100%;
@@ -571,6 +571,13 @@ img.large {
   display: flex;
   flex-direction: column;
   cursor: pointer;
+}
+.homepage-item:nth-last-child(1) {
+  margin-right: 0;
+}
+.homepage-item img {
+  height: 200px;
+  object-fit: cover;
 }
 .homepage-item:nth-child(4n) {
   margin-right: 0;

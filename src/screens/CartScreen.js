@@ -41,11 +41,11 @@ export default function CartScreen(props) {
       }}
     >
       <div className='col-2'>
-        <h1>Shopping Cart</h1>
+        <h1>Giỏ hàng</h1>
         {error && <MessageBox variant='danger'>{error}</MessageBox>}
         {cartItems.length === 0 ? (
           <MessageBox>
-            Cart is empty. <Link to='/'>Go Shopping</Link>
+            Chưa có sản phẩm. <Link to='/'>Mua ngay!</Link>
           </MessageBox>
         ) : (
           <ul>
@@ -78,13 +78,13 @@ export default function CartScreen(props) {
                       ))}
                     </select>
                   </div>
-                  <div>${item.price}</div>
+                  <div>{item.price}VND</div>
                   <div>
                     <button
                       type='button'
                       onClick={() => removeFromCartHandler(item.product)}
                     >
-                      Delete
+                      Xoá
                     </button>
                   </div>
                 </div>
@@ -98,8 +98,8 @@ export default function CartScreen(props) {
           <ul>
             <li>
               <h2>
-                Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)} items) : $
-                {cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
+                Tổng tiền ({cartItems.reduce((a, c) => a + c.qty, 0)} sản phẩm) :  
+                {cartItems.reduce((a, c) => a + c.price * c.qty, 0)} VNĐ
               </h2>
             </li>
             <li>
@@ -109,7 +109,7 @@ export default function CartScreen(props) {
                 className='primary block'
                 disabled={cartItems.length === 0}
               >
-                Proceed to Checkout
+                Tiến hành thanh toán
               </button>
             </li>
           </ul>

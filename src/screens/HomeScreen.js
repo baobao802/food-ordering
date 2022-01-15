@@ -46,7 +46,7 @@ export default function HomeScreen() {
           class='fa fa-star'
           aria-hidden='true'
         ></i>{' '}
-        Featured Products
+        Sản phẩm nổi bật
       </h1>
       {loading ? (
         <LoadingBox></LoadingBox>
@@ -54,7 +54,7 @@ export default function HomeScreen() {
         <MessageBox variant='danger'>{error}</MessageBox>
       ) : (
         <>
-          {products.length === 0 && <MessageBox>No Product Found</MessageBox>}
+          {products.length === 0 && <MessageBox>Không tìm thấy sản phẩm nào!</MessageBox>}
           <div className='homepage-container'>
             {products.map((product) => (
               <Product key={product._id} product={product}></Product>

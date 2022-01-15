@@ -21,7 +21,7 @@ export default function OrderHistoryScreen(props) {
         height: '100%',
       }}
     >
-      <h1 className='text-gray-900 text-lg md:text-2xl'>Order History</h1>
+      <h1 className='text-gray-900 text-lg md:text-2xl'>Lịch sử mua hàng</h1>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
@@ -38,31 +38,31 @@ export default function OrderHistoryScreen(props) {
                         scope='col'
                         class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
                       >
-                        User
+                        Khách hàng
                       </th>
                       <th
                         scope='col'
                         class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
                       >
-                        Date
+                        Ngày
                       </th>
                       <th
                         scope='col'
                         class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
                       >
-                        Total
+                        Tổng tiền
                       </th>
                       <th
                         scope='col'
                         class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
                       >
-                        Paid
+                        Đã thanh toán
                       </th>
                       <th
                         scope='col'
                         class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
                       >
-                        Delivered
+                        Đã vận chuyển
                       </th>
                       <th scope='col' class='relative px-6 py-3'>
                         <span class='sr-only'>Actions</span>
@@ -94,7 +94,7 @@ export default function OrderHistoryScreen(props) {
                             to={`/order/${order._id}`}
                             class='text-indigo-600 hover:text-indigo-900'
                           >
-                            Edit
+                            Chỉnh sửa
                           </Link>
                         </td>
                       </tr>
@@ -110,14 +110,14 @@ export default function OrderHistoryScreen(props) {
               disabled={0 === page}
               onClick={() => navigate(`/orderhistory/pageNumber/${page - 1}`)}
             >
-              Prev
+              Trước
             </button>
             <button
               class='bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'
               disabled={pages === page}
               onClick={() => navigate(`/orderhistory/pageNumber/${page + 1}`)}
             >
-              Next
+              Sau
             </button>
           </div>
         </div>

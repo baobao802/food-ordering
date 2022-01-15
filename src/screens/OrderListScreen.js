@@ -39,9 +39,14 @@ export default function OrderListScreen(props) {
     if (window.confirm("Are you sure to set this order into PAIDED?")) {
       try {
         console.log(userInfo);
-        const response = await Axios.put(`/api/orders/${order._id}/pay`, {
-          headers: { Authorization: `Bearer ${userInfo.token}` },
-        });
+        const response = await Axios.put(
+          `/api/orders/${order._id}/pay`,
+          {},
+          {
+            headers: { Authorization: `Bearer ${userInfo.token}` },
+          }
+        );
+        dispatch(listOrders({ seller: sellerMode ? userInfo._id : "" }));
         console.log(response);
       } catch (err) {
         console.log(err);
@@ -53,9 +58,14 @@ export default function OrderListScreen(props) {
     // console.log(userInfo);
     if (window.confirm("Are you sure to cancel this order?")) {
       try {
-        const response = await Axios.put(`/api/orders/${order._id}/cancel`, {
-          headers: { Authorization: `Bearer ${userInfo.token}` },
-        });
+        const response = await Axios.put(
+          `/api/orders/${order._id}/cancel`,
+          {},
+          {
+            headers: { Authorization: `Bearer ${userInfo.token}` },
+          }
+        );
+        dispatch(listOrders({ seller: sellerMode ? userInfo._id : "" }));
         console.log(response);
       } catch (err) {
         console.log(err);
@@ -66,9 +76,14 @@ export default function OrderListScreen(props) {
   const handleDelivery = async (order) => {
     if (window.confirm("Are you sure to set this order into DELIVERED?")) {
       try {
-        const response = await Axios.put(`/api/orders/${order._id}/deliver`, {
-          headers: { Authorization: `Bearer ${userInfo.token}` },
-        });
+        const response = await Axios.put(
+          `/api/orders/${order._id}/deliver`,
+          {},
+          {
+            headers: { Authorization: `Bearer ${userInfo.token}` },
+          }
+        );
+        dispatch(listOrders({ seller: sellerMode ? userInfo._id : "" }));
         console.log(response);
       } catch (err) {
         console.log(err);
@@ -84,7 +99,7 @@ export default function OrderListScreen(props) {
         height: "100%",
       }}
     >
-      <h1 className="text-gray-900 text-lg md:text-2xl">Orders</h1>
+      <h1 className="text-gray-900 text-lg md:text-2xl">Đơn hàng</h1>
       {loadingDelete && <LoadingBox></LoadingBox>}
       {errorDelete && <MessageBox variant="danger">{errorDelete}</MessageBox>}
       {loading ? (
@@ -103,37 +118,37 @@ export default function OrderListScreen(props) {
                         scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
-                        User
+                        Khách hàng
                       </th>
                       <th
                         scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
-                        Date
+                        Ngày
                       </th>
                       <th
                         scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
-                        Total
+                        Tổng tiền
                       </th>
                       <th
                         scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
-                        Delivered
+                        Đã thanh toán
                       </th>
                       <th
                         scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
-                        Paid
+                        Đã vận chuyển
                       </th>
                       <th
                         scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
-                        Cancel
+                        Huỷ đơn hàng
                       </th>
                       {/* <th scope="col" class="relative px-6 py-3">
                         <span class="sr-only">Actions</span>
@@ -157,7 +172,9 @@ export default function OrderListScreen(props) {
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                               <button
                                 style={{
-                                  backgroundColor: "#01876c",
+                                  backgroundColor: `${
+                                    order.isDelivered ? "#01876c" : "grey"
+                                  }`,
                                   cursor: "pointer",
                                   padding: "7px",
                                   borderRadius: "20px",
@@ -167,14 +184,16 @@ export default function OrderListScreen(props) {
                                 onClick={() => handleDelivery(order)}
                               >
                                 {order.isDelivered
-                                  ? "Delivered"
-                                  : "Confirm Delivered"}
+                                  ? "Đã vận chuyển"
+                                  : "Xác nhận vận chuyển"}
                               </button>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                               <button
                                 style={{
-                                  backgroundColor: "#01876c",
+                                  backgroundColor: `${
+                                    order.isPaid ? "#01876c" : "grey"
+                                  }`,
                                   cursor: "pointer",
                                   padding: "7px",
                                   borderRadius: "20px",
@@ -183,16 +202,17 @@ export default function OrderListScreen(props) {
                                 }}
                                 onClick={() => handlePaid(order)}
                               >
-                                {order.isPaid ? "Paided" : "Confirm Paided"}
+                                {order.isPaid
+                                  ? "Đã thanh toán"
+                                  : "Xác nhận thanh toán"}
                               </button>
-                              {/* {order.isPaid
-                              ? order.paidAt.substring(0, 10)
-                              : "No"} */}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                               <button
                                 style={{
-                                  backgroundColor: "#01876c",
+                                  backgroundColor: `${
+                                    order.isCanceled ? "red" : "grey"
+                                  }`,
                                   cursor: "pointer",
                                   padding: "7px",
                                   borderRadius: "20px",
@@ -201,25 +221,11 @@ export default function OrderListScreen(props) {
                                 }}
                                 onClick={() => handleCancel(order)}
                               >
-                                {order.isCanceled ? "Cancel" : "No"}
+                                {order.isCanceled
+                                  ? "Đã huỷ đơn hàng"
+                                  : "Huỷ đơn hàng"}
                               </button>
                             </td>
-                            {/* <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"> */}
-                            {/* <Link
-                              to={`/order/${order._id}`}
-                              class="text-indigo-600 hover:text-indigo-900"
-                            >
-                              Edit
-                            </Link> */}
-                            {/* <span> / </span> */}
-                            {/* <Link
-                              to="#"
-                              class="text-indigo-600 hover:text-indigo-900"
-                              onClick={() => deleteHandler(order)}
-                            >
-                              Delete
-                            </Link> */}
-                            {/* </td> */}
                           </tr>
                         );
                       })}
@@ -234,14 +240,14 @@ export default function OrderListScreen(props) {
               disabled={0 === page}
               onClick={() => navigate(`/orderlist/pageNumber/${page - 1}`)}
             >
-              Prev
+              Trước
             </button>
             <button
               class="bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow"
               disabled={pages === page}
               onClick={() => navigate(`/orderlist/pageNumber/${page + 1}`)}
             >
-              Next
+              Sau
             </button>
           </div>
         </div>
