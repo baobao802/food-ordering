@@ -92,9 +92,6 @@ function App() {
                 </Link>
                 <ul className='dropdown-content'>
                   <li>
-                    <Link to='/productlist/seller'>Products</Link>
-                  </li>
-                  <li>
                     <Link to='/orderlist/seller'>Orders</Link>
                   </li>
                 </ul>
@@ -135,9 +132,13 @@ function App() {
                   <li>
                     <Link to='/profile'>User Profile</Link>
                   </li>
-                  <li>
-                    <Link to='/orderhistory'>Order History</Link>
-                  </li>
+                  {
+                    userInfo && !userInfo.isSeller && !userInfo.isAdmin &&(
+                      <li>
+                      <Link to='/orderhistory'>Order History</Link>
+                    </li>
+                    )
+                  }
                   <li>
                     <Link to='#signout' onClick={signoutHandler}>
                       Sign Out

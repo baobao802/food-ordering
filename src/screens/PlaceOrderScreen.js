@@ -53,7 +53,7 @@ export default function PlaceOrderScreen(props) {
               <div className="card card-body" style={{border:0,boxShadow:'rgb(0 0 0 / 8%) 0px 2px 16px 0px'}}> 
               <div class="flex items-center text-xl checkout-title"><p class="part-number">2</p> <h2>Thanh toán</h2> </div>
                 <p>
-                  <strong>Phương thức thanh toán :</strong> Thanh toán khi nhận hàng
+                  <strong>Phương thức thanh toán :</strong> {cart.paymentMethod }
                 </p>
               </div>
             </div>
