@@ -409,7 +409,7 @@ function App() {
               className='fa fa-gratipay'
               aria-hidden='true'
             ></i>
-            FOOD ORDERING - BK HUNTER
+            FRUIT STORE - BK HUNTER
           </div>
         </footer>
       </div>

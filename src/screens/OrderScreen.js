@@ -202,15 +202,14 @@ export default function OrderScreen(props) {
                           <MessageBox variant='danger'>{errorPay}</MessageBox>
                         )}
                         {loadingPay && <LoadingBox></LoadingBox>}
-
-                        <PayPalButton
-                          amount={order.totalPrice}
-                          onSuccess={successPaymentHandler}
-                        ></PayPalButton>
-                      </>
-                    )}
-                  </li>
-                )}
+                      <PayPalButton
+                        amount={((order.totalPrice)/23000).toFixed(2)}
+                        onSuccess={successPaymentHandler}
+                      ></PayPalButton>
+                    </>
+                  )}
+                </li>
+              )}
               {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
                 <li>
                   {loadingDeliver && <LoadingBox></LoadingBox>}
