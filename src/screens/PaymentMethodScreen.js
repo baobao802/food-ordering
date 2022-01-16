@@ -22,9 +22,9 @@ export default function PaymentMethodScreen(props) {
     <div>
       <CheckoutSteps step1 step2 step3></CheckoutSteps>
       <form className="form" onSubmit={submitHandler}>
-        <div>
+        {/* <div>
           <h1>Payment Method</h1>
-        </div>
+        </div> */}
         <div>
           <div>
             <input
@@ -36,7 +36,7 @@ export default function PaymentMethodScreen(props) {
               checked
               onChange={(e) => setPaymentMethod(e.target.value)}
             ></input>
-            <label htmlFor="paypal">Thanh toán bằng PayPal</label>
+            <label htmlFor="paypal">Thanh toán qua PayPal</label>
           </div>
         </div>
         <div>
@@ -49,13 +49,13 @@ export default function PaymentMethodScreen(props) {
               required
               onChange={(e) => setPaymentMethod(e.target.value)}
             ></input>
-            <label htmlFor="byCash">Thanh toán bằng tiền mặt</label>
+            <label htmlFor="byCash">Thanh toán khi nhận hàng</label>
           </div>
         </div>
         <div>
           <label />
           <button className="primary" type="submit">
-            Continue
+            Tiếp tục
           </button>
         </div>
       </form>

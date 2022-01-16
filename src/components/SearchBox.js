@@ -31,7 +31,7 @@ export default function SearchBox() {
         id='q'
         onChange={(e) => setName(e.target.value)}
         className='nav-search-input'
-        placeholder='Search your products from here'
+        placeholder='Tìm kiếm sản phẩm bạn mong muốn'
       />
     </form>
   );
