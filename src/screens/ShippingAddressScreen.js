@@ -49,23 +49,10 @@ export default function ShippingAddressScreen(props) {
           lng: newLng,
         })
       );
-      navigate('/placeorder');
+      navigate('/payment');
     }
   };
-  const chooseOnMap = () => {
-    dispatch(
-      saveShippingAddress({
-        fullName,
-        address,
-        city,
-        postalCode,
-        country,
-        lat,
-        lng,
-      })
-    );
-    navigate('/map');
-  };
+  
   return (
     <div style={{paddingTop:'2rem'}}>
       <CheckoutSteps step1 step2></CheckoutSteps>

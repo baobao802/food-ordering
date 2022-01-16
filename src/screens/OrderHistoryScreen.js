@@ -1,18 +1,39 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import Axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { listOrderMine } from '../actions/orderActions';
+import { listOrderMine,listOrders } from '../actions/orderActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
 export default function OrderHistoryScreen(props) {
   const navigate = useNavigate();
   const orderMineList = useSelector((state) => state.orderMineList);
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
   const { loading, error, orders, pages, page } = orderMineList;
+  console.log(orders);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(listOrderMine());
   }, [dispatch]);
+  const handleCancel = async (order) => {
+    if (window.confirm("Are you sure to cancel this order?")) {
+      try {
+        const response = await Axios.put(
+          `/api/orders/${order._id}/cancel`,
+          {},
+          {
+            headers: { Authorization: `Bearer ${userInfo.token}` },
+          }
+        );
+        dispatch(listOrderMine());
+        console.log(response);
+      } catch (err) {
+        alert(err.response.data.message);
+      }
+    }
+  };
   return (
     <div
       style={{
@@ -64,8 +85,11 @@ export default function OrderHistoryScreen(props) {
                       >
                         Đã vận chuyển
                       </th>
-                      <th scope='col' class='relative px-6 py-3'>
-                        <span class='sr-only'>Actions</span>
+                      <th
+                        scope='col'
+                        class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+                      >
+                        Huỷ đơn hàng
                       </th>
                     </tr>
                   </thead>
@@ -89,13 +113,24 @@ export default function OrderHistoryScreen(props) {
                             ? order.deliveredAt.substring(0, 10)
                             : 'No'}
                         </td>
-                        <td class='px-6 py-4 whitespace-nowrap text-right text-sm font-medium'>
-                          <Link
-                            to={`/order/${order._id}`}
-                            class='text-indigo-600 hover:text-indigo-900'
-                          >
-                            Chỉnh sửa
-                          </Link>
+                        <td class='px-6 py-4 whitespace-nowrap text-sm font-medium'>
+                            <button
+                                style={{
+                                  backgroundColor: `${
+                                    order.isCanceled ? "red" : "grey"
+                                  }`,
+                                  cursor: "pointer",
+                                  padding: "7px",
+                                  borderRadius: "20px",
+                                  color: "white",
+                                  fontWeight: 600,
+                                }}
+                                onClick={() => handleCancel(order)}
+                              >
+                                {order.isCanceled
+                                  ? "Đã huỷ đơn hàng"
+                                  : "Huỷ đơn hàng"}
+                              </button>
                         </td>
                       </tr>
                     ))}

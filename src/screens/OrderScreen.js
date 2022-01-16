@@ -191,7 +191,7 @@ export default function OrderScreen(props) {
                   </div>
                 </div>
               </li>
-              {/* {!order.isPaid && (
+              {!order.isPaid && order.paymentMethod !== "Thanh toán bằng tiền mặt" && (
                 <li>
                   {!sdkReady ? (
                     <LoadingBox></LoadingBox>
@@ -224,7 +224,7 @@ export default function OrderScreen(props) {
                     Deliver Order
                   </button>
                 </li>
-              )} */}
+              )}
             </ul>
           </div>
         </div>

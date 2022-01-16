@@ -31,9 +31,8 @@ import {
 
 export const createOrder = (order) => async (dispatch, getState) => {
   dispatch({ type: ORDER_CREATE_REQUEST, payload: order });
-  let { itemsPrice, orderItems, shippingAddress, shippingPrice, totalPrice } =
+  let { itemsPrice, orderItems, shippingAddress, shippingPrice, totalPrice, paymentMethod } =
     order;
-  console.log(order);
   let orderItemsDetail = [];
   orderItems.map((item) => {
     orderItemsDetail.push({
@@ -52,7 +51,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
       country: shippingAddress?.country,
       fullName: shippingAddress?.fullName,
     },
-    paymentMethod: "By cash",
+    paymentMethod,
     itemsPrice,
     shippingPrice,
     totalPrice,
@@ -61,6 +60,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
     const {
       userSignin: { userInfo },
     } = getState();
+    console.log(orderDetail);
     const { data } = await Axios.post("/api/orders", orderDetail, {
       headers: {
         Authorization: `Bearer ${userInfo.token}`,
@@ -105,14 +105,21 @@ export const payOrder =
     const {
       userSignin: { userInfo },
     } = getState();
+    const newPaymentResult = {
+    id: paymentResult?.id,
+    status: paymentResult?.status,
+    update_time: paymentResult?.update_time,
+    email_address: userInfo?.email
+    }
     try {
       const { data } = Axios.put(
         `/api/orders/${order._id}/pay`,
-        paymentResult,
+        newPaymentResult,
         {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         }
       );
+      console.log(data)
       dispatch({ type: ORDER_PAY_SUCCESS, payload: data });
     } catch (error) {
       const message =
@@ -151,7 +158,7 @@ export const listOrders =
     } = getState();
     try {
       const { data } = await Axios.get(
-        `/api/orders?seller=${seller}&pageNumber=${pageNumber}`,
+        `/api/orders?pageNumber=${pageNumber}`,
         {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         }
