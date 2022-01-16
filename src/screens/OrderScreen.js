@@ -203,7 +203,7 @@ export default function OrderScreen(props) {
                       {loadingPay && <LoadingBox></LoadingBox>}
 
                       <PayPalButton
-                        amount={order.totalPrice}
+                        amount={((order.totalPrice)/23000).toFixed(2)}
                         onSuccess={successPaymentHandler}
                       ></PayPalButton>
                     </>
