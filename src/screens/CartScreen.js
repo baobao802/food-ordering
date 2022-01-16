@@ -36,7 +36,7 @@ export default function CartScreen(props) {
       className='custom-row top'
       style={{
         backgroundColor: '#f7f7f7',
-        padding: '2vw 2vw 0 2vw',
+        padding: '2rem',
         height: '100%',
       }}
     >
@@ -98,8 +98,8 @@ export default function CartScreen(props) {
           <ul>
             <li>
               <h2>
-                Tổng tiền ({cartItems.reduce((a, c) => a + c.qty, 0)} sản phẩm) :  
-                {cartItems.reduce((a, c) => a + c.price * c.qty, 0)} VNĐ
+                Tổng tiền ({cartItems.reduce((a, c) => a + c.qty, 0)} sản phẩm)
+                :{cartItems.reduce((a, c) => a + c.price * c.qty, 0)} VNĐ
               </h2>
             </li>
             <li>

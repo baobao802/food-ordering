@@ -50,7 +50,7 @@ export default function ProductCreateScreen(props) {
     <div
       style={{
         backgroundColor: '#f7f7f7',
-        padding: '2vw 2vw 0 2vw',
+        padding: '2rem',
         height: '100%',
       }}
     >
@@ -127,7 +127,7 @@ export default function ProductCreateScreen(props) {
                       for='name'
                       class='block text-sm font-medium text-gray-700'
                     >
-                      Tên 
+                      Tên
                     </label>
                     <input
                       type='text'

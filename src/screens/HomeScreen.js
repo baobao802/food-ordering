@@ -30,7 +30,7 @@ export default function HomeScreen() {
     <div
       style={{
         backgroundColor: '#f7f7f7',
-        padding: '2vw 2vw 0 2vw',
+        padding: '2rem',
         height: '100%',
       }}
     >
@@ -54,7 +54,9 @@ export default function HomeScreen() {
         <MessageBox variant='danger'>{error}</MessageBox>
       ) : (
         <>
-          {products.length === 0 && <MessageBox>Không tìm thấy sản phẩm nào!</MessageBox>}
+          {products.length === 0 && (
+            <MessageBox>Không tìm thấy sản phẩm nào!</MessageBox>
+          )}
           <div className='homepage-container'>
             {products.map((product) => (
               <Product key={product._id} product={product}></Product>

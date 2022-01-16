@@ -82,7 +82,7 @@ export default function OrderScreen(props) {
     <div
       style={{
         backgroundColor: '#f7f7f7',
-        padding: '2vw 2vw 0 2vw',
+        padding: '2rem',
         height: '100%',
       }}
     >
@@ -191,25 +191,26 @@ export default function OrderScreen(props) {
                   </div>
                 </div>
               </li>
-              {!order.isPaid && order.paymentMethod !== "Thanh toán bằng tiền mặt" && (
-                <li>
-                  {!sdkReady ? (
-                    <LoadingBox></LoadingBox>
-                  ) : (
-                    <>
-                      {errorPay && (
-                        <MessageBox variant='danger'>{errorPay}</MessageBox>
-                      )}
-                      {loadingPay && <LoadingBox></LoadingBox>}
+              {!order.isPaid &&
+                order.paymentMethod !== 'Thanh toán bằng tiền mặt' && (
+                  <li>
+                    {!sdkReady ? (
+                      <LoadingBox></LoadingBox>
+                    ) : (
+                      <>
+                        {errorPay && (
+                          <MessageBox variant='danger'>{errorPay}</MessageBox>
+                        )}
+                        {loadingPay && <LoadingBox></LoadingBox>}
 
-                      <PayPalButton
-                        amount={order.totalPrice}
-                        onSuccess={successPaymentHandler}
-                      ></PayPalButton>
-                    </>
-                  )}
-                </li>
-              )}
+                        <PayPalButton
+                          amount={order.totalPrice}
+                          onSuccess={successPaymentHandler}
+                        ></PayPalButton>
+                      </>
+                    )}
+                  </li>
+                )}
               {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
                 <li>
                   {loadingDeliver && <LoadingBox></LoadingBox>}

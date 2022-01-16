@@ -37,7 +37,7 @@ export default function UserListScreen(props) {
     <div
       style={{
         backgroundColor: '#f7f7f7',
-        padding: '2vw 2vw 0 2vw',
+        padding: '2rem',
         height: '100%',
       }}
     >
@@ -47,7 +47,9 @@ export default function UserListScreen(props) {
       {loadingDelete && <LoadingBox></LoadingBox>}
       {errorDelete && <MessageBox variant='danger'>{errorDelete}</MessageBox>}
       {successDelete && (
-        <MessageBox variant='success'>Xoá tài khoản nhân viên thành công!</MessageBox>
+        <MessageBox variant='success'>
+          Xoá tài khoản nhân viên thành công!
+        </MessageBox>
       )}
       {loading ? (
         <LoadingBox></LoadingBox>
