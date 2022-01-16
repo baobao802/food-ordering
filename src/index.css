@@ -561,8 +561,8 @@ img.large {
 }
 
 .homepage-item {
-  flex: 0 0 18%;
-  max-width: 18%;
+  flex: 0 0 20%;
+  max-width: 20%;
   background-color: #fff;
   margin-bottom: 2vw;
   border-radius: 6px;

@@ -73,7 +73,7 @@ export default function OrderHistoryScreen(props) {
                     {orders.map((order) => (
                       <tr key={order._id}>
                         <td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>
-                          {order.user.name}
+                          {order.shippingAddress.fullName}
                         </td>
                         <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
                           {order.createdAt.substring(0, 10)}

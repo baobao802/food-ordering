@@ -30,13 +30,13 @@ export default function OrderListScreen(props) {
     dispatch(listOrders({ seller: sellerMode ? userInfo._id : "" }));
   }, [dispatch, sellerMode, successDelete, userInfo._id]);
   const deleteHandler = (order) => {
-    if (window.confirm("Are you sure to delete?")) {
+    if (window.confirm("Bạn có chắc muốn xoá đơn hàng?")) {
       dispatch(deleteOrder(order._id));
     }
   };
   const handlePaid = async (order) => {
     // console.log(userInfo);
-    if (window.confirm("Are you sure to set this order into PAIDED?")) {
+    if (window.confirm("Xác nhận rằng đơn hàng đã thanh toán?")) {
       try {
         console.log(userInfo);
         const response = await Axios.put(
@@ -56,7 +56,7 @@ export default function OrderListScreen(props) {
 
   const handleCancel = async (order) => {
     // console.log(userInfo);
-    if (window.confirm("Are you sure to cancel this order?")) {
+    if (window.confirm("Bạn có muốn huỷ đơn hàng này?")) {
       try {
         const response = await Axios.put(
           `/api/orders/${order._id}/cancel`,
@@ -74,7 +74,7 @@ export default function OrderListScreen(props) {
   };
 
   const handleDelivery = async (order) => {
-    if (window.confirm("Are you sure to set this order into DELIVERED?")) {
+    if (window.confirm("Xác nhận rằng đơn hàng đã vận chuyển?")) {
       try {
         const response = await Axios.put(
           `/api/orders/${order._id}/deliver`,
@@ -136,13 +136,13 @@ export default function OrderListScreen(props) {
                         scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
-                        Đã thanh toán
+                        Đã vận chuyển
                       </th>
                       <th
                         scope="col"
                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
-                        Đã vận chuyển
+                        Đã thanh toán
                       </th>
                       <th
                         scope="col"

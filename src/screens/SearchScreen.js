@@ -168,12 +168,13 @@ export default function SearchScreen(props) {
                   <MessageBox>Không tìm thấy sản phẩm nào!</MessageBox>
                 )}
                 <div
-                  className="custom-row center"
+                  className="custom-row"
                   style={{
                     alignItems: "unset",
                     marginTop: "30px",
                     width: "100%",
                     height: "100%",
+                    justifyContent: "unset"
                   }}
                 >
                   {products.map((product) => (

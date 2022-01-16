@@ -8,7 +8,7 @@ export default function Product(props) {
     <div
       key={product._id}
       className="homepage-item"
-      style={isCategory && { maxWidth: "22%", flex: "0 0 22%" }}
+      style={isCategory && { maxWidth: "21%", flex: "0 0 21%" , marginRight : "4.0%" }}
     >
       <Link to={`/product/${product._id}`}>
         <img className="medium" src={product.image} alt={product.name} />
