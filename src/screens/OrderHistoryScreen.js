@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { listOrderMine,listOrders } from '../actions/orderActions';
+import { listOrderMine, listOrders } from '../actions/orderActions';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
@@ -18,14 +18,14 @@ export default function OrderHistoryScreen(props) {
     dispatch(listOrderMine());
   }, [dispatch]);
   const handleCancel = async (order) => {
-    if (window.confirm("Are you sure to cancel this order?")) {
+    if (window.confirm('Are you sure to cancel this order?')) {
       try {
         const response = await Axios.put(
           `/api/orders/${order._id}/cancel`,
           {},
           {
             headers: { Authorization: `Bearer ${userInfo.token}` },
-          }
+          },
         );
         dispatch(listOrderMine());
         console.log(response);
@@ -38,7 +38,7 @@ export default function OrderHistoryScreen(props) {
     <div
       style={{
         backgroundColor: '#f7f7f7',
-        padding: '2vw 2vw 0 2vw',
+        padding: '2rem',
         height: '100%',
       }}
     >
@@ -114,23 +114,23 @@ export default function OrderHistoryScreen(props) {
                             : 'No'}
                         </td>
                         <td class='px-6 py-4 whitespace-nowrap text-sm font-medium'>
-                            <button
-                                style={{
-                                  backgroundColor: `${
-                                    order.isCanceled ? "red" : "grey"
-                                  }`,
-                                  cursor: "pointer",
-                                  padding: "7px",
-                                  borderRadius: "20px",
-                                  color: "white",
-                                  fontWeight: 600,
-                                }}
-                                onClick={() => handleCancel(order)}
-                              >
-                                {order.isCanceled
-                                  ? "Đã huỷ đơn hàng"
-                                  : "Huỷ đơn hàng"}
-                              </button>
+                          <button
+                            style={{
+                              backgroundColor: `${
+                                order.isCanceled ? 'red' : 'grey'
+                              }`,
+                              cursor: 'pointer',
+                              padding: '7px',
+                              borderRadius: '20px',
+                              color: 'white',
+                              fontWeight: 600,
+                            }}
+                            onClick={() => handleCancel(order)}
+                          >
+                            {order.isCanceled
+                              ? 'Đã huỷ đơn hàng'
+                              : 'Huỷ đơn hàng'}
+                          </button>
                         </td>
                       </tr>
                     ))}

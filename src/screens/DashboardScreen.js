@@ -16,7 +16,7 @@ export default function DashboardScreen() {
     <div
       style={{
         backgroundColor: '#f7f7f7',
-        padding: '2vw 2vw 0 2vw',
+        padding: '2rem',
         height: '100%',
       }}
     >
@@ -55,10 +55,8 @@ export default function DashboardScreen() {
                 </span>
               </div>
               <div className='summary-body'>
-                {summary.orders[0]
-                  ? summary.orders[0].totalSales
-                  : 0}
-                  VNĐ
+                {summary.orders[0] ? summary.orders[0].totalSales : 0}
+                VNĐ
               </div>
             </li>
           </ul>
@@ -84,7 +82,9 @@ export default function DashboardScreen() {
             </div>
           </div>
           <div className='mb-8'>
-            <h2 className='font-bold text-2xl font-medium mb-3'>Doanh số theo phân loại</h2>
+            <h2 className='font-bold text-2xl font-medium mb-3'>
+              Doanh số theo phân loại
+            </h2>
             {summary.fruitCategories.length === 0 ? (
               <MessageBox>Không có sản phẩm</MessageBox>
             ) : (
