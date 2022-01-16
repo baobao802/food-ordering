@@ -34,7 +34,7 @@ export default function ProductListScreen(props) {
   }, [dispatch, navigate, sellerMode, successDelete, userInfo._id, pageNumber]);
 
   const deleteHandler = (product) => {
-    if (window.confirm('Are you sure to delete?')) {
+    if (window.confirm('Bạn có chắc muốn xoá sản phẩm này?')) {
       dispatch(deleteProduct(product._id));
     }
   };
