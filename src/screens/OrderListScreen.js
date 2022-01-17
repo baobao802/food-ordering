@@ -191,6 +191,7 @@ export default function OrderListScreen(props) {
                                   fontWeight: 600,
                                 }}
                                 onClick={() => handleDelivery(order)}
+                                disabled={order.isDelivered || order.isCanceled}
                               >
                                 {order.isDelivered
                                   ? 'Đã vận chuyển'
@@ -210,6 +211,7 @@ export default function OrderListScreen(props) {
                                   fontWeight: 600,
                                 }}
                                 onClick={() => handlePaid(order)}
+                                disabled={order.isPaid || order.isCanceled}
                               >
                                 {order.isPaid
                                   ? 'Đã thanh toán'
@@ -229,6 +231,10 @@ export default function OrderListScreen(props) {
                                   fontWeight: 600,
                                 }}
                                 onClick={() => handleCancel(order)}
+                                disabled={
+                                  order.isCanceled ||
+                                  (order.isDelivered && order.isPaid)
+                                }
                               >
                                 {order.isCanceled
                                   ? 'Đã huỷ đơn hàng'
@@ -245,14 +251,14 @@ export default function OrderListScreen(props) {
           </div>
           <div className='flex gap-1 mt-4 justify-end'>
             <button
-              class='bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'
+              class='w-16 bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'
               disabled={0 === page}
               onClick={() => navigate(`/orderlist/pageNumber/${page - 1}`)}
             >
               Trước
             </button>
             <button
-              class='bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'
+              class='w-16 bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'
               disabled={pages === page}
               onClick={() => navigate(`/orderlist/pageNumber/${page + 1}`)}
             >

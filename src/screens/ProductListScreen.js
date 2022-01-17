@@ -50,7 +50,9 @@ export default function ProductListScreen(props) {
       }}
     >
       <div className='row'>
-        <h1 className='text-gray-900 text-lg md:text-2xl'>Danh sách sản phẩm</h1>
+        <h1 className='text-gray-900 text-lg md:text-2xl'>
+          Danh sách sản phẩm
+        </h1>
         <div className='text-right'>
           <button
             type='button'
@@ -94,6 +96,12 @@ export default function ProductListScreen(props) {
                         scope='col'
                         class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
                       >
+                        Số lượng
+                      </th>
+                      <th
+                        scope='col'
+                        class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+                      >
                         Phân loại
                       </th>
                       <th
@@ -130,6 +138,9 @@ export default function ProductListScreen(props) {
                           {product.price}
                         </td>
                         <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+                          {product.countInStock}
+                        </td>
+                        <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
                           {product.category}
                         </td>
                         <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
@@ -160,14 +171,14 @@ export default function ProductListScreen(props) {
           </div>
           <div className='flex gap-1 mt-4 justify-end'>
             <button
-              class='bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'
+              class='w-16 bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'
               disabled={1 === page}
               onClick={() => navigate(`/productlist/pageNumber/${page - 1}`)}
             >
               Trước
             </button>
             <button
-              class='bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'
+              class='w-16 bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'
               disabled={pages === page}
               onClick={() => navigate(`/productlist/pageNumber/${page + 1}`)}
             >

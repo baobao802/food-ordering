@@ -21,10 +21,11 @@ export default function ShippingAddressScreen(props) {
     navigate('/signin');
   }
   const [fullName, setFullName] = useState(shippingAddress.fullName || '');
+  const [phone, setPhone] = useState(shippingAddress.phone || '');
   const [address, setAddress] = useState(shippingAddress.address || '');
   const [city, setCity] = useState(shippingAddress.city || '');
   const [postalCode, setPostalCode] = useState(
-    shippingAddress.postalCode || ''
+    shippingAddress.postalCode || '',
   );
   const [country, setCountry] = useState(shippingAddress.country || '');
   const dispatch = useDispatch();
@@ -41,64 +42,76 @@ export default function ShippingAddressScreen(props) {
       dispatch(
         saveShippingAddress({
           fullName,
+          phone,
           address,
           city,
           postalCode,
           country,
           lat: newLat,
           lng: newLng,
-        })
+        }),
       );
       navigate('/payment');
     }
   };
-  
+
   return (
-    <div style={{paddingTop:'2rem'}}>
+    <div style={{ paddingTop: '2rem' }}>
       <CheckoutSteps step1 step2></CheckoutSteps>
-      <form className="form" onSubmit={submitHandler}>
+      <form className='form' onSubmit={submitHandler}>
         <div>
           <h1>Địa chỉ giao hàng</h1>
         </div>
         <div>
-          <label htmlFor="fullName">Tên</label>
+          <label htmlFor='fullName'>Tên</label>
           <input
-            type="text"
-            id="fullName"
-            placeholder="Nhập tên"
+            type='text'
+            id='fullName'
+            placeholder='Nhập tên'
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             required
           ></input>
         </div>
         <div>
-          <label htmlFor="address">Địa chỉ</label>
+          <label htmlFor='phone'>Số điện thoại</label>
           <input
-            type="text"
-            id="address"
-            placeholder="Nhập địa chỉ"
+            type='text'
+            id='phone'
+            placeholder='Nhập số điện thoại'
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            required
+          ></input>
+        </div>
+        <div>
+          <label htmlFor='address'>Địa chỉ</label>
+          <input
+            type='text'
+            id='address'
+            placeholder='Nhập địa chỉ'
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             required
           ></input>
         </div>
         <div>
-          <label htmlFor="city">Tỉnh/Thành phố</label>
+          <label htmlFor='city'>Tỉnh/Thành phố</label>
           <input
-            type="text"
-            id="city"
-            placeholder="Nhập tỉnh/thành phố"
+            type='text'
+            id='city'
+            placeholder='Nhập tỉnh/thành phố'
             value={city}
             onChange={(e) => setCity(e.target.value)}
             required
           ></input>
         </div>
         <div>
-          <label htmlFor="country">Quốc gia</label>
+          <label htmlFor='country'>Quốc gia</label>
           <input
-            type="text"
-            id="country"
-            placeholder="Nhập quốc gia"
+            type='text'
+            id='country'
+            placeholder='Nhập quốc gia'
             value={country}
             onChange={(e) => setCountry(e.target.value)}
             required
@@ -106,7 +119,7 @@ export default function ShippingAddressScreen(props) {
         </div>
         <div>
           <label />
-          <button className="primary" type="submit">
+          <button className='primary' type='submit'>
             Tiếp tục
           </button>
         </div>

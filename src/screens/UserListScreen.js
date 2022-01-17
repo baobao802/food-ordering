@@ -159,14 +159,14 @@ export default function UserListScreen(props) {
           </div>
           <div className='flex gap-1 mt-4 justify-end'>
             <button
-              className='bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'
+              className='w-16 bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'
               disabled={1 === page}
               onClick={() => navigate(`/userlist/pageNumber/${page - 1}`)}
             >
               Trước
             </button>
             <button
-              className='bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'
+              className='w-16 bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'
               disabled={pages === page}
               onClick={() => navigate(`/userlist/pageNumber/${page + 1}`)}
             >
