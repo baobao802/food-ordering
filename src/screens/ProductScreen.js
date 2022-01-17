@@ -153,7 +153,6 @@ export default function ProductScreen(props) {
                         }}
                       >
                         {' '}
-                        Số lượng còn lại :
                       </span>
                     ) : (
                       <span
@@ -246,7 +245,10 @@ export default function ProductScreen(props) {
                     onSubmit={submitHandler}
                   >
                     <div>
-                      <h2>Cảm ơn phản hồi của quý khách!</h2>
+                      <h2>
+                        Để lại đánh giá của bạn giúp chúng tôi cải thiện chất
+                        lượng dịch vụ của mình.
+                      </h2>
                     </div>
                     <div>
                       <label htmlFor='rating'>Đánh giá</label>
@@ -255,7 +257,7 @@ export default function ProductScreen(props) {
                         value={rating}
                         onChange={(e) => setRating(e.target.value)}
                       >
-                        <option value=''>Select...</option>
+                        <option value=''>Chọn...</option>
                         <option value='1'>1- Tệ</option>
                         <option value='2'>2- Bình thường</option>
                         <option value='3'>3- Tốt</option>
@@ -274,7 +276,7 @@ export default function ProductScreen(props) {
                     <div>
                       <label />
                       <button className='primary' type='submit'>
-                        Đánh giá
+                        Gửi đánh giá
                       </button>
                     </div>
                     <div>

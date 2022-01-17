@@ -28,7 +28,7 @@ export default function UserListScreen(props) {
   }, [dispatch, pageNumber, successDelete]);
 
   const deleteHandler = (user) => {
-    if (window.confirm('Are you sure?')) {
+    if (window.confirm('Bán có chắc muốn xoá tài khoản này?')) {
       dispatch(deleteUser(user._id));
     }
   };

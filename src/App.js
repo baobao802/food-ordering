@@ -79,7 +79,8 @@ function App() {
           </div>
           <div className='header-menu'>
             <Link to='/cart'>
-              <i className='fa fa-shopping-cart' aria-hidden='true'></i> Cart
+              <i className='fa fa-shopping-cart' aria-hidden='true'></i> Giỏ
+              hàng
               {cartItems.length > 0 && (
                 <span className='badge'>{cartItems.length}</span>
               )}
@@ -87,12 +88,12 @@ function App() {
             {userInfo && userInfo.isSeller && (
               <div className='dropdown'>
                 <Link to='#admin'>
-                  <i className='fa fa-tachometer' aria-hidden='true'></i> Staff{' '}
-                  <i className='fa fa-caret-down'></i>
+                  <i className='fa fa-tachometer' aria-hidden='true'></i> Nhân
+                  viên <i className='fa fa-caret-down'></i>
                 </Link>
                 <ul className='dropdown-content'>
                   <li>
-                    <Link to='/orderlist/seller'>Orders</Link>
+                    <Link to='/orderlist/seller'>Đơn hàng</Link>
                   </li>
                 </ul>
               </div>
@@ -105,19 +106,19 @@ function App() {
                 </Link>
                 <ul className='dropdown-content'>
                   <li>
-                    <Link to='/dashboard'>Dashboard</Link>
+                    <Link to='/dashboard'>Thống kê</Link>
                   </li>
                   <li>
-                    <Link to='/productlist'>Products</Link>
+                    <Link to='/productlist'>Sản phẩm</Link>
                   </li>
                   <li>
-                    <Link to='/orderlist'>Orders</Link>
+                    <Link to='/orderlist'>Đơn hàng</Link>
                   </li>
                   <li>
-                    <Link to='/userlist'>Users</Link>
+                    <Link to='/userlist'>Tài khoản</Link>
                   </li>
                   <li>
-                    <Link to='/support'>Support</Link>
+                    <Link to='/support'>Hỗ trợ khách hàng</Link>
                   </li>
                 </ul>
               </div>
@@ -130,22 +131,22 @@ function App() {
                 </Link>
                 <ul className='dropdown-content'>
                   <li>
-                    <Link to='/profile'>User Profile</Link>
+                    <Link to='/profile'>Hồ sơ</Link>
                   </li>
                   {userInfo && !userInfo.isSeller && !userInfo.isAdmin && (
                     <li>
-                      <Link to='/orderhistory'>Order History</Link>
+                      <Link to='/orderhistory'>Lịch sử mua hàng</Link>
                     </li>
                   )}
                   <li>
                     <Link to='#signout' onClick={signoutHandler}>
-                      Sign Out
+                      Đăng xuất
                     </Link>
                   </li>
                 </ul>
               </div>
             ) : (
-              <Link to='/signin'>Sign In</Link>
+              <Link to='/signin'>Đăng nhập</Link>
             )}
           </div>
         </header>
@@ -190,7 +191,7 @@ function App() {
                     ></path>
                   </g>
                 </svg>
-                Categories
+                Phân loại
               </div>
               <button
                 onClick={() => setSidebarIsOpen(false)}
@@ -407,7 +408,7 @@ function App() {
               className='fa fa-gratipay'
               aria-hidden='true'
             ></i>
-            FOOD ORDERING - BK HUNTER
+            FRUIT STORE - BK HUNTER
           </div>
         </footer>
       </div>

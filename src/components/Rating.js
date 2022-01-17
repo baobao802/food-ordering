@@ -78,7 +78,7 @@ export default function Rating(props) {
             fontSize: '0.7em',
           }}
         >
-          {numReviews || 0 + ' reviews'}
+          {numReviews || 0 + ' đánh giá'}
         </span>
       )}
     </div>
