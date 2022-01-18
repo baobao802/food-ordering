@@ -47,6 +47,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
     orderItems: [...orderItemsDetail],
     shippingAddress: {
       address: shippingAddress?.address,
+      phone: shippingAddress?.phone,
       city: shippingAddress?.city,
       country: shippingAddress?.country,
       fullName: shippingAddress?.fullName,
