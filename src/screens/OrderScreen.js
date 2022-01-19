@@ -1,16 +1,16 @@
-import Axios from 'axios';
-import { PayPalButton } from 'react-paypal-button-v2';
-import { useParams } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { deliverOrder, detailsOrder, payOrder } from '../actions/orderActions';
-import LoadingBox from '../components/LoadingBox';
-import MessageBox from '../components/MessageBox';
+import Axios from "axios";
+import { PayPalButton } from "react-paypal-button-v2";
+import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { deliverOrder, detailsOrder, payOrder } from "../actions/orderActions";
+import LoadingBox from "../components/LoadingBox";
+import MessageBox from "../components/MessageBox";
 import {
   ORDER_DELIVER_RESET,
   ORDER_PAY_RESET,
-} from '../constants/orderConstants';
+} from "../constants/orderConstants";
 
 export default function OrderScreen(props) {
   const params = useParams();
@@ -36,10 +36,15 @@ export default function OrderScreen(props) {
   } = orderDeliver;
   const dispatch = useDispatch();
   useEffect(() => {
+    dispatch({ type: ORDER_PAY_RESET });
+    dispatch({ type: ORDER_DELIVER_RESET });
+    dispatch(detailsOrder(orderId));
+  }, []);
+  useEffect(() => {
     const addPayPalScript = async () => {
-      const { data } = await Axios.get('/api/config/paypal');
-      const script = document.createElement('script');
-      script.type = 'text/javascript';
+      const { data } = await Axios.get("/api/config/paypal");
+      const script = document.createElement("script");
+      script.type = "text/javascript";
       script.src = `https://www.paypal.com/sdk/js?client-id=${data}`;
       script.async = true;
       script.onload = () => {
@@ -47,6 +52,7 @@ export default function OrderScreen(props) {
       };
       document.body.appendChild(script);
     };
+
     if (
       !order ||
       successPay ||
@@ -56,6 +62,7 @@ export default function OrderScreen(props) {
       dispatch({ type: ORDER_PAY_RESET });
       dispatch({ type: ORDER_DELIVER_RESET });
       dispatch(detailsOrder(orderId));
+      console.log("có");
     } else {
       if (!order.isPaid) {
         if (!window.paypal) {
@@ -77,77 +84,78 @@ export default function OrderScreen(props) {
   return loading ? (
     <LoadingBox></LoadingBox>
   ) : error ? (
-    <MessageBox variant='danger'>{error}</MessageBox>
+    <MessageBox variant="danger">{error}</MessageBox>
   ) : (
     <div
       style={{
-        backgroundColor: '#f7f7f7',
-        padding: '2rem',
-        height: '100%',
+        backgroundColor: "#f7f7f7",
+        padding: "2rem",
+        height: "100%",
       }}
     >
-      <h1 className='text-gray-900 text-lg md:text-3xl mb-3 font-medium'>
+      <h1 className="text-gray-900 text-lg md:text-3xl mb-3 font-medium">
         Đơn hàng {order._id}
       </h1>
-      <div className='row top'>
-        <div className='col-2'>
+      <div className="row top">
+        <div className="col-2">
           <ul>
             <li>
-              <div className='card card-body'>
+              <div className="card card-body">
                 <h2>Thông tin giao hàng </h2>
                 <p>
                   <strong>Tên:</strong> {order.shippingAddress.fullName} <br />
-                  <strong>Số điện thoại:</strong> {order.shippingAddress.phone} <br />
+                  <strong>Số điện thoại:</strong> {order.shippingAddress.phone}{" "}
+                  <br />
                   <strong>Địa chỉ: </strong> {order.shippingAddress.address},
-                  {order.shippingAddress.city},{' '}
-                  {order.shippingAddress.country}
+                  {order.shippingAddress.city}, {order.shippingAddress.country}
                 </p>
                 {order.isDelivered ? (
-                  <MessageBox variant='success'>
+                  <MessageBox variant="success">
                     Đã vận chuyển lúc {order.deliveredAt}
                   </MessageBox>
                 ) : (
-                  <MessageBox variant='danger'>Chưa vận chuyển</MessageBox>
+                  <MessageBox variant="danger">Chưa vận chuyển</MessageBox>
                 )}
               </div>
             </li>
             <li>
-              <div className='card card-body'>
+              <div className="card card-body">
                 <h2>Phương thức thanh toán</h2>
                 <p>
                   <strong>Phương thức:</strong> {order.paymentMethod}
                 </p>
                 {order.isPaid ? (
-                  <MessageBox variant='success'>
+                  <MessageBox variant="success">
                     Đã thanh toán lúc {order.paidAt}
                   </MessageBox>
                 ) : (
-                  <MessageBox variant='danger'>Chưa thanh toán</MessageBox>
+                  <MessageBox variant="danger">Chưa thanh toán</MessageBox>
                 )}
               </div>
             </li>
             <li>
-              <div className='card card-body'>
+              <div className="card card-body">
                 <h2>Sản phẩm trong đơn hàng</h2>
                 <ul>
                   {order.orderItems.map((item) => (
                     <li key={item.product}>
-                      <div className='row'>
+                      <div className="row">
                         <div>
                           <img
                             src={item.image}
                             alt={item.name}
-                            className='small'
+                            className="small"
                           ></img>
                         </div>
-                        <div className='min-30'>
+                        <div className="min-30">
                           <Link to={`/product/${item.product}`}>
                             {item.name}
                           </Link>
                         </div>
 
                         <div>
-                          {item.qty} x {item.price} VNĐ = {item.qty * item.price} VNĐ
+                          {item.qty} x {item.price} VNĐ ={" "}
+                          {item.qty * item.price} VNĐ
                         </div>
                       </div>
                     </li>
@@ -157,32 +165,26 @@ export default function OrderScreen(props) {
             </li>
           </ul>
         </div>
-        <div className='col-1'>
-          <div className='card card-body'>
+        <div className="col-1">
+          <div className="card card-body">
             <ul>
               <li>
                 <h2>Tổng kết đơn hàng</h2>
               </li>
               <li>
-                <div className='row'>
+                <div className="row">
                   <div>Giá sản phẩm</div>
                   <div>{order.itemsPrice} VNĐ</div>
                 </div>
               </li>
               <li>
-                <div className='row'>
+                <div className="row">
                   <div>Phí vận chuyển</div>
                   <div>{order.shippingPrice} VNĐ</div>
                 </div>
               </li>
-              {/* <li>
-                <div className="row">
-                  <div>Tax</div>
-                  <div>${order.taxPrice.toFixed(2)}</div>
-                </div>
-              </li> */}
               <li>
-                <div className='row'>
+                <div className="row">
                   <div>
                     <strong>Tổng cộng</strong>
                   </div>
@@ -192,33 +194,35 @@ export default function OrderScreen(props) {
                 </div>
               </li>
               {!order.isPaid &&
-                order.paymentMethod !== 'Thanh toán bằng tiền mặt' && (
+                !userInfo.isAdmin &&
+                !userInfo.isSeller &&
+                order.paymentMethod !== "Thanh toán bằng tiền mặt" && (
                   <li>
                     {!sdkReady ? (
                       <LoadingBox></LoadingBox>
                     ) : (
                       <>
                         {errorPay && (
-                          <MessageBox variant='danger'>{errorPay}</MessageBox>
+                          <MessageBox variant="danger">{errorPay}</MessageBox>
                         )}
                         {loadingPay && <LoadingBox></LoadingBox>}
-                      <PayPalButton
-                        amount={((order.totalPrice)/23000).toFixed(2)}
-                        onSuccess={successPaymentHandler}
-                      ></PayPalButton>
-                    </>
-                  )}
-                </li>
-              )}
+                        <PayPalButton
+                          amount={(order.totalPrice / 23000).toFixed(2)}
+                          onSuccess={successPaymentHandler}
+                        ></PayPalButton>
+                      </>
+                    )}
+                  </li>
+                )}
               {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
                 <li>
                   {loadingDeliver && <LoadingBox></LoadingBox>}
                   {errorDeliver && (
-                    <MessageBox variant='danger'>{errorDeliver}</MessageBox>
+                    <MessageBox variant="danger">{errorDeliver}</MessageBox>
                   )}
                   <button
-                    type='button'
-                    className='primary block'
+                    type="button"
+                    className="primary block"
                     onClick={deliverHandler}
                   >
                     Giao hàng
