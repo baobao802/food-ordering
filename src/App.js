@@ -401,7 +401,6 @@ function App() {
           </div>
         </main>
         <footer style={{ fontWeight: 500 }} className='custom-row center'>
-          {userInfo && !userInfo.isAdmin && <ChatBox userInfo={userInfo} />}
           <div>
             <i
               style={{ marginRight: '5px' }}
