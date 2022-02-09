@@ -40,7 +40,7 @@ export const listProducts =
     });
     try {
       const { data } = await Axios.get(
-        `/api/fruits?pageNumber=${pageNumber}&name=${name}&category=${category}&min=${min}&max=${max}&rating=${rating}&order=${order}`,
+        `https://food-ordering-bkhunter.herokuapp.com/api/fruits?pageNumber=${pageNumber}&name=${name}&category=${category}&min=${min}&max=${max}&rating=${rating}&order=${order}`,
       );
       dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data });
     } catch (error) {
@@ -53,7 +53,9 @@ export const listProductCategories = () => async (dispatch) => {
     type: PRODUCT_CATEGORY_LIST_REQUEST,
   });
   try {
-    const { data } = await Axios.get(`/api/fruits/categories`);
+    const { data } = await Axios.get(
+      `https://food-ordering-bkhunter.herokuapp.com/api/fruits/categories`,
+    );
     dispatch({ type: PRODUCT_CATEGORY_LIST_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: PRODUCT_CATEGORY_LIST_FAIL, payload: error.message });
@@ -63,7 +65,9 @@ export const listProductCategories = () => async (dispatch) => {
 export const detailsProduct = (productId) => async (dispatch) => {
   dispatch({ type: PRODUCT_DETAILS_REQUEST, payload: productId });
   try {
-    const { data } = await Axios.get(`/api/fruits/${productId}`);
+    const { data } = await Axios.get(
+      `https://food-ordering-bkhunter.herokuapp.com/api/fruits/${productId}`,
+    );
     dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -83,9 +87,13 @@ export const createProduct = (product) => async (dispatch, getState) => {
   try {
     const bodyFormData = new FormData();
     Object.keys(product).map((key) => bodyFormData.append(key, product[key]));
-    const { data } = await Axios.post('/api/fruits', bodyFormData, {
-      headers: { Authorization: `Bearer ${userInfo.token}` },
-    });
+    const { data } = await Axios.post(
+      'https://food-ordering-bkhunter.herokuapp.com/api/fruits',
+      bodyFormData,
+      {
+        headers: { Authorization: `Bearer ${userInfo.token}` },
+      },
+    );
     dispatch({
       type: PRODUCT_CREATE_SUCCESS,
       payload: data.fruit,
@@ -107,7 +115,7 @@ export const updateProduct = (product) => async (dispatch, getState) => {
     const bodyFormData = new FormData();
     Object.keys(product).map((key) => bodyFormData.append(key, product[key]));
     const { data } = await Axios.put(
-      `/api/fruits/${product._id}`,
+      `https://food-ordering-bkhunter.herokuapp.com/api/fruits/${product._id}`,
       bodyFormData,
       {
         headers: { Authorization: `Bearer ${userInfo.token}` },
@@ -128,9 +136,12 @@ export const deleteProduct = (productId) => async (dispatch, getState) => {
     userSignin: { userInfo },
   } = getState();
   try {
-    await Axios.delete(`/api/fruits/${productId}`, {
-      headers: { Authorization: `Bearer ${userInfo.token}` },
-    });
+    await Axios.delete(
+      `https://food-ordering-bkhunter.herokuapp.com/api/fruits/${productId}`,
+      {
+        headers: { Authorization: `Bearer ${userInfo.token}` },
+      },
+    );
     dispatch({ type: PRODUCT_DELETE_SUCCESS });
   } catch (error) {
     const message =
@@ -148,7 +159,7 @@ export const createReview =
     } = getState();
     try {
       const { data } = await Axios.post(
-        `/api/fruits/${productId}/reviews`,
+        `https://food-ordering-bkhunter.herokuapp.com/api/fruits/${productId}/reviews`,
         review,
         {
           headers: { Authorization: `Bearer ${userInfo.token}` },

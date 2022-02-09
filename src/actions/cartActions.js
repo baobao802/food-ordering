@@ -8,7 +8,9 @@ import {
 } from '../constants/cartConstants';
 
 export const addToCart = (productId, qty) => async (dispatch, getState) => {
-  const { data } = await Axios.get(`/api/fruits/${productId}`);
+  const { data } = await Axios.get(
+    `https://food-ordering-bkhunter.herokuapp.com/api/fruits/${productId}`,
+  );
   const {
     cart: { cartItems },
   } = getState();
@@ -31,7 +33,7 @@ export const addToCart = (productId, qty) => async (dispatch, getState) => {
     });
     localStorage.setItem(
       'cartItems',
-      JSON.stringify(getState().cart.cartItems)
+      JSON.stringify(getState().cart.cartItems),
     );
   }
 };

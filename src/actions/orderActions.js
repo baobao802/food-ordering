@@ -1,5 +1,5 @@
-import Axios from "axios";
-import { CART_EMPTY } from "../constants/cartConstants";
+import Axios from 'axios';
+import { CART_EMPTY } from '../constants/cartConstants';
 import {
   ORDER_CREATE_FAIL,
   ORDER_CREATE_REQUEST,
@@ -27,12 +27,18 @@ import {
   CONFIRM_PAIDED_SUCCESS,
   CONFIRM_PAIDED_REQUEST,
   CONFIRM_PAIDED_FAIL,
-} from "../constants/orderConstants";
+} from '../constants/orderConstants';
 
 export const createOrder = (order) => async (dispatch, getState) => {
   dispatch({ type: ORDER_CREATE_REQUEST, payload: order });
-  let { itemsPrice, orderItems, shippingAddress, shippingPrice, totalPrice, paymentMethod } =
-    order;
+  let {
+    itemsPrice,
+    orderItems,
+    shippingAddress,
+    shippingPrice,
+    totalPrice,
+    paymentMethod,
+  } = order;
   let orderItemsDetail = [];
   orderItems.map((item) => {
     orderItemsDetail.push({
@@ -62,14 +68,18 @@ export const createOrder = (order) => async (dispatch, getState) => {
       userSignin: { userInfo },
     } = getState();
     console.log(orderDetail);
-    const { data } = await Axios.post("/api/orders", orderDetail, {
-      headers: {
-        Authorization: `Bearer ${userInfo.token}`,
+    const { data } = await Axios.post(
+      'https://food-ordering-bkhunter.herokuapp.com/api/orders',
+      orderDetail,
+      {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
       },
-    });
+    );
     dispatch({ type: ORDER_CREATE_SUCCESS, payload: data.order });
     dispatch({ type: CART_EMPTY });
-    localStorage.removeItem("cartItems");
+    localStorage.removeItem('cartItems');
   } catch (error) {
     dispatch({
       type: ORDER_CREATE_FAIL,
@@ -87,9 +97,12 @@ export const detailsOrder = (orderId) => async (dispatch, getState) => {
     userSignin: { userInfo },
   } = getState();
   try {
-    const { data } = await Axios.get(`/api/orders/${orderId}`, {
-      headers: { Authorization: `Bearer ${userInfo.token}` },
-    });
+    const { data } = await Axios.get(
+      `https://food-ordering-bkhunter.herokuapp.com/api/orders/${orderId}`,
+      {
+        headers: { Authorization: `Bearer ${userInfo.token}` },
+      },
+    );
     dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     const message =
@@ -107,20 +120,20 @@ export const payOrder =
       userSignin: { userInfo },
     } = getState();
     const newPaymentResult = {
-    id: paymentResult?.id,
-    status: paymentResult?.status,
-    update_time: paymentResult?.update_time,
-    email_address: userInfo?.email
-    }
+      id: paymentResult?.id,
+      status: paymentResult?.status,
+      update_time: paymentResult?.update_time,
+      email_address: userInfo?.email,
+    };
     try {
       const { data } = Axios.put(
-        `/api/orders/${order._id}/pay`,
+        `https://food-ordering-bkhunter.herokuapp.com/api/orders/${order._id}/pay`,
         newPaymentResult,
         {
           headers: { Authorization: `Bearer ${userInfo.token}` },
-        }
+        },
       );
-      console.log(data)
+      console.log(data);
       dispatch({ type: ORDER_PAY_SUCCESS, payload: data });
     } catch (error) {
       const message =
@@ -136,11 +149,14 @@ export const listOrderMine = () => async (dispatch, getState) => {
     userSignin: { userInfo },
   } = getState();
   try {
-    const { data } = await Axios.get("/api/orders/mine", {
-      headers: {
-        Authorization: `Bearer ${userInfo.token}`,
+    const { data } = await Axios.get(
+      'https://food-ordering-bkhunter.herokuapp.com/api/orders/mine',
+      {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
       },
-    });
+    );
     dispatch({ type: ORDER_MINE_LIST_SUCCESS, payload: data });
   } catch (error) {
     const message =
@@ -151,7 +167,7 @@ export const listOrderMine = () => async (dispatch, getState) => {
   }
 };
 export const listOrders =
-  ({ seller = "", pageNumber = 1 }) =>
+  ({ seller = '', pageNumber = 1 }) =>
   async (dispatch, getState) => {
     dispatch({ type: ORDER_LIST_REQUEST });
     const {
@@ -159,10 +175,10 @@ export const listOrders =
     } = getState();
     try {
       const { data } = await Axios.get(
-        `/api/orders?pageNumber=${pageNumber}`,
+        `https://food-ordering-bkhunter.herokuapp.com/api/orders?pageNumber=${pageNumber}`,
         {
           headers: { Authorization: `Bearer ${userInfo.token}` },
-        }
+        },
       );
       dispatch({ type: ORDER_LIST_SUCCESS, payload: data });
     } catch (error) {
@@ -179,9 +195,12 @@ export const deleteOrder = (orderId) => async (dispatch, getState) => {
     userSignin: { userInfo },
   } = getState();
   try {
-    const { data } = Axios.delete(`/api/orders/${orderId}`, {
-      headers: { Authorization: `Bearer ${userInfo.token}` },
-    });
+    const { data } = Axios.delete(
+      `https://food-ordering-bkhunter.herokuapp.com/api/orders/${orderId}`,
+      {
+        headers: { Authorization: `Bearer ${userInfo.token}` },
+      },
+    );
     dispatch({ type: ORDER_DELETE_SUCCESS, payload: data });
   } catch (error) {
     const message =
@@ -199,11 +218,11 @@ export const deliverOrder = (orderId) => async (dispatch, getState) => {
   } = getState();
   try {
     const { data } = Axios.put(
-      `/api/orders/${orderId}/deliver`,
+      `https://food-ordering-bkhunter.herokuapp.com/api/orders/${orderId}/deliver`,
       {},
       {
         headers: { Authorization: `Bearer ${userInfo.token}` },
-      }
+      },
     );
     dispatch({ type: ORDER_DELIVER_SUCCESS, payload: data });
   } catch (error) {
@@ -221,9 +240,12 @@ export const summaryOrder = () => async (dispatch, getState) => {
     userSignin: { userInfo },
   } = getState();
   try {
-    const { data } = await Axios.get("/api/orders/summary", {
-      headers: { Authorization: `Bearer ${userInfo.token}` },
-    });
+    const { data } = await Axios.get(
+      'https://food-ordering-bkhunter.herokuapp.com/api/orders/summary',
+      {
+        headers: { Authorization: `Bearer ${userInfo.token}` },
+      },
+    );
     dispatch({ type: ORDER_SUMMARY_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -242,9 +264,12 @@ export const confirmPaided = (id) => async (dispatch, getState) => {
     userSignin: { userInfo },
   } = getState();
   try {
-    const { data } = await Axios.get(`/api/orders/${id}`, {
-      headers: { Authorization: `Bearer ${userInfo.token}` },
-    });
+    const { data } = await Axios.get(
+      `https://food-ordering-bkhunter.herokuapp.com/api/orders/${id}`,
+      {
+        headers: { Authorization: `Bearer ${userInfo.token}` },
+      },
+    );
     // dispatch({ type: CONFIRM_PAIDED_SUCCESS, payload: data });
   } catch (error) {
     console.log(error);
