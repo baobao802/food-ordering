@@ -43,7 +43,7 @@ export default function OrderListScreen(props) {
       try {
         console.log(userInfo);
         const response = await Axios.put(
-          `/api/orders/${order._id}/pay`,
+          `https://food-ordering-bkhunter.herokuapp.com/api/orders/${order._id}/pay`,
           {},
           {
             headers: { Authorization: `Bearer ${userInfo.token}` },
@@ -64,7 +64,7 @@ export default function OrderListScreen(props) {
     if (window.confirm('Bạn có muốn huỷ đơn hàng này?')) {
       try {
         const response = await Axios.put(
-          `/api/orders/${order._id}/cancel`,
+          `https://food-ordering-bkhunter.herokuapp.com/api/orders/${order._id}/cancel`,
           {},
           {
             headers: { Authorization: `Bearer ${userInfo.token}` },
@@ -84,7 +84,7 @@ export default function OrderListScreen(props) {
     if (window.confirm('Xác nhận rằng đơn hàng đã vận chuyển?')) {
       try {
         const response = await Axios.put(
-          `/api/orders/${order._id}/deliver`,
+          `https://food-ordering-bkhunter.herokuapp.com/api/orders/${order._id}/deliver`,
           {},
           {
             headers: { Authorization: `Bearer ${userInfo.token}` },

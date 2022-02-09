@@ -26,7 +26,9 @@ export default function MapScreen(props) {
 
   useEffect(() => {
     const fetch = async () => {
-      const { data } = await Axios('/api/config/google');
+      const { data } = await Axios(
+        'https://food-ordering-bkhunter.herokuapp.com/api/config/google',
+      );
       setGoogleApiKey(data);
       getUserCurrentLocation();
     };
@@ -95,10 +97,10 @@ export default function MapScreen(props) {
   };
 
   return googleApiKey ? (
-    <div className="full-container">
+    <div className='full-container'>
       <LoadScript libraries={libs} googleMapsApiKey={googleApiKey}>
         <GoogleMap
-          id="smaple-map"
+          id='smaple-map'
           mapContainerStyle={{ height: '100%', width: '100%' }}
           center={center}
           zoom={15}
@@ -109,9 +111,9 @@ export default function MapScreen(props) {
             onLoad={onLoadPlaces}
             onPlacesChanged={onPlacesChanged}
           >
-            <div className="map-input-box">
-              <input type="text" placeholder="Enter your address"></input>
-              <button type="button" className="primary" onClick={onConfirm}>
+            <div className='map-input-box'>
+              <input type='text' placeholder='Enter your address'></input>
+              <button type='button' className='primary' onClick={onConfirm}>
                 Confirm
               </button>
             </div>

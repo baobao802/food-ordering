@@ -21,7 +21,7 @@ export default function OrderHistoryScreen(props) {
     if (window.confirm('Bạn có muốn huỷ đơn hàng này?')) {
       try {
         const response = await Axios.put(
-          `/api/orders/${order._id}/cancel`,
+          `https://food-ordering-bkhunter.herokuapp.com/api/orders/${order._id}/cancel`,
           {},
           {
             headers: { Authorization: `Bearer ${userInfo.token}` },
