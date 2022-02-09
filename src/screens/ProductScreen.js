@@ -305,7 +305,7 @@ export default function ProductScreen(props) {
                       <h2
                         style={{ color: 'rgba(236,72,153)', fontWeight: 400 }}
                       >
-                        Một số nhật xét :
+                        Một số nhận xét :
                       </h2>
                     </div>
                     {product.reviews &&
