@@ -392,6 +392,14 @@ function App() {
                   </SellerRoute>
                 }
               />
+              <Route
+                path="/orderlist/seller/pageNumber/:pageNumber"
+                element={
+                  <SellerRoute>
+                    <OrderListScreen />
+                  </SellerRoute>
+                }
+              />
 
               <Route path="/" element={<HomeScreen />} exact></Route>
             </Routes>
