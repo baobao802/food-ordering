@@ -136,6 +136,7 @@ export const updateUser = (user) => async (dispatch, getState) => {
   try {
     const { data } = await Axios.put(
       `https://food-ordering-bkhunter.herokuapp.com/api/users/${user._id}`,
+      // `http://localhost:3000/api/users/${user._id}`,
       user,
       {
         headers: { Authorization: `Bearer ${userInfo.token}` },
