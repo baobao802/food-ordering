@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { savePaymentMethod } from '../actions/cartActions';
-import CheckoutSteps from '../components/CheckoutSteps';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { savePaymentMethod } from "../actions/cartActions";
+import CheckoutSteps from "../components/CheckoutSteps";
 
 export default function PaymentMethodScreen(props) {
   const navigate = useNavigate();
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
   if (!shippingAddress.address) {
-    navigate('/shipping');
+    navigate("/shipping");
   }
-  const [paymentMethod, setPaymentMethod] = useState('Thanh toán bằng PayPal');
+  const [paymentMethod, setPaymentMethod] = useState("Thanh toán bằng PayPal");
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(savePaymentMethod(paymentMethod));
-    navigate('/placeorder');
+    navigate("/placeorder");
   };
   return (
     <div>
@@ -33,8 +33,10 @@ export default function PaymentMethodScreen(props) {
               value="Thanh toán bằng PayPal"
               name="paymentMethod"
               required
-              checked
-              onChange={(e) => setPaymentMethod(e.target.value)}
+              checked={paymentMethod === "Thanh toán bằng PayPal"}
+              onChange={(e) => {
+                setPaymentMethod(e.target.value);
+              }}
             ></input>
             <label htmlFor="paypal">Thanh toán qua PayPal</label>
           </div>
@@ -46,6 +48,7 @@ export default function PaymentMethodScreen(props) {
               id="byCash"
               value="Thanh toán bằng tiền mặt"
               name="paymentMethod"
+              checked={paymentMethod === "Thanh toán bằng tiền mặt"}
               required
               onChange={(e) => setPaymentMethod(e.target.value)}
             ></input>
