@@ -26,8 +26,7 @@ export default function OrderListScreen(props) {
   const { userInfo } = userSignin;
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch({ type: ORDER_DELETE_RESET });
-
+    // dispatch({ type: ORDER_DELETE_RESET });
     dispatch(
       listOrders({ seller: sellerMode ? userInfo._id : "", pageNumber })
     );
@@ -38,7 +37,7 @@ export default function OrderListScreen(props) {
     }
   };
   const handlePaid = async (order) => {
-    // console.log(userInfo);
+    console.log(userInfo);
     if (window.confirm("Xác nhận rằng đơn hàng đã thanh toán?")) {
       try {
         console.log(userInfo);

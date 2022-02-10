@@ -16,7 +16,12 @@ export default function OrderScreen(props) {
   const params = useParams();
   const { id: orderId } = params;
   const isLoading = useRef(true);
-
+  const formatPriceVND = (currency) => {
+    if (typeof currency === "string") {
+      return currency.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    return currency.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
   const [sdkReady, setSdkReady] = useState(false);
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
@@ -161,7 +166,7 @@ export default function OrderScreen(props) {
 
                         <div>
                           {item.qty} x {item.price} VNĐ ={" "}
-                          {item.qty * item.price} VNĐ
+                          {formatPriceVND(item.qty * item.price)} VNĐ
                         </div>
                       </div>
                     </li>
@@ -180,13 +185,13 @@ export default function OrderScreen(props) {
               <li>
                 <div className="row">
                   <div>Giá sản phẩm</div>
-                  <div>{order.itemsPrice} VNĐ</div>
+                  <div>{formatPriceVND(order.itemsPrice)} VNĐ</div>
                 </div>
               </li>
               <li>
                 <div className="row">
                   <div>Phí vận chuyển</div>
-                  <div>{order.shippingPrice} VNĐ</div>
+                  <div>{formatPriceVND(order.shippingPrice)} VNĐ</div>
                 </div>
               </li>
               <li>
@@ -195,7 +200,7 @@ export default function OrderScreen(props) {
                     <strong>Tổng cộng</strong>
                   </div>
                   <div>
-                    <strong>{order.totalPrice} VNĐ</strong>
+                    <strong>{formatPriceVND(order.totalPrice)} VNĐ</strong>
                   </div>
                 </div>
               </li>

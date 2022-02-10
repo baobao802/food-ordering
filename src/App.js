@@ -252,6 +252,10 @@ function App() {
                 element={<OrderHistoryScreen />}
               ></Route>
               <Route
+                path="/orderhistory/pageNumber/:pageNumber"
+                element={<OrderHistoryScreen />}
+              />
+              <Route
                 path="/search/name"
                 element={<SearchScreen />}
                 exact
