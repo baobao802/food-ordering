@@ -14,6 +14,12 @@ export default function PlaceOrderScreen(props) {
   if (!cart.paymentMethod) {
     navigate("/payment");
   }
+  const formatPriceVND = (currency) => {
+    if (typeof currency === "string") {
+      return currency.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    return currency.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
   const orderCreate = useSelector((state) => state.orderCreate);
   const { loading, success, error, order } = orderCreate;
   const toPrice = (num) => Number(num.toFixed(2)); // 5.123 => "5.12" => 5.12
@@ -125,13 +131,13 @@ export default function PlaceOrderScreen(props) {
               <div>
                 <div className="custom-row">
                   <div>Sản phẩm</div>
-                  <div>{cart.itemsPrice} VNĐ</div>
+                  <div>{formatPriceVND(cart.itemsPrice)} VNĐ</div>
                 </div>
               </div>
               <div>
                 <div className="custom-row">
                   <div>Phí vận chuyển</div>
-                  <div>{cart.shippingPrice} VNĐ</div>
+                  <div>{formatPriceVND(cart.shippingPrice)} VNĐ</div>
                 </div>
               </div>
               <div>
@@ -140,7 +146,7 @@ export default function PlaceOrderScreen(props) {
                     <strong> Tổng tiền</strong>
                   </div>
                   <div>
-                    <strong>{cart.totalPrice} VNĐ</strong>
+                    <strong>{formatPriceVND(cart.totalPrice)} VNĐ</strong>
                   </div>
                 </div>
               </div>
