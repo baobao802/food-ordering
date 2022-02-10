@@ -4,11 +4,19 @@ import Rating from "./Rating";
 import "../index.css";
 export default function Product(props) {
   const { product, isCategory } = props;
+  const formatPriceVND = (currency) => {
+    if (typeof currency === "string") {
+      return currency.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    return currency.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
   return (
     <div
       key={product._id}
       className="homepage-item"
-      style={isCategory && { maxWidth: "21%", flex: "0 0 21%" , marginRight : "4.0%" }}
+      style={
+        isCategory && { maxWidth: "21%", flex: "0 0 21%", marginRight: "4.0%" }
+      }
     >
       <Link to={`/product/${product._id}`}>
         <img className="medium" src={product.image} alt={product.name} />
@@ -24,7 +32,7 @@ export default function Product(props) {
           numReviews={product.numReviews}
         ></Rating>
         <div className="custom-row" style={{ marginTop: "20px" }}>
-          <div className="price">{product.price} VND</div>
+          <div className="price">{formatPriceVND(product.price)} VND</div>
         </div>
       </div>
     </div>

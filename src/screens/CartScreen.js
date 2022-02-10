@@ -1,17 +1,22 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate, useParams, useLocation } from 'react-router-dom';
-import { addToCart, removeFromCart } from '../actions/cartActions';
-import MessageBox from '../components/MessageBox';
-import '../index.css';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate, useParams, useLocation } from "react-router-dom";
+import { addToCart, removeFromCart } from "../actions/cartActions";
+import MessageBox from "../components/MessageBox";
+import "../index.css";
 
 export default function CartScreen(props) {
   const navigate = useNavigate();
   const params = useParams();
   const { id: productId } = params;
-
+  const formatPriceVND = (currency) => {
+    if (typeof currency === "string") {
+      return currency.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    return currency.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
   const { search } = useLocation();
-  const qtyInUrl = new URLSearchParams(search).get('qty');
+  const qtyInUrl = new URLSearchParams(search).get("qty");
   const qty = qtyInUrl ? Number(qtyInUrl) : 1;
 
   const cart = useSelector((state) => state.cart);
@@ -29,37 +34,37 @@ export default function CartScreen(props) {
   };
 
   const checkoutHandler = () => {
-    navigate('/signin?redirect=/shipping');
+    navigate("/signin?redirect=/shipping");
   };
   return (
     <div
-      className='custom-row top'
+      className="custom-row top"
       style={{
-        backgroundColor: '#f7f7f7',
-        padding: '2rem',
-        height: '100%',
+        backgroundColor: "#f7f7f7",
+        padding: "2rem",
+        height: "100%",
       }}
     >
-      <div className='col-2'>
+      <div className="col-2">
         <h1>Giỏ hàng</h1>
-        {error && <MessageBox variant='danger'>{error}</MessageBox>}
+        {error && <MessageBox variant="danger">{error}</MessageBox>}
         {cartItems.length === 0 ? (
           <MessageBox>
-            Chưa có sản phẩm. <Link to='/'>Mua ngay!</Link>
+            Chưa có sản phẩm. <Link to="/">Mua ngay!</Link>
           </MessageBox>
         ) : (
           <ul>
             {cartItems.map((item) => (
               <li key={item.product}>
-                <div className='custom-row'>
+                <div className="custom-row">
                   <div>
                     <img
                       src={item.image}
                       alt={item.name}
-                      className='small'
+                      className="small"
                     ></img>
                   </div>
-                  <div className='min-30'>
+                  <div className="min-30">
                     <Link to={`/product/${item.product}`}>{item.name}</Link>
                   </div>
                   <div>
@@ -67,7 +72,7 @@ export default function CartScreen(props) {
                       value={item.qty}
                       onChange={(e) =>
                         dispatch(
-                          addToCart(item.product, Number(e.target.value)),
+                          addToCart(item.product, Number(e.target.value))
                         )
                       }
                     >
@@ -78,10 +83,10 @@ export default function CartScreen(props) {
                       ))}
                     </select>
                   </div>
-                  <div>{item.price}VND</div>
+                  <div>{formatPriceVND(item.price)}VND</div>
                   <div>
                     <button
-                      type='button'
+                      type="button"
                       onClick={() => removeFromCartHandler(item.product)}
                     >
                       Xoá
@@ -93,8 +98,8 @@ export default function CartScreen(props) {
           </ul>
         )}
       </div>
-      <div className='col-1'>
-        <div className='card card-body'>
+      <div className="col-1">
+        <div className="card card-body">
           <ul>
             <li>
               <h2>
@@ -104,9 +109,9 @@ export default function CartScreen(props) {
             </li>
             <li>
               <button
-                type='button'
+                type="button"
                 onClick={checkoutHandler}
-                className='primary block'
+                className="primary block"
                 disabled={cartItems.length === 0}
               >
                 Tiến hành thanh toán

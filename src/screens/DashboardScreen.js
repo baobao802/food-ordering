@@ -1,13 +1,19 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import Chart from 'react-google-charts';
-import { summaryOrder } from '../actions/orderActions';
-import LoadingBox from '../components/LoadingBox';
-import MessageBox from '../components/MessageBox';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Chart from "react-google-charts";
+import { summaryOrder } from "../actions/orderActions";
+import LoadingBox from "../components/LoadingBox";
+import MessageBox from "../components/MessageBox";
 
 export default function DashboardScreen() {
   const orderSummary = useSelector((state) => state.orderSummary);
   const { loading, summary, error } = orderSummary;
+  const formatPriceVND = (currency) => {
+    if (typeof currency === "string") {
+      return currency.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    return currency.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(summaryOrder());
@@ -15,65 +21,67 @@ export default function DashboardScreen() {
   return (
     <div
       style={{
-        backgroundColor: '#f7f7f7',
-        padding: '2rem',
-        height: '100%',
+        backgroundColor: "#f7f7f7",
+        padding: "2rem",
+        height: "100%",
       }}
     >
-      <div className='row'>
-        <h1 className='font-bold text-3xl py-2 font-medium'>Thống kê</h1>
+      <div className="row">
+        <h1 className="font-bold text-3xl py-2 font-medium">Thống kê</h1>
       </div>
       {loading ? (
         <LoadingBox />
       ) : error ? (
-        <MessageBox variant='danger'>{error}</MessageBox>
+        <MessageBox variant="danger">{error}</MessageBox>
       ) : (
         <>
-          <ul className='row summary flex gap-8 mb-8'>
+          <ul className="row summary flex gap-8 mb-8">
             <li>
-              <div className='summary-title bg-red-300'>
+              <div className="summary-title bg-red-300">
                 <span>
-                  <i className='fa fa-users' /> Người dùng
+                  <i className="fa fa-users" /> Người dùng
                 </span>
               </div>
-              <div className='summary-body'>{summary.users[0].numUsers}</div>
+              <div className="summary-body">{summary.users[0].numUsers}</div>
             </li>
             <li>
-              <div className='summary-title bg-green-300'>
+              <div className="summary-title bg-green-300">
                 <span>
-                  <i className='fa fa-shopping-cart' /> Đơn hàng
+                  <i className="fa fa-shopping-cart" /> Đơn hàng
                 </span>
               </div>
-              <div className='summary-body'>
+              <div className="summary-body">
                 {summary.orders[0] ? summary.orders[0].numOrders : 0}
               </div>
             </li>
             <li>
-              <div className='summary-title bg-purple-300'>
+              <div className="summary-title bg-purple-300">
                 <span>
-                  <i className='fa fa-money' /> Doanh thu
+                  <i className="fa fa-money" /> Doanh thu
                 </span>
               </div>
-              <div className='summary-body'>
-                {summary.orders[0] ? summary.orders[0].totalSales : 0}
+              <div className="summary-body">
+                {formatPriceVND(
+                  summary.orders[0] ? summary.orders[0].totalSales : 0
+                )}
                 VNĐ
               </div>
             </li>
           </ul>
-          <div className='mb-8'>
+          <div className="mb-8">
             <div>
-              <h2 className='font-bold text-2xl font-medium mb-3'>Doanh thu</h2>
+              <h2 className="font-bold text-2xl font-medium mb-3">Doanh thu</h2>
               {summary.dailyOrders.length === 0 ? (
                 <MessageBox>Không có doanh thu</MessageBox>
               ) : (
-                <div className='rounded overflow-hidden'>
+                <div className="rounded overflow-hidden">
                   <Chart
-                    width='100%'
-                    height='500px'
-                    chartType='AreaChart'
+                    width="100%"
+                    height="500px"
+                    chartType="AreaChart"
                     loader={<div>Loading Chart</div>}
                     data={[
-                      ['Date', 'Sales'],
+                      ["Date", "Sales"],
                       ...summary.dailyOrders.map((x) => [x._id, x.sales]),
                     ]}
                   ></Chart>
@@ -81,21 +89,21 @@ export default function DashboardScreen() {
               )}
             </div>
           </div>
-          <div className='mb-8'>
-            <h2 className='font-bold text-2xl font-medium mb-3'>
+          <div className="mb-8">
+            <h2 className="font-bold text-2xl font-medium mb-3">
               Doanh số theo phân loại
             </h2>
             {summary.fruitCategories.length === 0 ? (
               <MessageBox>Không có sản phẩm</MessageBox>
             ) : (
-              <div className='rounded overflow-hidden'>
+              <div className="rounded overflow-hidden">
                 <Chart
-                  width='100%'
-                  height='500px'
-                  chartType='PieChart'
+                  width="100%"
+                  height="500px"
+                  chartType="PieChart"
                   loader={<div>Loading Chart</div>}
                   data={[
-                    ['Category', 'Products'],
+                    ["Category", "Products"],
                     ...summary.fruitCategories.map((x) => [x._id, x.count]),
                   ]}
                 />

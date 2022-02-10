@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import Axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { listOrderMine, listOrders } from '../actions/orderActions';
-import LoadingBox from '../components/LoadingBox';
-import MessageBox from '../components/MessageBox';
+import React, { useEffect, useState } from "react";
+import Axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { listOrderMine, listOrders } from "../actions/orderActions";
+import LoadingBox from "../components/LoadingBox";
+import MessageBox from "../components/MessageBox";
+import { useParams } from "../../node_modules/react-router/index";
 
 export default function OrderHistoryScreen(props) {
   const navigate = useNavigate();
@@ -13,21 +14,24 @@ export default function OrderHistoryScreen(props) {
   const { userInfo } = userSignin;
   const { loading, error, orders, pages, page } = orderMineList;
   console.log(orders);
+  const { pageNumber } = useParams();
   const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(listOrderMine());
-  }, [dispatch]);
+    dispatch(listOrderMine({ pageNumber }));
+  }, [dispatch, navigate]);
+
   const handleCancel = async (order) => {
-    if (window.confirm('Bạn có muốn huỷ đơn hàng này?')) {
+    if (window.confirm("Bạn có muốn huỷ đơn hàng này?")) {
       try {
         const response = await Axios.put(
           `https://food-ordering-bkhunter.herokuapp.com/api/orders/${order._id}/cancel`,
           {},
           {
             headers: { Authorization: `Bearer ${userInfo.token}` },
-          },
+          }
         );
-        dispatch(listOrderMine());
+        dispatch(listOrderMine({ pageNumber }));
         console.log(response);
       } catch (err) {
         alert(err.response.data.message);
@@ -37,115 +41,115 @@ export default function OrderHistoryScreen(props) {
   return (
     <div
       style={{
-        backgroundColor: '#f7f7f7',
-        padding: '2rem',
-        height: '100%',
+        backgroundColor: "#f7f7f7",
+        padding: "2rem",
+        height: "100%",
       }}
     >
-      <h1 className='text-gray-900 text-lg md:text-2xl'>Lịch sử mua hàng</h1>
+      <h1 className="text-gray-900 text-lg md:text-2xl">Lịch sử mua hàng</h1>
       {loading ? (
         <LoadingBox></LoadingBox>
       ) : error ? (
-        <MessageBox variant='danger'>{error}</MessageBox>
+        <MessageBox variant="danger">{error}</MessageBox>
       ) : (
-        <div class='flex flex-col'>
-          <div class='-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
-            <div class='py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8'>
-              <div class='shadow overflow-hidden border-b border-gray-200 sm:rounded-lg'>
-                <table class='min-w-full divide-y divide-gray-200'>
-                  <thead class='bg-gray-50'>
+        <div class="flex flex-col">
+          <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+              <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                <table class="min-w-full divide-y divide-gray-200">
+                  <thead class="bg-gray-50">
                     <tr>
                       <th
-                        scope='col'
-                        class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+                        scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
                         Khách hàng
                       </th>
                       <th
-                        scope='col'
-                        class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+                        scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
                         Ngày
                       </th>
                       <th
-                        scope='col'
-                        class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+                        scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
                         Tổng tiền
                       </th>
                       <th
-                        scope='col'
-                        class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+                        scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
                         Đã thanh toán
                       </th>
                       <th
-                        scope='col'
-                        class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+                        scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
                         Đã vận chuyển
                       </th>
                       <th
-                        scope='col'
-                        class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+                        scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
                         Huỷ đơn hàng
                       </th>
                       <th
-                        scope='col'
-                        class='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+                        scope="col"
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
                         Hành động
                       </th>
                     </tr>
                   </thead>
-                  <tbody class='bg-white divide-y divide-gray-200'>
+                  <tbody class="bg-white divide-y divide-gray-200">
                     {orders.map((order) => (
                       <tr key={order._id}>
-                        <td class='px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900'>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                           {order.shippingAddress.fullName}
                         </td>
-                        <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                           {order.createdAt.substring(0, 10)}
                         </td>
-                        <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                           {order.totalPrice.toFixed(2)}
                         </td>
-                        <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-                          {order.isPaid ? order.paidAt.substring(0, 10) : 'No'}
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                          {order.isPaid ? order.paidAt.substring(0, 10) : "No"}
                         </td>
-                        <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                           {order.isDelivered
                             ? order.deliveredAt.substring(0, 10)
-                            : 'No'}
+                            : "No"}
                         </td>
-                        <td class='px-6 py-4 whitespace-nowrap text-sm font-medium'>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                           <button
                             style={{
                               backgroundColor: `${
-                                order.isCanceled ? 'red' : 'grey'
+                                order.isCanceled ? "red" : "grey"
                               }`,
-                              cursor: 'pointer',
-                              padding: '7px',
-                              borderRadius: '20px',
-                              color: 'white',
+                              cursor: "pointer",
+                              padding: "7px",
+                              borderRadius: "20px",
+                              color: "white",
                               fontWeight: 600,
                             }}
                             onClick={() => handleCancel(order)}
                           >
                             {order.isCanceled
-                              ? 'Đã huỷ đơn hàng'
-                              : 'Huỷ đơn hàng'}
+                              ? "Đã huỷ đơn hàng"
+                              : "Huỷ đơn hàng"}
                           </button>
                         </td>
                         <td
                           style={{
-                            cursor: 'pointer',
-                            color: '#6AACE3',
+                            cursor: "pointer",
+                            color: "#6AACE3",
                             fontWeight: 700,
                           }}
                           onClick={() => navigate(`/order/${order._id}`)}
-                          class='px-6 py-4 whitespace-nowrap text-sm text-gray-900'
+                          class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
                         >
                           Xem chi tiết
                         </td>
@@ -156,18 +160,20 @@ export default function OrderHistoryScreen(props) {
               </div>
             </div>
           </div>
-          <div className='flex gap-1 mt-4 justify-end'>
+          <div className="flex gap-1 mt-4 justify-end">
             <button
-              class='w-16 bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'
+              class="w-16 bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow"
               disabled={1 === page}
               onClick={() => navigate(`/orderhistory/pageNumber/${page - 1}`)}
             >
               Trước
             </button>
             <button
-              class='w-16 bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow'
+              class="w-16 bg-white hover:bg-gray-100 text-gray-900 font-medium py-1 px-2.5 text-base border border-gray-200 rounded shadow"
               disabled={pages === page}
-              onClick={() => navigate(`/orderhistory/pageNumber/${page + 1}`)}
+              onClick={() => {
+                navigate(`/orderhistory/pageNumber/${page + 1}`);
+              }}
             >
               Sau
             </button>
